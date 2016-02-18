@@ -13,7 +13,6 @@ App::App()
 App::~App()
 {
 }
-adadasd
 
 float App::getRandom(float x){
 	float r2 = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / x));
