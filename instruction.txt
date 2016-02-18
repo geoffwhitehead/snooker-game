@@ -1,0 +1,9 @@
+ngl coursework 
+
+create entity that holds pointer to rendero object with v update method - take the timestep.
+
+in main loop update enotyt. iterate over entties calling updates
+
+on key press - for enitty - update model moatrix
+
+s
