@@ -51,7 +51,7 @@ protected:
 	vector<Entity*> entityObjects;
 
 	//MESHES
-	Mesh*	triangle;
+	Mesh* triangle;
 	Mesh*	cubeMesh;
 	Mesh*	points;
 	Mesh*   quadMesh;
@@ -72,13 +72,7 @@ protected:
 	Shader* hairyShader;
 	Shader* tessCubeShader;
 
-	Entity circle1;
-	Entity circle2;
-	Entity circle3;
-
-	RenderObject c1;
-	RenderObject c2;
-	RenderObject c3;
+	Entity test;
 
 	RenderObject root;			//ROOT
 	RenderObject triObject;

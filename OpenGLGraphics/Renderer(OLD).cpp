@@ -24,6 +24,8 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 	tessMesh = Mesh::GenerateQuadPatch();
 
 	//SHADERS
+	
+	
 	smileyShader = new Shader("VertSmiley.glsl", "FragSmiley.glsl");
 	blendShader = new Shader("basicVertBlend.glsl", "basicFragBlend.glsl");
 	perlinShader = new Shader("basicVertPerlin.glsl", "basicFragPerlin.glsl");
@@ -101,41 +103,33 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 	AddRenderObject(hairyObject);		// hairy cube - displays normal vectors as lines
 	AddRenderObject(tessCubeObject);	// tesselated cube
 	
-*/
-	modelMatrix = Matrix4::Rotation(90, Vector3(1, 0, 0)) * Matrix4::Scale(Vector3(300, 300, 300));
-	viewMatrix = Matrix4::Rotation(90, Vector3(1, 0, 0)) * Matrix4::Rotation(20, Vector3(1, 0, 0)) * Matrix4::Translation(Vector3(0, -30, 20));
-	projMatrix = Matrix4::Perspective(1.0f, 1000.0f, (float)width / (float)height, 45.0f);
+
+	//modelMatrix = Matrix4::Rotation(90, Vector3(1, 0, 0)) * Matrix4::Scale(Vector3(300, 300, 300));
+	//viewMatrix = Matrix4::Rotation(90, Vector3(1, 0, 0)) * Matrix4::Rotation(20, Vector3(1, 0, 0)) * Matrix4::Translation(Vector3(0, -30, 20));
+	//projMatrix = Matrix4::Perspective(1.0f, 1000.0f, (float)width / (float)height, 45.0f);
 
 	// LIGHT SOURCE
 	SetShaderLight(Vector3(-4, 0, -8), Vector3(1, 1, 1), 10);
+	*/
 
 	// SCENE MATRIXES
 	SetProjectionMatrix(Matrix4::Perspective(1.0f, 500.0f, 1.33f, 45.0f));
 	SetViewMatrix(Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10)));
+
+	/*
 	
-	//SHADERS
-	basicShader = new Shader("basicVert.glsl", "basicFrag.glsl");
-	//MESHES
+
 	triangle = Mesh::GenerateTriangle();
+	
+	*/
 
-	//RENDER OBJECTS
-	c1 = RenderObject(triangle, basicShader);
-	c2 = RenderObject(triangle, basicShader);
-	c3 = RenderObject(triangle, basicShader);
-	//TRANSFORMS
-	c1.SetModelMatrix(Matrix4::Translation(Vector3(2, 2, -10)));
-	c2.SetModelMatrix(Matrix4::Translation(Vector3(4, 10, -10)));
-	c3.SetModelMatrix(Matrix4::Translation(Vector3(6, 20, -10)));
-
-	//ENTITIES
-	circle1 = Entity(5, 5, 5, 5, 5, 5, 5, &(c1));
-	circle2 = Entity(5, 5, 5, 5, 5, 5, 5, &(c2));
-	circle3 = Entity(5, 5, 5, 5, 5, 5, 5, &(c3));
-
-	//ADD
-	AddEntityObject(circle1);
-	AddEntityObject(circle2);
-	AddEntityObject(circle3);
+	basicShader = new Shader("basicvert.glsl", "basicFrag.glsl");
+	triangle = Mesh::GenerateTriangle();
+	triObject = RenderObject(triangle, basicShader);
+	triObject.SetModelMatrix(Matrix4::Translation(Vector3(-3, 0, -10)));
+	//AddRenderObject(triObject);			// triangle
+	test = Entity(5, 5, 5, 5, 5, 5, 5, &triObject);
+	AddEntityObject(test);
 
 	/*
 	for (int i = 0; i < 10; ++i){
@@ -151,22 +145,54 @@ float Renderer::getRandom(float x){
 	return r2;
 }
 
+/*
+std::vector<Entity> App::run(float x, float y){
+	srand(static_cast <unsigned> (time(0)));
+
+	const float MAX_AGGRO = (x + y) / 8; //get a max aggrorange relative to screen coords
+
+	std::vector<Entity> vec;
+
+	for (int i = 0; i < 10; ++i){
+		vec.push_back(Entity(App::getRandom(x), App::getRandom(y), App::getRandom(Z), App::getRandom(MAX_AGGRO), App::getRandom(MAX_VEL), App::getRandom(MAX_VEL), App::getRandom(MAX_VEL)));
+	}
+
+	print(vec);
+	return vec;
+}
+*/
+
 /// create the gamemanager which will manage entities, pass render objects to the renderer by passing a rendering node. 
 
 Renderer::~Renderer(void)	{
-	
+	/*
 	//DELETE MESHES
-	delete triangle;
+	delete cubeMesh;
+	delete points;
+	delete tessMesh;
+	delete bg;
+
+	//DELETE SHADERS
+	delete basicShader;
+	delete simpleShader;
+	delete smileyShader;
+	delete blendShader;
+	delete perlinShader;
+	delete pointShader;
+	delete tessShader;
+	delete lightShader;
+	delete destroyShader;
+	delete hairyShader;
+	*/
 }
 
 void	Renderer::RenderScene() {
 	ClearBuffers();
 	Render(root);
-	/*
 	for (vector<RenderObject*>::iterator i = renderObjects.begin(); i != renderObjects.end(); ++i) {
 		//Render(*(*i));
+	}
 	
-	}*/
 	for (int i = 0; i < entityObjects.size(); i++) {
 		Render(*(entityObjects[i]->renderObject));
 	}
@@ -184,9 +210,25 @@ void	Renderer::Render(const RenderObject &o) {
 		UpdateShaderMatrices(program);
 		ApplyShaderLight(program);	
 
-		// Pass in GLuint for time 
 		GLint time = glGetUniformLocation(program, "time");
 		glUniform1f(time, o.GetTime());
+		/*
+		GLfloat particleSize = glGetUniformLocation(program, "particleSize");
+		glUniform1f(particleSize, o.GetParticleSize());
+
+		glUniform1i(glGetUniformLocation(program, "smileyTex"), 0);
+		glUniform1i(glGetUniformLocation(program, "staticTex"), 1);
+		glUniform1i(glGetUniformLocation(program, "perlinTex"), 1);
+		glUniform1i(glGetUniformLocation(program, "fireTex"), 1);
+
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, o.GetTexture());
+
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, o.GetTexture2());
+		*/
+
+
 
 		Matrix4 rotation = Matrix4(viewMatrix);
 		Vector3 invCamPos = viewMatrix.GetPositionVector();
