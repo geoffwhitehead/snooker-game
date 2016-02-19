@@ -24,6 +24,10 @@ public:
 		renderObjects.push_back(&r);
 	}
 
+	void	AddEntityObject(Entity &e){
+		entityObjects.push_back(&e);
+	}
+
 	static float getRandom(float);
 
 	GLuint LoadTexture(char* filename, bool textureRepeating = true);
@@ -41,16 +45,12 @@ public:
 	}
 
 protected:
-	RenderObject root;
-
+	
+	// MANAGERS
 	vector<RenderObject*> renderObjects;
-	RenderObject triObject;
+	vector<Entity*> entityObjects;
 
-	std::vector<Entity> vec;
-
-
-
-
+	//MESHES
 	Mesh* triangle;
 	Mesh*	cubeMesh;
 	Mesh*	points;
@@ -72,6 +72,10 @@ protected:
 	Shader* hairyShader;
 	Shader* tessCubeShader;
 
+	Entity test;
+
+	RenderObject root;			//ROOT
+	RenderObject triObject;
 	RenderObject smileyObject;
 	RenderObject interpolateObject;
 	RenderObject perlinObject;

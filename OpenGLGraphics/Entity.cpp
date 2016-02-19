@@ -15,10 +15,11 @@ Entity::~Entity()
 {
 }
 
-Entity::Entity(float x, float y, float z, float agg, float dir_x, float dir_y, float dir_z, RenderObject r){
+Entity::Entity(float x, float y, float z, float agg, float dir_x, float dir_y, float dir_z, RenderObject* r){
 	this->position = Vector3(x, y, z);
 	this->dir = Vector3(dir_x, dir_y, dir_z);
 	this->aggroRange = agg;
+	this->renderObject = r;
 }
 
 void Entity::setPos(Vector3 v){

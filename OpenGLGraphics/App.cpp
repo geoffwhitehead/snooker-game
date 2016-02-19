@@ -9,12 +9,9 @@ App::App()
 	
 }
 
-
 App::~App()
 {
 }
-
-
 
 void App::print(std::vector<Entity> vec){
 

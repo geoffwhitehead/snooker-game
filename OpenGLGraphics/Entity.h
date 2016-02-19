@@ -11,7 +11,7 @@ class Entity
 public:
 	Entity();
 	~Entity();
-	Entity(float, float, float, float, float, float, float, RenderObject);
+	Entity(float, float, float, float, float, float, float, RenderObject*);
 	void setPos(Vector3);
 	void setDir(Vector3);
 	void setAggroRange(float);
@@ -22,7 +22,6 @@ public:
 	float getAggroRange() const;
 	int getEntitiesInRange() const;
 	friend ostream& operator<<(ostream& os, const Entity& e);
-
 	RenderObject* renderObject;
 
 private:
@@ -30,7 +29,5 @@ private:
 	Vector3 dir;
 	float aggroRange;
 	int entitiesInRange = 0;
-
-
 };
 

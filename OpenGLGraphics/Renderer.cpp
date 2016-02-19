@@ -25,7 +25,7 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 
 	//SHADERS
 	
-	basicShader = new Shader("basicvert2.glsl", "basicFrag2.glsl");
+	
 	smileyShader = new Shader("VertSmiley.glsl", "FragSmiley.glsl");
 	blendShader = new Shader("basicVertBlend.glsl", "basicFragBlend.glsl");
 	perlinShader = new Shader("basicVertPerlin.glsl", "basicFragPerlin.glsl");
@@ -116,22 +116,28 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 	SetProjectionMatrix(Matrix4::Perspective(1.0f, 500.0f, 1.33f, 45.0f));
 	SetViewMatrix(Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10)));
 
-
-	simpleShader = new Shader("testvert.glsl", "testFrag.glsl");
-	triangle = Mesh::GenerateTriangle();
-	triObject = RenderObject(triangle, simpleShader);
-	triObject.SetModelMatrix(Matrix4::Translation(Vector3(-3, 0, -10)) * Matrix4::Rotation(90, Vector3(0, 1, 0)));
-	AddRenderObject(triObject);			// triangle
-	triangle = Mesh::GenerateTriangle();
-
+	/*
 	
+
+	triangle = Mesh::GenerateTriangle();
 	
+	*/
+
+	basicShader = new Shader("basicvert.glsl", "basicFrag.glsl");
+	triangle = Mesh::GenerateTriangle();
+	triObject = RenderObject(triangle, basicShader);
+	triObject.SetModelMatrix(Matrix4::Translation(Vector3(-3, 0, -10)));
+	//AddRenderObject(triObject);			// triangle
+	test = Entity(5, 5, 5, 5, 5, 5, 5, &triObject);
+	AddEntityObject(test);
+
+	/*
 	for (int i = 0; i < 10; ++i){
-		triObject = RenderObject(triangle, simpleShader);
-		triObject.SetModelMatrix(Matrix4::Translation(Vector3(-3+i, 0, -10)));
-		vec.push_back(Entity(Renderer::getRandom(5), Renderer::getRandom(5), Renderer::getRandom(Z), Renderer::getRandom(3), Renderer::getRandom(MAX_VEL), Renderer::getRandom(MAX_VEL), Renderer::getRandom(MAX_VEL), triObject));
-	}
+		triObject = RenderObject(triangle, basicShader);
 
+		triObject.SetModelMatrix(Matrix4::Translation(Vector3(i, 0, -10)));
+		vec.push_back(Entity(Renderer::getRandom(5), Renderer::getRandom(5), Renderer::getRandom(Z), Renderer::getRandom(3), Renderer::getRandom(MAX_VEL), Renderer::getRandom(MAX_VEL), Renderer::getRandom(MAX_VEL), &triObject));
+	}*/
 }
 
 float Renderer::getRandom(float x){
@@ -184,11 +190,11 @@ void	Renderer::RenderScene() {
 	ClearBuffers();
 	Render(root);
 	for (vector<RenderObject*>::iterator i = renderObjects.begin(); i != renderObjects.end(); ++i) {
-		Render(*(*i));
+		//Render(*(*i));
 	}
-	for (vector<Entity>::iterator i = vec.begin(); i != vec.end(); ++i) {
 	
-		Render(*i->renderObject);
+	for (int i = 0; i < entityObjects.size(); i++) {
+		Render(*(entityObjects[i]->renderObject));
 	}
 }
 
