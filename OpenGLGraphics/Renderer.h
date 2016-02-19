@@ -2,7 +2,9 @@
 #include "../nclgl/OGLRenderer.h"
 
 #include "RenderObject.h"
-
+#include <ctime>
+#include <cstdlib>
+#include "Entity.h"
 #include <vector>
 
 using std::vector;
@@ -22,7 +24,7 @@ public:
 		renderObjects.push_back(&r);
 	}
 
-
+	static float getRandom(float);
 
 	GLuint LoadTexture(char* filename, bool textureRepeating = true);
 
@@ -43,6 +45,11 @@ protected:
 
 	vector<RenderObject*> renderObjects;
 	RenderObject triObject;
+
+	std::vector<Entity> vec;
+
+
+
 
 	Mesh* triangle;
 	Mesh*	cubeMesh;

@@ -1,7 +1,12 @@
 #include "Renderer.h"
 
-Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
+const float Z = 10.f; // something random for now
+const float MAX_VEL = 10.0f; // maximum speed
 
+
+
+Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
+	
 	// OPENGL SETTINGS 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
@@ -117,7 +122,21 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 	triObject = RenderObject(triangle, simpleShader);
 	triObject.SetModelMatrix(Matrix4::Translation(Vector3(-3, 0, -10)) * Matrix4::Rotation(90, Vector3(0, 1, 0)));
 	AddRenderObject(triObject);			// triangle
+	triangle = Mesh::GenerateTriangle();
 
+	
+	
+	for (int i = 0; i < 10; ++i){
+		triObject = RenderObject(triangle, simpleShader);
+		triObject.SetModelMatrix(Matrix4::Translation(Vector3(-3+i, 0, -10)));
+		vec.push_back(Entity(Renderer::getRandom(5), Renderer::getRandom(5), Renderer::getRandom(Z), Renderer::getRandom(3), Renderer::getRandom(MAX_VEL), Renderer::getRandom(MAX_VEL), Renderer::getRandom(MAX_VEL), triObject));
+	}
+
+}
+
+float Renderer::getRandom(float x){
+	float r2 = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / x));
+	return r2;
 }
 
 /*
@@ -166,6 +185,10 @@ void	Renderer::RenderScene() {
 	Render(root);
 	for (vector<RenderObject*>::iterator i = renderObjects.begin(); i != renderObjects.end(); ++i) {
 		Render(*(*i));
+	}
+	for (vector<Entity>::iterator i = vec.begin(); i != vec.end(); ++i) {
+	
+		Render(*i->renderObject);
 	}
 }
 
