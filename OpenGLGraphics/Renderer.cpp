@@ -118,26 +118,31 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 
 	//MESHES
 	triangle = Mesh::GenerateTriangle();
+	triFan = Mesh::GenerateTriFan(5.0f, 5.0f, -10.0f, 1.0f);
 
 	//RENDER OBJECTS
 	c1 = RenderObject(triangle, basicShader);
 	c2 = RenderObject(triangle, basicShader);
 	c3 = RenderObject(triangle, basicShader);
+	tf1 = RenderObject(triFan, basicShader);
 
 	//TRANSFORMS
 	c1.SetModelMatrix(Matrix4::Translation(Vector3(2, 2, -10)));
 	c2.SetModelMatrix(Matrix4::Translation(Vector3(3, 3, -20)));
 	c3.SetModelMatrix(Matrix4::Translation(Vector3(4, 4, -30)));
+	tf1.SetModelMatrix(Matrix4::Translation(Vector3(4, 4, -15)));
 
 	//ENTITIES
 	circle1 = new Entity(5, 5, 5, 5, 5, 5, 5, &(c1));
 	circle2 = new Entity(5, 5, 5, 5, 5, 5, 5, &(c2));
 	circle3 = new Entity(5, 5, 5, 5, 5, 5, 5, &(c3));
+	triFan1 = new Entity(5, 5, 5, 5, 5, 5, 5, &(tf1));
 
 	//ADD
 	AddEntityObject(circle1);
 	AddEntityObject(circle2);
 	AddEntityObject(circle3);
+	AddEntityObject(triFan1);
 
 	/*
 	for (int i = 0; i < 10; ++i){

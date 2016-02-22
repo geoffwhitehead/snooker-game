@@ -57,6 +57,7 @@ protected:
 	Mesh*   quadMesh;
 	Mesh*	tessMesh;
 	Mesh*	bg;
+	Mesh*	triFan;
 
 	Shader* simpleShader;
 	Shader* basicShader;
@@ -75,10 +76,12 @@ protected:
 	Entity* circle1;
 	Entity* circle2;
 	Entity* circle3;
+	Entity* triFan1;
 
 	RenderObject c1;
 	RenderObject c2;
 	RenderObject c3;
+	RenderObject tf1;
 
 	RenderObject root;			//ROOT
 	RenderObject triObject;

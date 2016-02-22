@@ -190,6 +190,35 @@ Mesh* Mesh::GenerateQuad() {
 	return m;
 }
 
+// generate traingle fan
+
+Mesh* Mesh::GenerateTriFan(float x, float y, float z, float radius){
+	int i;
+	int triangleDetail = 100;
+	float twicePi = 2.0f *PI;
+
+	Mesh*m = new Mesh();
+	m->type = GL_TRIANGLE_FAN;
+	m->numVertices = triangleDetail + 1;
+	m->vertices = new Vector3[m->numVertices];
+
+	m->vertices[0] = Vector3(x, y, z);
+	Vector2(x, y); // center of circle
+	for (i = 0; i <= triangleDetail; i++) {
+		m->vertices[i] = Vector3(
+			x + (radius * cos(i *  twicePi / triangleDetail)),
+			y + (radius * sin(i * twicePi / triangleDetail)),
+			z
+			);
+	}
+	m->BufferData();
+
+	return m;
+
+}
+// generate line loop circle
+
+
 Mesh*	Mesh::LoadMeshFile(const string &filename) {
 	ifstream f(filename);
 
