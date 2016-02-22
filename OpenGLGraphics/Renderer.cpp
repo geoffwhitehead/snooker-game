@@ -115,6 +115,7 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 	
 	//SHADERS
 	basicShader = new Shader("basicVert.glsl", "basicFrag.glsl");
+
 	//MESHES
 	triangle = Mesh::GenerateTriangle();
 
@@ -122,15 +123,16 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 	c1 = RenderObject(triangle, basicShader);
 	c2 = RenderObject(triangle, basicShader);
 	c3 = RenderObject(triangle, basicShader);
+
 	//TRANSFORMS
 	c1.SetModelMatrix(Matrix4::Translation(Vector3(2, 2, -10)));
-	c2.SetModelMatrix(Matrix4::Translation(Vector3(4, 10, -10)));
-	c3.SetModelMatrix(Matrix4::Translation(Vector3(6, 20, -10)));
+	c2.SetModelMatrix(Matrix4::Translation(Vector3(3, 3, -20)));
+	c3.SetModelMatrix(Matrix4::Translation(Vector3(4, 4, -30)));
 
 	//ENTITIES
-	circle1 = Entity(5, 5, 5, 5, 5, 5, 5, &(c1));
-	circle2 = Entity(5, 5, 5, 5, 5, 5, 5, &(c2));
-	circle3 = Entity(5, 5, 5, 5, 5, 5, 5, &(c3));
+	circle1 = new Entity(5, 5, 5, 5, 5, 5, 5, &(c1));
+	circle2 = new Entity(5, 5, 5, 5, 5, 5, 5, &(c2));
+	circle3 = new Entity(5, 5, 5, 5, 5, 5, 5, &(c3));
 
 	//ADD
 	AddEntityObject(circle1);
@@ -235,7 +237,9 @@ void	Renderer::UpdateScene(float msec) {
 	for (vector<RenderObject*>::iterator i = renderObjects.begin(); i != renderObjects.end(); ++i) {
 		(*i)->Update(msec);
 	}
-
+	for (int i = 0; i < entityObjects.size(); i++) {
+		(entityObjects[i]->renderObject->Update(msec));
+	}
 	// *************** SCENE MOVEMENT / TEXTURE CHANGE ******************
 	// enables you to move the camera around the scene with the defined keys
 	if (Keyboard::KeyDown(KEY_A)) {

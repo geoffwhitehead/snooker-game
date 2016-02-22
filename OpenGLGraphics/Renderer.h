@@ -24,8 +24,8 @@ public:
 		renderObjects.push_back(&r);
 	}
 
-	void	AddEntityObject(Entity &e){
-		entityObjects.push_back(&e);
+	void	AddEntityObject(Entity *e){
+		entityObjects.push_back(e);
 	}
 
 	static float getRandom(float);
@@ -72,9 +72,9 @@ protected:
 	Shader* hairyShader;
 	Shader* tessCubeShader;
 
-	Entity circle1;
-	Entity circle2;
-	Entity circle3;
+	Entity* circle1;
+	Entity* circle2;
+	Entity* circle3;
 
 	RenderObject c1;
 	RenderObject c2;
