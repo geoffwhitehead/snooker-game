@@ -50,7 +50,7 @@ public:
 	static Mesh* Mesh::GenerateQuadPatch();
 	static Mesh* Mesh::GeneratePoints(unsigned int count);
 	static Mesh* Mesh::GenerateTriFan(float x, float y, float z, float radius);
-
+	static Mesh* Mesh::GenerateTriFanBorder(float x, float y, float z, float radius);
 	//Generates a single triangle, with RGB colours
 	static Mesh*	GenerateTriangle();
 	static Mesh*	LoadMeshFile(const string &filename);

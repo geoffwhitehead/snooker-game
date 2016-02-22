@@ -118,31 +118,53 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 
 	//MESHES
 	triangle = Mesh::GenerateTriangle();
-	triFan = Mesh::GenerateTriFan(5.0f, 5.0f, -10.0f, 1.0f);
+	triFanMesh = Mesh::GenerateTriFan(5.0f, 5.0f, -10.0f, 1.0f);
+	triLoopMesh = Mesh::GenerateTriFanBorder(5.0f, 5.0f, -10.0f, 3.0f);
+	bgMesh = Mesh::GeneratePoints(1);
+	tessMesh = Mesh::GenerateQuadPatch();
+
+	//TEXTURES
+	skyTex = LoadTexture("sky.png");
+	rustTex = LoadTexture("rust.png");
+	snowTex = LoadTexture("snow.png");
 
 	//RENDER OBJECTS
 	c1 = RenderObject(triangle, basicShader);
 	c2 = RenderObject(triangle, basicShader);
 	c3 = RenderObject(triangle, basicShader);
-	tf1 = RenderObject(triFan, basicShader);
+	tf1 = RenderObject(triFanMesh, basicShader);
+	tl1 = RenderObject(triLoopMesh, basicShader);
+	bgObject = RenderObject(bgMesh, pointShader, skyTex);
+	tessObject = RenderObject(tessMesh, tessShader, snowTex);
+
 
 	//TRANSFORMS
 	c1.SetModelMatrix(Matrix4::Translation(Vector3(2, 2, -10)));
 	c2.SetModelMatrix(Matrix4::Translation(Vector3(3, 3, -20)));
 	c3.SetModelMatrix(Matrix4::Translation(Vector3(4, 4, -30)));
-	tf1.SetModelMatrix(Matrix4::Translation(Vector3(4, 4, -15)));
+	tf1.SetModelMatrix(Matrix4::Translation(Vector3(0, 0, -15)));
+	tl1.SetModelMatrix(Matrix4::Translation(Vector3(0, 0, -15)));
+	tessObject.SetModelMatrix(Matrix4::Translation(Vector3(50, -20, 0)) * Matrix4::Scale(Vector3(100, 100, 100)) * Matrix4::Rotation(90, Vector3(1, 0, 0)));
+	bgObject.SetModelMatrix(Matrix4::Translation(Vector3(-50, 0, -100)));
 
 	//ENTITIES
 	circle1 = new Entity(5, 5, 5, 5, 5, 5, 5, &(c1));
 	circle2 = new Entity(5, 5, 5, 5, 5, 5, 5, &(c2));
 	circle3 = new Entity(5, 5, 5, 5, 5, 5, 5, &(c3));
 	triFan1 = new Entity(5, 5, 5, 5, 5, 5, 5, &(tf1));
+	triLoop1 = new Entity(5, 5, 5, 5, 5, 5, 5, &(tl1));
+	bg = new Entity(5, 5, 5, 5, 5, 5, 5, &(bgObject));
+	ground = new Entity(5, 5, 5, 5, 5, 5, 5, &(tessObject));
 
 	//ADD
 	AddEntityObject(circle1);
 	AddEntityObject(circle2);
 	AddEntityObject(circle3);
 	AddEntityObject(triFan1);
+	AddEntityObject(triFan1);
+	AddEntityObject(triLoop1);
+	AddEntityObject(bg);
+	AddEntityObject(ground);
 
 	/*
 	for (int i = 0; i < 10; ++i){
@@ -233,12 +255,16 @@ void	Renderer::UpdateScene(float msec) {
 	interpolateObject.SetTime(sin(i));
 	perlinObject.SetTime(sin(i));
 	spritesObject.SetParticleSize(2.0f);
-	bgObject.SetParticleSize(200.0f);
+	
 	shrinkObject.SetTime(shrink);
 	destroyObject.SetParticleSize(2.0f);
 	destroyObject.SetTime(i);
 	destroyObject.Update(msec);
 	*/
+
+	bgObject.SetParticleSize(200.0f);
+
+
 	for (vector<RenderObject*>::iterator i = renderObjects.begin(); i != renderObjects.end(); ++i) {
 		(*i)->Update(msec);
 	}

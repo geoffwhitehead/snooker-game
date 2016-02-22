@@ -193,21 +193,20 @@ Mesh* Mesh::GenerateQuad() {
 // generate traingle fan
 
 Mesh* Mesh::GenerateTriFan(float x, float y, float z, float radius){
-	int i;
-	int triangleDetail = 100;
+	int LOD = 100;
 	float twicePi = 2.0f *PI;
 
 	Mesh*m = new Mesh();
 	m->type = GL_TRIANGLE_FAN;
-	m->numVertices = triangleDetail + 1;
+	m->numVertices = LOD + 1;
 	m->vertices = new Vector3[m->numVertices];
 
 	m->vertices[0] = Vector3(x, y, z);
 	Vector2(x, y); // center of circle
-	for (i = 0; i <= triangleDetail; i++) {
+	for (int i = 0; i <= LOD; i++) {
 		m->vertices[i] = Vector3(
-			x + (radius * cos(i *  twicePi / triangleDetail)),
-			y + (radius * sin(i * twicePi / triangleDetail)),
+			x + (radius * cos(i *  twicePi / LOD)),
+			y + (radius * sin(i * twicePi / LOD)),
 			z
 			);
 	}
@@ -216,8 +215,29 @@ Mesh* Mesh::GenerateTriFan(float x, float y, float z, float radius){
 	return m;
 
 }
-// generate line loop circle
 
+// generate line loop circle
+Mesh* Mesh::GenerateTriFanBorder(float x, float y, float z, float radius){
+	int LOD = 100;
+	float twicePi = 2.0f *PI;
+
+	Mesh*m = new Mesh();
+	m->type = GL_LINE_LOOP;
+	m->numVertices = LOD + 1;
+	m->vertices = new Vector3[m->numVertices];
+
+	for (int i = 0; i <= LOD; i++) {
+		m->vertices[i] = Vector3(
+			x + (radius * cos(i *  twicePi / LOD)),
+			y + (radius* sin(i * twicePi / LOD)),
+			z
+			);
+	}
+	m->BufferData();
+
+	return m;
+
+}
 
 Mesh*	Mesh::LoadMeshFile(const string &filename) {
 	ifstream f(filename);
