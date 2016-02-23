@@ -226,6 +226,31 @@ void Renderer::collisionManager(){
 
 }
 
+void Renderer::gameManager(){
+
+}
+
+void Renderer::physicsManager(){
+
+}
+
+void Renderer::resourceManager(){
+
+}
+
+// SHOULD ENTITIES HAVE FLAGS TO SAY WHETHER THESE OBJECT ARE AFFECTED BY PHYSICS / COLLISIONS?
+
+//
+
+
+// ARE ALL THE MANAGERS CLASSES OR FUNCTIONS?
+
+// SHOULD I HAVE AN ENCOMPASSING CLASS TO HOLD ALL THE MANAGERS OR NEST THEM WITHIN THE RENDERER?
+
+// WHERE TO HANDLE ENTITY MOVEMENT AND GAME LOGIC?
+
+// WHERE TO STORE ALL THE MESHES AND TEXTURES THAT ARE GETTING LOADED IN?... RESOURCE MANAGER?
+
 /// create the gamemanager which will manage entities, pass render objects to the renderer by passing a rendering node. 
 
 Renderer::~Renderer(void)	{
