@@ -1,7 +1,13 @@
 #include "Renderer.h"
+#include <ctime>
+#include <cstdlib>
 
 const float Z = 10.f; // something random for now
 const float MAX_VEL = 10.0f; // maximum speed
+const float X_BOUND = 20.0f-1;
+const float Y_BOUND = 20.0f-1;
+const float GAME_DEPTH = -20.0f;
+const float MAX_VELOCITY = 1.5f;
 
 
 
@@ -11,7 +17,7 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	
+	srand(std::time(NULL));
 	//triangle = Mesh::GenerateTriangle();
 	//triObject = RenderObject(triangle, simpleShader);
 
@@ -118,10 +124,12 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 
 	//MESHES
 	triangle = Mesh::GenerateTriangle();
-	triFanMesh = Mesh::GenerateTriFan(5.0f, 5.0f, -10.0f, 1.0f);
-	triLoopMesh = Mesh::GenerateTriFanBorder(5.0f, 5.0f, -10.0f, 3.0f);
+	triFanMesh = Mesh::GenerateTriFan(0, 0, 0, 1.0f);
+	triLoopMesh = Mesh::GenerateTriFanBorder(0, 0, 0, 3.0f);
 	bgMesh = Mesh::GeneratePoints(1);
 	tessMesh = Mesh::GenerateQuadPatch();
+	quadMesh = Mesh::GenerateQuad();
+
 
 	//TEXTURES
 	skyTex = LoadTexture("sky.png");
@@ -134,37 +142,69 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 	c3 = RenderObject(triangle, basicShader);
 	tf1 = RenderObject(triFanMesh, basicShader);
 	tl1 = RenderObject(triLoopMesh, basicShader);
+	tf2 = RenderObject(triFanMesh, basicShader);
+	tl2 = RenderObject(triLoopMesh, basicShader);
+	tf3 = RenderObject(triFanMesh, basicShader);
+	tl3 = RenderObject(triLoopMesh, basicShader);
 	bgObject = RenderObject(bgMesh, pointShader, skyTex);
 	tessObject = RenderObject(tessMesh, tessShader, snowTex);
+	tbl_top = RenderObject(quadMesh, basicShader);
+	tbl_right = RenderObject(quadMesh, basicShader);
+	tbl_bottom = RenderObject(quadMesh, basicShader);
+	tbl_left = RenderObject(quadMesh, basicShader);
 
+	
 
-	//TRANSFORMS
-	c1.SetModelMatrix(Matrix4::Translation(Vector3(2, 2, -10)));
-	c2.SetModelMatrix(Matrix4::Translation(Vector3(3, 3, -20)));
-	c3.SetModelMatrix(Matrix4::Translation(Vector3(4, 4, -30)));
-	tf1.SetModelMatrix(Matrix4::Translation(Vector3(0, 0, -15)));
-	tl1.SetModelMatrix(Matrix4::Translation(Vector3(0, 0, -15)));
-	tessObject.SetModelMatrix(Matrix4::Translation(Vector3(50, -20, 0)) * Matrix4::Scale(Vector3(100, 100, 100)) * Matrix4::Rotation(90, Vector3(1, 0, 0)));
-	bgObject.SetModelMatrix(Matrix4::Translation(Vector3(-50, 0, -100)));
 
 	//ENTITIES
-	circle1 = new Entity(5, 5, 5, 5, 5, 5, 5, &(c1));
-	circle2 = new Entity(5, 5, 5, 5, 5, 5, 5, &(c2));
-	circle3 = new Entity(5, 5, 5, 5, 5, 5, 5, &(c3));
-	triFan1 = new Entity(5, 5, 5, 5, 5, 5, 5, &(tf1));
-	triLoop1 = new Entity(5, 5, 5, 5, 5, 5, 5, &(tl1));
-	bg = new Entity(5, 5, 5, 5, 5, 5, 5, &(bgObject));
-	ground = new Entity(5, 5, 5, 5, 5, 5, 5, &(tessObject));
+	circle1 = new Entity(2, 2, -10, 0, 0, 0, 0, &(c1));
+	circle2 = new Entity(3, 3, -20, 0, 0, 0, 0, &(c2));
+	circle3 = new Entity(4, 4, -30, 0, 0, 0, 0, &(c3));
+	triFan1 = new Entity(getRandom(X_BOUND), getRandom(Y_BOUND), GAME_DEPTH, 3, getRandom(5), getRandom(5), 0, &(tf1));
+	triLoop1 = new Entity(triFan1->getPos().x, triFan1->getPos().y, triFan1->getPos().z, triFan1->getAggroRange(), triFan1->getDir().x, triFan1->getDir().y, 0, &(tl1));
+	triFan2 = new Entity(getRandom(X_BOUND), getRandom(Y_BOUND), GAME_DEPTH, 3, getRandom(5), getRandom(5), 0, &(tf2));
+	triLoop2 = new Entity(triFan2->getPos().x, triFan2->getPos().y, triFan2->getPos().z, triFan2->getAggroRange(), triFan2->getDir().x, triFan2->getDir().y, 0, &(tl2));
+	triFan3 = new Entity(getRandom(X_BOUND), getRandom(Y_BOUND), GAME_DEPTH, 3, getRandom(5), getRandom(5), 0, &(tf3));
+	triLoop3 = new Entity(triFan3->getPos().x, triFan3->getPos().y, triFan3->getPos().z, triFan3->getAggroRange(), triFan3->getDir().x, triFan3->getDir().y, 0, &(tl3));
+
+	tableTop = new Entity(10, 20, GAME_DEPTH, 0, 0, 0, 0, &(tbl_top));
+	tableRight = new Entity(20, 10, GAME_DEPTH, 0, 0, 0, 0, &(tbl_right));
+	tableBottom = new Entity(10, 0, GAME_DEPTH, 0, 0, 0, 0, &(tbl_bottom));
+	tableLeft = new Entity(0, 10, GAME_DEPTH, 0, 0, 0, 0, &(tbl_left));
+
+
+	bg = new Entity(5, 5, 5, 0, 0, 0, 0, &(bgObject));
+	ground = new Entity(5, 5, 5, 0, 0, 0, 0, &(tessObject));
+	
+
+
+	// SCALE TRANSFORMS
+	tbl_top.SetModelMatrix(tbl_top.GetModelMatrix() * Matrix4::Scale(Vector3(21, 1, 1)));
+	tbl_right.SetModelMatrix(tbl_right.GetModelMatrix() * Matrix4::Scale(Vector3(1, 21, 1)));
+	tbl_bottom.SetModelMatrix(tbl_bottom.GetModelMatrix() * Matrix4::Scale(Vector3(21, 1, 1)));
+	tbl_left.SetModelMatrix(tbl_left.GetModelMatrix() * Matrix4::Scale(Vector3(1, 21, 1)));
+
+	tessObject.SetModelMatrix(Matrix4::Translation(Vector3(50, -20, 0)) * Matrix4::Scale(Vector3(100, 100, 100)) * Matrix4::Rotation(90, Vector3(1, 0, 0)));
+	bgObject.SetModelMatrix(Matrix4::Translation(Vector3(-50, 0, -100)));
 
 	//ADD
 	AddEntityObject(circle1);
 	AddEntityObject(circle2);
 	AddEntityObject(circle3);
 	AddEntityObject(triFan1);
-	AddEntityObject(triFan1);
 	AddEntityObject(triLoop1);
-	AddEntityObject(bg);
-	AddEntityObject(ground);
+	AddEntityObject(triFan2);
+	AddEntityObject(triLoop2);
+	AddEntityObject(triFan3);
+	AddEntityObject(triLoop3);
+	
+	AddEntityObject(tableTop);
+	AddEntityObject(tableRight);
+	AddEntityObject(tableBottom);
+	AddEntityObject(tableLeft);
+
+	//AddEntityObject(bg);
+	//AddEntityObject(ground);
 
 	/*
 	for (int i = 0; i < 10; ++i){
@@ -178,6 +218,12 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 float Renderer::getRandom(float x){
 	float r2 = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / x));
 	return r2;
+
+}
+
+
+void Renderer::collisionManager(){
+
 }
 
 /// create the gamemanager which will manage entities, pass render objects to the renderer by passing a rendering node. 
@@ -231,12 +277,12 @@ void	Renderer::Render(const RenderObject &o) {
 }
 
 void	Renderer::UpdateScene(float msec) {
-
+	time += msec;
 	/*
 	//incremenent variables
 	i = i + 0.01;
 	shrink = shrink - 0.003;
-	time += msec;
+	
 
 	//rotate light cube model matrix
 	Matrix4 light = lightObject.GetModelMatrix();

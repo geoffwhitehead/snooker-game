@@ -168,22 +168,22 @@ Mesh* Mesh::GenerateQuad() {
 	m->numVertices = 4;
 
 	m->vertices = new Vector3[m->numVertices];
-	m->vertices[0] = Vector3(0.5f, 0.5f, 0.0f);
-	m->vertices[1] = Vector3(0.5f, -0.5f, 0.0f);
+	m->vertices[0] = Vector3(-0.5f, 0.5f, 0.0f);
+	m->vertices[1] = Vector3(0.5f, 0.5f, 0.0f);
 	m->vertices[2] = Vector3(-0.5f, -0.5f, 0.0f);
-	m->vertices[3] = Vector3(-0.5f, 0.5f, 0.0f);
+	m->vertices[3] = Vector3(0.5f, -0.5f, 0.0f);
 
 	m->textureCoords = new Vector2[m->numVertices];
-	m->textureCoords[0] = Vector2(1.0f, 0.0f);
+	m->textureCoords[0] = Vector2(0.0f, 1.0f);
 	m->textureCoords[1] = Vector2(1.0f, 1.0f);
-	m->textureCoords[2] = Vector2(0.0f, 1.0f);
-	m->textureCoords[3] = Vector2(1.0f, 1.0f);
+	m->textureCoords[2] = Vector2(0.0f, 0.0f);
+	m->textureCoords[3] = Vector2(1.0f, 0.0f);
 
 	m->colours = new Vector4[m->numVertices];
 	m->colours[0] = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
 	m->colours[1] = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
 	m->colours[2] = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
-	m->colours[3] = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+	m->colours[3] = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
 
 	m->BufferData();
 
@@ -200,6 +200,7 @@ Mesh* Mesh::GenerateTriFan(float x, float y, float z, float radius){
 	m->type = GL_TRIANGLE_FAN;
 	m->numVertices = LOD + 1;
 	m->vertices = new Vector3[m->numVertices];
+	m->colours = new Vector4[m->numVertices];
 
 	m->vertices[0] = Vector3(x, y, z);
 	Vector2(x, y); // center of circle
@@ -209,6 +210,7 @@ Mesh* Mesh::GenerateTriFan(float x, float y, float z, float radius){
 			y + (radius * sin(i * twicePi / LOD)),
 			z
 			);
+		m->colours[i] = Vector4(1.0f, 1.0f, 0.0f, 1.0f);
 	}
 	m->BufferData();
 
@@ -225,6 +227,7 @@ Mesh* Mesh::GenerateTriFanBorder(float x, float y, float z, float radius){
 	m->type = GL_LINE_LOOP;
 	m->numVertices = LOD + 1;
 	m->vertices = new Vector3[m->numVertices];
+	m->colours = new Vector4[m->numVertices];
 
 	for (int i = 0; i <= LOD; i++) {
 		m->vertices[i] = Vector3(
@@ -232,12 +235,29 @@ Mesh* Mesh::GenerateTriFanBorder(float x, float y, float z, float radius){
 			y + (radius* sin(i * twicePi / LOD)),
 			z
 			);
+		m->colours[i] = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
 	}
 	m->BufferData();
 
 	return m;
-
 }
+
+Mesh* Mesh::GenerateRectangle(float x, float y, float z, float width, float height){
+	Mesh*m = new Mesh();
+	m->type = GL_TRIANGLES;
+	m->numVertices = 6;
+	m->vertices = new Vector3[m->numVertices];
+	m->colours = new Vector4[m->numVertices];
+
+	m->vertices[0] = Vector3(0.5f, 0.5f, 1.0f);
+	m->vertices[1] = Vector3(0.5f, 0.5f, 0.0f);
+	m->vertices[2] = Vector3(0.5f, -0.5f, 0.0f);
+	m->vertices[3] = m->vertices[2];
+	m->vertices[4] = Vector3(-0.5f, -0.5f, 1.0f);
+	m->vertices[5] = m->vertices[0];
+	return m;
+}
+
 
 Mesh*	Mesh::LoadMeshFile(const string &filename) {
 	ifstream f(filename);

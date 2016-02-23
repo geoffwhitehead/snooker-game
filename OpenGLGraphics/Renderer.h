@@ -44,6 +44,8 @@ public:
 		currentLight.radius = radius;
 	}
 
+	void collisionManager();
+
 protected:
 	
 	// MANAGERS
@@ -79,14 +81,33 @@ protected:
 	Entity* circle3;
 	Entity* triFan1;
 	Entity* triLoop1;
+	Entity* triFan2;
+	Entity* triLoop2;
+	Entity* triFan3;
+	Entity* triLoop3;
 	Entity* bg;
 	Entity* ground;
+	Entity* tableTop;
+	Entity* tableRight;
+	Entity* tableBottom;
+	Entity* tableLeft;
+
 
 	RenderObject c1;
 	RenderObject c2;
 	RenderObject c3;
 	RenderObject tf1;
 	RenderObject tl1;
+	RenderObject tf2;
+	RenderObject tl2;
+	RenderObject tf3;
+	RenderObject tl3;
+
+	RenderObject tbl_top;
+	RenderObject tbl_right;
+	RenderObject tbl_bottom;
+	RenderObject tbl_left;
+
 
 	RenderObject root;			//ROOT
 	RenderObject triObject;

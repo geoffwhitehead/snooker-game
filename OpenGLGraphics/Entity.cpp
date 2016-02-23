@@ -20,6 +20,8 @@ Entity::Entity(float x, float y, float z, float agg, float dir_x, float dir_y, f
 	this->dir = Vector3(dir_x, dir_y, dir_z);
 	this->aggroRange = agg;
 	this->renderObject = r;
+	this->renderObject->SetModelMatrix(Matrix4::Translation(Vector3(x, y, z)));
+
 }
 
 void Entity::setPos(Vector3 v){
