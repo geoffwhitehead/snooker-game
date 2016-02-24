@@ -49,10 +49,9 @@ public:
 	virtual void Draw();
 	static Mesh* Mesh::GenerateQuadPatch();
 	static Mesh* Mesh::GeneratePoints(unsigned int count);
-	static Mesh* Mesh::GenerateTriFan(float x, float y, float z, float radius);
-	static Mesh* Mesh::GenerateTriFanBorder(float x, float y, float z, float radius);
-	static Mesh* Mesh::GenerateRectangle(float x, float y, float z, float width, float height);
-
+	static Mesh* Mesh::GenerateTriFan();
+	static Mesh* Mesh::GenerateTriFanBorder();
+	
 
 	//Generates a single triangle, with RGB colours
 	static Mesh*	GenerateTriangle();

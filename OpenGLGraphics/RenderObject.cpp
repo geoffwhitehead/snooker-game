@@ -5,7 +5,7 @@ RenderObject::RenderObject(void)	{
 	mesh	= NULL;
 	shader	= NULL;
 	texture = NULL;
-	texture2 = NULL;
+	//texture2 = NULL;
 	parent  = NULL;
 }
 

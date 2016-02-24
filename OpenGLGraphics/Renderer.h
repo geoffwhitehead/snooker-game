@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include "Entity.h"
 #include <vector>
+#include "Physics.h"
 
 using std::vector;
 
@@ -93,20 +94,15 @@ protected:
 	Entity* tableLeft;
 
 
-	RenderObject c1;
-	RenderObject c2;
-	RenderObject c3;
-	RenderObject tf1;
-	RenderObject tl1;
-	RenderObject tf2;
-	RenderObject tl2;
-	RenderObject tf3;
-	RenderObject tl3;
+	RenderObject red;
+	RenderObject green;
+	RenderObject blue;
 
 	RenderObject tbl_top;
 	RenderObject tbl_right;
 	RenderObject tbl_bottom;
 	RenderObject tbl_left;
+	RenderObject obj_Table;
 
 
 	RenderObject root;			//ROOT
@@ -123,15 +119,7 @@ protected:
 	RenderObject hairyObject;
 	RenderObject tessCubeObject;
 
-	GLuint smileyTex;
-	GLuint staticTex;
-	GLuint perlinTex;
-	GLuint fireTex;
-	GLuint skyTex;
-	GLuint rustTex;
-	GLuint snowTex;
-	GLuint treeTex;
-	GLuint crateTex;
+	GLuint tableTex;
 
 	float i = 1.0;
 	float shrink = 1.0;

@@ -20,18 +20,16 @@ public:
 	GLuint	GetTexture()		const	{return texture;}
 	void	SetTexture(GLuint tex)		{texture = tex;}
 
-	GLuint  GetTexture2() const			{ return texture2;}
-	void SetTexture2(GLuint tex)			{ texture2 = tex; }
-
 	void	SetModelMatrix(Matrix4 mat) {modelMatrix = mat;}
 	Matrix4 GetModelMatrix()	const	{return modelMatrix;}
 
-	// MODIFIED GEOFF
-	void	SetTime(float t) { time = t; }
-	void	SetParticleSize(float p_s) { particleSize = p_s; }
+	
+	void	SetColour(Vector4 c) { ballColour = c; }
+	//void	SetParticleSize(float p_s) { particleSize = p_s; }
 
-	float GetTime()	const	{ return time; }
-	float GetParticleSize() const { return particleSize; }
+	Vector4 GetColour()	const	{ return ballColour; }
+	//float GetParticleSize() const { return particleSize; }
+	
 
 	virtual void Update(float msec);
 
@@ -63,7 +61,7 @@ protected:
 	Matrix4 modelMatrix;
 	Matrix4 worldTransform;
 
-	float time;
+	Vector4 ballColour;
 	float particleSize;
 
 	RenderObject*			parent;

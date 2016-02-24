@@ -190,9 +190,12 @@ Mesh* Mesh::GenerateQuad() {
 	return m;
 }
 
-// generate traingle fan
-
-Mesh* Mesh::GenerateTriFan(float x, float y, float z, float radius){
+Mesh* Mesh::GenerateTriFan(){
+	float x = 0;
+	float y = 0;
+	float z = 0;
+	float radius = 1;
+	
 	int LOD = 100;
 	float twicePi = 2.0f *PI;
 
@@ -218,10 +221,13 @@ Mesh* Mesh::GenerateTriFan(float x, float y, float z, float radius){
 
 }
 
-// generate line loop circle
-Mesh* Mesh::GenerateTriFanBorder(float x, float y, float z, float radius){
+Mesh* Mesh::GenerateTriFanBorder(){
 	int LOD = 100;
 	float twicePi = 2.0f *PI;
+	float x = 0;
+	float y = 0;
+	float z = 0;
+	float radius = 2;
 
 	Mesh*m = new Mesh();
 	m->type = GL_LINE_LOOP;
@@ -242,21 +248,6 @@ Mesh* Mesh::GenerateTriFanBorder(float x, float y, float z, float radius){
 	return m;
 }
 
-Mesh* Mesh::GenerateRectangle(float x, float y, float z, float width, float height){
-	Mesh*m = new Mesh();
-	m->type = GL_TRIANGLES;
-	m->numVertices = 6;
-	m->vertices = new Vector3[m->numVertices];
-	m->colours = new Vector4[m->numVertices];
-
-	m->vertices[0] = Vector3(0.5f, 0.5f, 1.0f);
-	m->vertices[1] = Vector3(0.5f, 0.5f, 0.0f);
-	m->vertices[2] = Vector3(0.5f, -0.5f, 0.0f);
-	m->vertices[3] = m->vertices[2];
-	m->vertices[4] = Vector3(-0.5f, -0.5f, 1.0f);
-	m->vertices[5] = m->vertices[0];
-	return m;
-}
 
 
 Mesh*	Mesh::LoadMeshFile(const string &filename) {
