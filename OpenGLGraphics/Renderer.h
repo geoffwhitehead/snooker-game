@@ -94,9 +94,26 @@ protected:
 	Entity* tableLeft;
 
 
-	RenderObject red;
-	RenderObject green;
+	RenderObject red1;
+	RenderObject red2;
+	RenderObject red3;
+	RenderObject red4;
+	RenderObject red5;
+	RenderObject red6;
+	RenderObject red7;
+	RenderObject red8;
+	RenderObject red8;
+	RenderObject red10;
+	RenderObject red11;
+	RenderObject red12;
+	RenderObject red13;
+	RenderObject red14;
+	RenderObject red15;
+	RenderObject yellow1;
 	RenderObject blue;
+	RenderObject pink;
+	RenderObject black;
+
 
 	RenderObject tbl_top;
 	RenderObject tbl_right;
