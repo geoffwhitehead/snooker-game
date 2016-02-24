@@ -153,9 +153,6 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 	tbl_bottom = RenderObject(quadMesh, basicShader);
 	tbl_left = RenderObject(quadMesh, basicShader);
 
-	
-
-
 	//ENTITIES
 	circle1 = new Entity(2, 2, -10, 0, 0, 0, 0, &(c1));
 	circle2 = new Entity(3, 3, -20, 0, 0, 0, 0, &(c2));
@@ -172,12 +169,9 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 	tableBottom = new Entity(10, 0, GAME_DEPTH, 0, 0, 0, 0, &(tbl_bottom));
 	tableLeft = new Entity(0, 10, GAME_DEPTH, 0, 0, 0, 0, &(tbl_left));
 
-
 	bg = new Entity(5, 5, 5, 0, 0, 0, 0, &(bgObject));
 	ground = new Entity(5, 5, 5, 0, 0, 0, 0, &(tessObject));
 	
-
-
 	// SCALE TRANSFORMS
 	tbl_top.SetModelMatrix(tbl_top.GetModelMatrix() * Matrix4::Scale(Vector3(21, 1, 1)));
 	tbl_right.SetModelMatrix(tbl_right.GetModelMatrix() * Matrix4::Scale(Vector3(1, 21, 1)));
@@ -218,10 +212,9 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 float Renderer::getRandom(float x){
 	float r2 = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / x));
 	return r2;
-
 }
 
-
+/*
 void Renderer::collisionManager(){
 
 }
@@ -237,11 +230,11 @@ void Renderer::physicsManager(){
 void Renderer::resourceManager(){
 
 }
+*/
 
 // SHOULD ENTITIES HAVE FLAGS TO SAY WHETHER THESE OBJECT ARE AFFECTED BY PHYSICS / COLLISIONS?
 
 //
-
 
 // ARE ALL THE MANAGERS CLASSES OR FUNCTIONS?
 
@@ -339,6 +332,8 @@ void	Renderer::UpdateScene(float msec) {
 	for (vector<RenderObject*>::iterator i = renderObjects.begin(); i != renderObjects.end(); ++i) {
 		(*i)->Update(msec);
 	}
+
+
 	for (int i = 0; i < entityObjects.size(); i++) {
 		(entityObjects[i]->renderObject->Update(msec));
 	}
