@@ -77,33 +77,6 @@ protected:
 	Shader* shader_hairy;
 	Shader* shader_tessCube;
 
-	// table entities
-	Entity* ent_tableTop;
-	Entity* ent_tableRight;
-	Entity* ent_tableBottom;
-	Entity* ent_tableLeft;
-	Entity* ent_table;
-	//ball entities
-	Entity* ent_red1;
-	Entity* ent_red2;
-	Entity* ent_red3;
-	Entity* ent_red4;
-	Entity* ent_red5;
-	Entity* ent_red6;
-	Entity* ent_red7;
-	Entity* ent_red8;
-	Entity* ent_red8;
-	Entity* ent_red10;
-	Entity* ent_red11;
-	Entity* ent_red12;
-	Entity* ent_red13;
-	Entity* ent_red14;
-	Entity* ent_red15;
-	Entity* ent_yellow1;
-	Entity* ent_blue;
-	Entity* ent_pink;
-	Entity* ent_black;
-
 
 	/*
 	RenderObject obj_root;			//ROOT

@@ -21,6 +21,28 @@ Entity::Entity(string name, Vector3 pos, Vector3 dir, Vector3 vel){
 
 }
 
+void Entity::setPos(Vector3 v){
+
+}
+void Entity::setDir(Vector3 v){
+
+}
+void Entity::setVel(Vector3 v){
+
+}
+
+void Entity::translate(Vector3 v){
+
+}
+void Entity::scale(Vector3 v){
+
+}
+void Entity::rotate(Vector3 v){
+
+}
+
+
+
 
 //destuctor
 Entity::~Entity()

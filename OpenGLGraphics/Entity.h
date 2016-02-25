@@ -18,9 +18,14 @@ public:
 
 	~Entity();
 
-	void setPos(Vector3);
-	void setDir(Vector3);
-	void updateObjectMatrix();
+	void setPos(Vector3 v);
+	void setDir(Vector3 v);
+	void setVel(Vector3 v);
+
+	inline void translate(Vector3 v) { this->physicsObject->translate(v); };
+	inline void scale(Vector3 v){ this->physicsObject->scale(v); };
+	inline void rotate(float degree, Vector3 v){ this->physicsObject->rotate(degree, v); };
+
 
 private:
 	Vector3 position;
