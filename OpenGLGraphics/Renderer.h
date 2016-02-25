@@ -54,89 +54,73 @@ protected:
 	vector<Entity*> entityObjects;
 
 	//MESHES
-	Mesh*	triangle;
-	Mesh*	cubeMesh;
-	Mesh*	points;
-	Mesh*   quadMesh;
-	Mesh*	tessMesh;
-	Mesh*	bgMesh;
-	Mesh*	triFanMesh;
-	Mesh*	triLoopMesh;
+	Mesh*	mesh_triangle;
+	Mesh*	mesh_cube;
+	Mesh*	mesh_points;
+	Mesh*   mesh_quad;
+	Mesh*	mesh_tessMesh;
+	Mesh*	mesh_bgMesh;
+	Mesh*	mesh_circle;
+	Mesh*	mesh_hollowCircle;
 
-	Shader* simpleShader;
-	Shader* basicShader;
-	Shader* smileyShader;
-	Shader* blendShader;
-	Shader* perlinShader;
-	Shader* pointShader;
-	Shader* tessShader;
-	Shader* lightShader;
-	Shader* shrinkShader;
-	Shader* tessLightShader;
-	Shader* destroyShader;
-	Shader* hairyShader;
-	Shader* tessCubeShader;
+	Shader* shader_simple;
+	Shader* shader_basic;
+	Shader* shader_smiley;
+	Shader* shader_blend;
+	Shader* shader_perlin;
+	Shader* shader_point;
+	Shader* shader_tess;
+	Shader* shader_light;
+	Shader* shader_shrink;
+	Shader* shader_tessLight;
+	Shader* shader_destroy;
+	Shader* shader_hairy;
+	Shader* shader_tessCube;
 
-	Entity* circle1;
-	Entity* circle2;
-	Entity* circle3;
-	Entity* triFan1;
-	Entity* triLoop1;
-	Entity* triFan2;
-	Entity* triLoop2;
-	Entity* triFan3;
-	Entity* triLoop3;
-	Entity* bg;
-	Entity* ground;
-	Entity* tableTop;
-	Entity* tableRight;
-	Entity* tableBottom;
-	Entity* tableLeft;
-
-
-	RenderObject red1;
-	RenderObject red2;
-	RenderObject red3;
-	RenderObject red4;
-	RenderObject red5;
-	RenderObject red6;
-	RenderObject red7;
-	RenderObject red8;
-	RenderObject red8;
-	RenderObject red10;
-	RenderObject red11;
-	RenderObject red12;
-	RenderObject red13;
-	RenderObject red14;
-	RenderObject red15;
-	RenderObject yellow1;
-	RenderObject blue;
-	RenderObject pink;
-	RenderObject black;
+	// table entities
+	Entity* ent_tableTop;
+	Entity* ent_tableRight;
+	Entity* ent_tableBottom;
+	Entity* ent_tableLeft;
+	Entity* ent_table;
+	//ball entities
+	Entity* ent_red1;
+	Entity* ent_red2;
+	Entity* ent_red3;
+	Entity* ent_red4;
+	Entity* ent_red5;
+	Entity* ent_red6;
+	Entity* ent_red7;
+	Entity* ent_red8;
+	Entity* ent_red8;
+	Entity* ent_red10;
+	Entity* ent_red11;
+	Entity* ent_red12;
+	Entity* ent_red13;
+	Entity* ent_red14;
+	Entity* ent_red15;
+	Entity* ent_yellow1;
+	Entity* ent_blue;
+	Entity* ent_pink;
+	Entity* ent_black;
 
 
-	RenderObject tbl_top;
-	RenderObject tbl_right;
-	RenderObject tbl_bottom;
-	RenderObject tbl_left;
-	RenderObject obj_Table;
-
-
-	RenderObject root;			//ROOT
-	RenderObject triObject;
-	RenderObject smileyObject;
-	RenderObject interpolateObject;
-	RenderObject perlinObject;
-	RenderObject spritesObject;
-	RenderObject tessObject;
-	RenderObject lightObject;
-	RenderObject shrinkObject;
-	RenderObject bgObject;
-	RenderObject destroyObject;
-	RenderObject hairyObject;
-	RenderObject tessCubeObject;
-
-	GLuint tableTex;
+	/*
+	RenderObject obj_root;			//ROOT
+	RenderObject obj_triObject;
+	RenderObject obj_smileyObject;
+	RenderObject obj_interpolateObject;
+	RenderObject obj_perlinObject;
+	RenderObject obj_spritesObject;
+	RenderObject obj_tessObject;
+	RenderObject obj_lightObject;
+	RenderObject obj_shrinkObject;
+	RenderObject obj_bgObject;
+	RenderObject obj_destroyObject;
+	RenderObject obj_hairyObject;
+	RenderObject obj_tessCubeObject;
+	*/
+	GLuint tex_table;
 
 	float i = 1.0;
 	float shrink = 1.0;

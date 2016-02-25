@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 #include "RenderObject.h"
+#include "PhysicsObject.h";
+#include <string>
 
 using namespace std;
 
@@ -10,24 +12,20 @@ class Entity
 {
 public:
 	Entity();
+	Entity(string name, Vector3 pos, Vector3 dir, Vector3 vel, Mesh* mesh, Shader* shader, GLuint texture);
+	Entity(string name, Vector3 pos, Vector3 dir, Vector3 vel, Mesh* mesh, Shader* shader);
+	Entity(string name, Vector3 pos, Vector3 dir, Vector3 vel);
+
 	~Entity();
-	Entity(float, float, float, float, float, float, float, RenderObject*);
+
 	void setPos(Vector3);
 	void setDir(Vector3);
-	void setAggroRange(float);
-	void setEntitiesInRange(int i);
-	void incEntity();
-	Vector3 getPos() const;
-	Vector3 getDir() const;
-	float getAggroRange() const;
-	int getEntitiesInRange() const;
-	friend ostream& operator<<(ostream& os, const Entity& e);
-	RenderObject* renderObject;
+	void updateObjectMatrix();
 
 private:
 	Vector3 position;
 	Vector3 dir;
-	float aggroRange;
-	int entitiesInRange = 0;
+	PhysicsObject* physicsObject;
+	RenderObject* renderObject;
 };
 

@@ -35,67 +35,25 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 	SetViewMatrix(Matrix4::BuildViewMatrix(Vector3(0, 0, 0), Vector3(0, 0, -10)));
 	
 	//SHADERS
-	basicShader = new Shader("./shaders/basicVert.glsl", "./shaders/basicFrag.glsl");
-	simpleShader = new Shader("./shaders/textureVert.glsl", "./shaders/textureFrag.glsl");
+	shader_basic = new Shader("./shaders/basicVert.glsl", "./shaders/basicFrag.glsl");
+	shader_simple = new Shader("./shaders/textureVert.glsl", "./shaders/textureFrag.glsl");
 
 	//MESHES
-	triangle = Mesh::GenerateTriangle();
-	triFanMesh = Mesh::GenerateTriFan();
-	triLoopMesh = Mesh::GenerateTriFanBorder();
-	bgMesh = Mesh::GeneratePoints(1);
-	tessMesh = Mesh::GenerateQuadPatch();
-	quadMesh = Mesh::GenerateQuad();
+	mesh_triangle = Mesh::GenerateTriangle();
+	mesh_circle = Mesh::GenerateTriFan();
+	mesh_hollowCircle = Mesh::GenerateTriFanBorder();
+	mesh_bgMesh = Mesh::GeneratePoints(1);
+	mesh_tessMesh = Mesh::GenerateQuadPatch();
+	mesh_quad = Mesh::GenerateQuad();
 
 	//TEXTURES
-	tableTex = LoadTexture("./textures/snooker_table.png");
+	tex_table = LoadTexture("./textures/snooker_table.png");
 
-	//RENDER OBJECTS
-
-	tf1 = RenderObject(triFanMesh, basicShader);
-	tf2 = RenderObject(triFanMesh, basicShader);
-	tf3 = RenderObject(triFanMesh, basicShader);
-
-
-	tbl_top = RenderObject(quadMesh, basicShader);
-	tbl_right = RenderObject(quadMesh, basicShader);
-	tbl_bottom = RenderObject(quadMesh, basicShader);
-	tbl_left = RenderObject(quadMesh, basicShader);
-	obj_Table = RenderObject(quadMesh, simpleShader, tableTex);
-
-	AddRenderObject(c1);
 	glUniform1f(c1.SetColour(), RED);
-	AddRenderObject(c2);
-	AddRenderObject(c3);
-	AddRenderObject(tf1);
-	AddRenderObject(tl1);
-	AddRenderObject(tf2);
-	AddRenderObject(tl2);
-	AddRenderObject(tf3);
-	AddRenderObject(tl3);
-	AddRenderObject(tbl_top);
-	AddRenderObject(tbl_right);
-	AddRenderObject(tbl_bottom);
-	AddRenderObject(tbl_left);
-	AddRenderObject(obj_Table);
 
-	/*
+	
 	//ENTITIES
-	circle1 = new Entity(2, 2, -10, 0, 0, 0, 0, &(c1));
-	circle2 = new Entity(3, 3, -20, 0, 0, 0, 0, &(c2));
-	circle3 = new Entity(4, 4, -30, 0, 0, 0, 0, &(c3));
-	triFan1 = new Entity(getRandom(X_BOUND), getRandom(Y_BOUND), GAME_DEPTH, 3, getRandom(5), getRandom(5), 0, &(tf1));
-	triLoop1 = new Entity(triFan1->getPos().x, triFan1->getPos().y, triFan1->getPos().z, triFan1->getAggroRange(), triFan1->getDir().x, triFan1->getDir().y, 0, &(tl1));
-	triFan2 = new Entity(getRandom(X_BOUND), getRandom(Y_BOUND), GAME_DEPTH, 3, getRandom(5), getRandom(5), 0, &(tf2));
-	triLoop2 = new Entity(triFan2->getPos().x, triFan2->getPos().y, triFan2->getPos().z, triFan2->getAggroRange(), triFan2->getDir().x, triFan2->getDir().y, 0, &(tl2));
-	triFan3 = new Entity(getRandom(X_BOUND), getRandom(Y_BOUND), GAME_DEPTH, 3, getRandom(5), getRandom(5), 0, &(tf3));
-	triLoop3 = new Entity(triFan3->getPos().x, triFan3->getPos().y, triFan3->getPos().z, triFan3->getAggroRange(), triFan3->getDir().x, triFan3->getDir().y, 0, &(tl3));
-
-	tableTop = new Entity(10, 20, GAME_DEPTH, 0, 0, 0, 0, &(tbl_top));
-	tableRight = new Entity(20, 10, GAME_DEPTH, 0, 0, 0, 0, &(tbl_right));
-	tableBottom = new Entity(10, 0, GAME_DEPTH, 0, 0, 0, 0, &(tbl_bottom));
-	tableLeft = new Entity(0, 10, GAME_DEPTH, 0, 0, 0, 0, &(tbl_left));
-	*/
-
+	
 	//POSITION TRANSFORMS
 	
 	
@@ -108,24 +66,37 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 	obj_Table.SetModelMatrix(obj_Table.GetModelMatrix() * (Matrix4::Scale(Vector3(SNOOKER_WIDTH, SNOOKER_HEIGHT, 1))));
 
 
-	/*
-	//ADD
-	AddEntityObject(circle1);
-	AddEntityObject(circle2);
-	AddEntityObject(circle3);
-	AddEntityObject(triFan1);
-	AddEntityObject(triLoop1);
-	AddEntityObject(triFan2);
-	AddEntityObject(triLoop2);
-	AddEntityObject(triFan3);
-	AddEntityObject(triLoop3);
-	AddEntityObject(tableTop);
-	AddEntityObject(tableRight);
-	AddEntityObject(tableBottom);
-	AddEntityObject(tableLeft);
-	*/
-	
+	AddEntityObject(new Entity("red1", Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+	AddEntityObject(new Entity("red2", Vector3(3.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+	AddEntityObject(new Entity("red2", Vector3(3.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+	AddEntityObject(new Entity("red3", Vector3(5.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+	AddEntityObject(new Entity("red4", Vector3(7.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+	AddEntityObject(new Entity("red5", Vector3(9.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+	AddEntityObject(new Entity("red6", Vector3(11.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+	AddEntityObject(new Entity("red7", Vector3(13.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+	AddEntityObject(new Entity("red8", Vector3(15.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+	AddEntityObject(new Entity("red9", Vector3(17.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+	AddEntityObject(new Entity("red10", Vector3(19.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+	AddEntityObject(new Entity("red11", Vector3(21.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+	AddEntityObject(new Entity("red12", Vector3(23.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+	AddEntityObject(new Entity("red13", Vector3(25.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+	AddEntityObject(new Entity("red14", Vector3(27.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+	AddEntityObject(new Entity("red15", Vector3(29.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic));
+
+	AddEntityObject(new Entity("yellow", Vector3(31.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic);
+	AddEntityObject(new Entity("blue", Vector3(33.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic);
+	AddEntityObject(new Entity("pink", Vector3(35.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic);
+	AddEntityObject(new Entity("black", Vector3(37.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_circle, shader_basic);
+
+	AddEntityObject(new Entity("table_left", Vector3(29.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_quad, shader_basic);
+	AddEntityObject(new Entity("table_right", Vector3(31.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_quad, shader_basic);
+	AddEntityObject(new Entity("table_bottom", Vector3(33.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_quad, shader_basic);
+	AddEntityObject(new Entity("table_top", Vector3(35.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_quad, shader_basic);
+	AddEntityObject(new Entity("table", Vector3(37.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 1.0f, 1.0f), mesh_quad, shader_simple, tex_table);
+
 }
+
+
 
 float Renderer::getRandom(float x){
 	float r2 = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / x));

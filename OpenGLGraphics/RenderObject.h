@@ -56,7 +56,6 @@ protected:
 	Shader*	shader;
 
 	GLuint	texture;
-	GLuint	texture2;
 
 	Matrix4 modelMatrix;
 	Matrix4 worldTransform;
