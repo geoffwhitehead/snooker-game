@@ -9,10 +9,8 @@ Entity::Entity(string name, Vector3 pos, Vector3 dir, Vector3 vel, Mesh* mesh, S
 }
 
 Entity::Entity(string name, Vector3 pos, Vector3 dir, Vector3 vel, Mesh* mesh, Shader* shader){
-	
 	this->renderObject = new RenderObject(mesh, shader);;
 	this->physicsObject = new PhysicsObject(pos, dir, vel, renderObject);
-
 }
 Entity::Entity(string name, Vector3 pos, Vector3 dir, Vector3 vel){
 
@@ -22,7 +20,7 @@ Entity::Entity(string name, Vector3 pos, Vector3 dir, Vector3 vel){
 }
 
 void Entity::setPos(Vector3 pos){ this->physicsObject->setPos(pos); }
-void Entity::setDir(Vector3 dir){ this->physicsObject->setDir(dir); }
+void Entity::setAcc(Vector3 dir){ this->physicsObject->setAcc(dir); }
 void Entity::setVel(Vector3 vel){ this->physicsObject->setVel(vel); }
 
 //destuctor

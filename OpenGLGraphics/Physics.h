@@ -7,7 +7,7 @@ class Physics
 public:
 	Physics();
 	~Physics();
-	inline Vector3 calcSUVAT(Vector3 u, Vector3 a, float t){
+	inline static Vector3 calcSUVAT(Vector3 u, Vector3 a, float t){
 		return u + a * t;
 	}
 

@@ -28,7 +28,7 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 	srand(std::time(NULL));
 
 	modelMatrix = Matrix4::Rotation(90, Vector3(1, 0, 0)) * Matrix4::Scale(Vector3(300, 300, 300));
-	projMatrix = Matrix4::Orthographic(0, 50, SNOOKER_WIDTH / 2 + TABLE_BORDER, -SNOOKER_WIDTH / 2 - TABLE_BORDER, SNOOKER_HEIGHT / 2 + TABLE_BORDER, -SNOOKER_HEIGHT / 2 - TABLE_BORDER);
+	projMatrix = Matrix4::Orthographic(-20, 50, SNOOKER_WIDTH / 2 + TABLE_BORDER, -SNOOKER_WIDTH / 2 - TABLE_BORDER, SNOOKER_HEIGHT / 2 + TABLE_BORDER, -SNOOKER_HEIGHT / 2 - TABLE_BORDER);
 
 	// SCENE MATRIXES
 	//SetProjectionMatrix(Matrix4::Orthographic(1.0f, 500.0f, 1.33f, 45.0f));
