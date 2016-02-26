@@ -49,7 +49,6 @@ public:
 	OGLRenderer(Window &parent);
 	virtual ~OGLRenderer(void);
 
-	virtual void	RenderScene()		= 0;
 	virtual void	UpdateScene(float msec);
 	void			SwapBuffers();
 

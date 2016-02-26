@@ -33,3 +33,29 @@ Entity::~Entity()
 RenderObject* Entity::getRenderObject() const {
 	return this->renderObject;
 }
+
+void Entity::update(float dt){
+	this->physicsObject->update(dt);
+	this->renderObject->update(dt);
+	for (vector<Entity*>::iterator i = children.begin(); i != children.end(); ++i) {
+		(*(*i)).physicsObject->update(dt);
+		(*(*i)).renderObject->update(dt);
+	}
+}
+
+void Entity::render(Renderer* renderer){
+	renderer->render(renderObject);
+	for (vector<Entity*>::iterator child = children.begin(); child != children.end(); ++child) {
+		renderer->render((*child)->renderObject);
+	}
+}
+
+void Entity::addChild(Entity &child) {
+	children.push_back(&child);
+	child.parent = this;
+	child.renderObject->setParent(this->renderObject);
+}
+
+const vector<Entity*>& Entity::GetChildren() const  {
+	return children;
+}

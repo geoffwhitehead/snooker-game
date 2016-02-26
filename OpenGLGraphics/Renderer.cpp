@@ -1,22 +1,4 @@
 #include "Renderer.h"
-#include <ctime>
-#include <cstdlib>
-
-const float Z = 10.f; // something random for now
-const float MAX_VEL = 10.0f; // maximum speed
-const float X_BOUND = 20.0f-1;
-const float Y_BOUND = 20.0f-1;
-const float GAME_DEPTH = -20.0f;
-const float MAX_VELOCITY = 1.5f;
-const float SNOOKER_WIDTH = 360.0f;
-const float SNOOKER_HEIGHT = 180.0f;
-const float TABLE_BORDER = 50.0f;
-const float CUSHION_WIDTH = 18.0f;
-const float POCKET_WIDTH = 63.0f;
-
-
-const Vector4 RED = Vector4(1.0f,1.0f,255.0f,1.0f);
-
 
 
 Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
@@ -36,32 +18,17 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)	{
 	
 }
 
-
-
-float Renderer::getRandom(float x){
-	float r2 = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / x));
-	return r2;
-}
-
 Renderer::~Renderer(void)	{
 	
 }
 
-void	Renderer::RenderScene() {
-	ClearBuffers();
-	//Render(root);
-	
-	for (vector<RenderObject*>::iterator i = renderObjects.begin(); i != renderObjects.end(); ++i) {
-		Render(*(*i));
-	}
-}
 
-void	Renderer::Render(const RenderObject &o) {
+void	Renderer::render(const RenderObject *o) {
 
-	modelMatrix = o.GetWorldTransform();
+	modelMatrix = o->GetWorldTransform();
 
-	if (o.GetShader() && o.GetMesh()) {
-		GLuint program = o.GetShader()->GetShaderProgram();
+	if (o->GetShader() && o->GetMesh()) {
+		GLuint program = o->GetShader()->GetShaderProgram();
 
 		glUseProgram(program);
 
@@ -77,14 +44,10 @@ void	Renderer::Render(const RenderObject &o) {
 		Vector3 camPos = rotation * -invCamPos; 
 		glUniform3fv(glGetUniformLocation(program, "cameraPos"), 1, (GLfloat*)&camPos);
 
-		o.Draw();
-	}
-
-	for (vector<RenderObject*>::const_iterator i = o.GetChildren().begin(); i != o.GetChildren().end(); ++i) {
-		Render(*(*i));
+		o->Draw();
 	}
 }
-
+/*
 void	Renderer::UpdateScene(float msec) {
 	time += msec;
 
@@ -119,28 +82,6 @@ void	Renderer::UpdateScene(float msec) {
 		viewMatrix = viewMatrix *
 			Matrix4::Translation(Vector3(0.0, 0.0, -0.1 * 50));
 	}
-}
+}*/
 
-GLuint Renderer::LoadTexture(char* filename, bool textureRepeating){
-	GLuint texture = SOIL_load_OGL_texture(filename,
-		SOIL_LOAD_AUTO,
-		SOIL_CREATE_NEW_ID,
-		SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_MULTIPLY_ALPHA
-		);
-
-	if (texture == NULL){
-		printf("[Texture loader] \"%s\" failed to load!\n", filename);
-		return 0;
-	}
-	else
-	{
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture);
-
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, textureRepeating ? GL_REPEAT : GL_CLAMP);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, textureRepeating ? GL_REPEAT : GL_CLAMP);
-
-		glActiveTexture(0);
-		return texture;	   
-	}					   
-}						   
+				   

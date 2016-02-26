@@ -22,32 +22,19 @@ public:
 
 	void	SetModelMatrix(Matrix4 mat) {modelMatrix = mat;}
 	Matrix4 GetModelMatrix()	const	{return modelMatrix;}
-	
-	//void	SetColour(Vector4 c) { ballColour = c; }
-	//void	SetParticleSize(float p_s) { particleSize = p_s; }
 
-	//Vector4 GetColour()	const	{ return ballColour; }
-	//float GetParticleSize() const { return particleSize; }
-	
-
-	virtual void Update(float msec);
+	virtual void update(float msec);
 
 	virtual void Draw() const;
 
 	//virtual void Update(float msec);
 
-	void	AddChild(RenderObject &child) {
-		children.push_back(&child);
-		child.parent = this;
-	}
 
 	Matrix4 GetWorldTransform() const {
 		return worldTransform;
 	}
 
-	const vector<RenderObject*>& GetChildren() const  {
-		return children;
-	}
+	void setParent(RenderObject* r);
 
 protected:
 
@@ -60,9 +47,6 @@ protected:
 	Matrix4 worldTransform;
 
 	float particleSize;
-
-	RenderObject*			parent;
-	vector<RenderObject*>	children;
-
+	RenderObject* parent;
 };
 

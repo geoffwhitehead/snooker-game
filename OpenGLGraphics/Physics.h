@@ -11,7 +11,7 @@ public:
 		return u + a * t;
 	}
 
-	inline Vector3 calcDisplacement(Vector3 u, Vector3 a, float t){
+	inline static Vector3 calcDisplacement(Vector3 u, Vector3 a, float t){
 		return (u*t) + (a * 0.5f * t*t);
 	}
 
