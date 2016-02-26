@@ -194,39 +194,6 @@ void OGLRenderer::SwapBuffers() {
 	//function keeps all the tutorial code 100% cross-platform (kinda).
 	::SwapBuffers(deviceContext);
 }
-/*
-Used by some later tutorials when we want to have framerate-independent
-updates on certain datatypes. Really, OGLRenderer should have its own
-timer, so it can just sit and look after itself (potentially even in
-another thread...), but it's fine for the tutorials.
-
-STUDENTS: Don't put your entity update routine in this, or anything like
-that - it's just asking for trouble! Strictly speaking, even the camera
-shouldn't be in here...(I'm lazy)
-*/
-void OGLRenderer::UpdateScene(float msec)	{
-
-}
-
-/*
-Updates the uniform matrices of the current shader. Assumes that
-the shader has uniform matrices called modelMatrix, viewMatrix,
-projMatrix, and textureMatrix. Updates them with the relevant
-matrix data. Sanity checks currentShader, so is always safe to
-call.
-*/
-void OGLRenderer::UpdateShaderMatrices(GLuint program)	{
-	glUniformMatrix4fv(glGetUniformLocation(program, "modelMatrix")  , 1, false, (float*)&modelMatrix);
-	glUniformMatrix4fv(glGetUniformLocation(program, "viewMatrix")   , 1, false, (float*)&viewMatrix);
-	glUniformMatrix4fv(glGetUniformLocation(program, "projMatrix")   , 1, false, (float*)&projMatrix);
-	glUniformMatrix4fv(glGetUniformLocation(program, "textureMatrix"), 1, false, (float*)&textureMatrix);
-}
-
-//void OGLRenderer::SetCurrentShader(Shader*s) {
-//	currentShader = s;
-//
-//	glUseProgram(s->GetProgram());
-//}
 
 void	OGLRenderer::ClearBuffers() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

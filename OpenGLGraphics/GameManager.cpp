@@ -6,6 +6,7 @@ const float WINDOW_Y = 768;
 
 GameManager::GameManager()
 : window(Window(WINDOW_X, WINDOW_Y)), renderer(Renderer(window)){
+
 }
 
 GameManager::~GameManager(){
@@ -16,13 +17,15 @@ void GameManager::addEntity(Entity* e){
 	entityObjects.push_back(e);
 }
 
-
-
 void GameManager::run(){
 
+	Camera* camera = new Camera(0.0f, 0.0f, Vector3(0, 0, 400));
+	Camera::projMatrix = Matrix4::Perspective(1, 1000, 1024.0f / 768.0f, 45);
+	Camera::viewMatrix = camera->BuildViewMatrix();
+	
 	while (window.UpdateWindow()){
 		float msec = window.GetTimer()->GetTimedMS();
-
+		camera->UpdateCamera(msec);
 		for (vector<Entity*>::iterator entity = entityObjects.begin(); entity != entityObjects.end(); ++entity)
 			(*entity)->update(msec);
 
@@ -33,6 +36,36 @@ void GameManager::run(){
 
 		renderer.SwapBuffers();
 	}
+	/*
+	// *************** SCENE MOVEMENT / TEXTURE CHANGE ******************
+	// enables you to move the camera around the scene with the defined keys
+	if (Keyboard::KeyDown(KEY_A)) {
+		Camera::viewMatrix = Camera::viewMatrix *
+			Matrix4::Translation(Vector3(-0.1f * 50, 0, 0));
+	};
+
+	if (Keyboard::KeyDown(KEY_D)) {
+		Camera::viewMatrix = Camera::viewMatrix *
+			Matrix4::Translation(Vector3(0.1f * 50, 0, 0));
+	}
+	if (Keyboard::KeyDown(KEY_W)) {
+		Camera::viewMatrix = Camera::viewMatrix *
+			Matrix4::Translation(Vector3(0.0, 0.1f * 50, 0));
+	}
+	if (Keyboard::KeyDown(KEY_S)) {
+		Camera::viewMatrix = Camera::viewMatrix *
+			Matrix4::Translation(Vector3(0.0, -0.1f * 50, 0));
+	}
+
+	if (Keyboard::KeyDown(KEY_E)) {
+		Camera::viewMatrix = Camera::viewMatrix *
+			Matrix4::Translation(Vector3(0.0, 0.0, 0.1 * 50));
+	}
+	if (Keyboard::KeyDown(KEY_C)) {
+		Camera::viewMatrix = Camera::viewMatrix *
+			Matrix4::Translation(Vector3(0.0, 0.0, -0.1 * 50));
+	}
+*/
 	
 }
 

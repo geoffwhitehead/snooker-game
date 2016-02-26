@@ -1,21 +1,21 @@
 
 #include "Entity.h"
 
-Entity::Entity(string name, Vector3 pos, Vector3 dir, Vector3 vel, Mesh* mesh, Shader* shader, GLuint texture){
+Entity::Entity(string name, Vector3 pos, Vector3 acc, Vector3 vel, Mesh* mesh, Shader* shader, GLuint texture){
 	
-	this->renderObject = new RenderObject(mesh, shader, texture);;
-	this->physicsObject = new PhysicsObject(pos, dir, vel, renderObject);
+	this->renderObject = new RenderObject(pos, mesh, shader, texture);;
+	this->physicsObject = new PhysicsObject(pos, acc, vel, renderObject);
 
 }
 
-Entity::Entity(string name, Vector3 pos, Vector3 dir, Vector3 vel, Mesh* mesh, Shader* shader){
-	this->renderObject = new RenderObject(mesh, shader);;
-	this->physicsObject = new PhysicsObject(pos, dir, vel, renderObject);
+Entity::Entity(string name, Vector3 pos, Vector3 acc, Vector3 vel, Mesh* mesh, Shader* shader){
+	this->renderObject = new RenderObject(pos, mesh, shader);;
+	this->physicsObject = new PhysicsObject(pos, acc, vel, renderObject);
 }
-Entity::Entity(string name, Vector3 pos, Vector3 dir, Vector3 vel){
+Entity::Entity(string name, Vector3 pos, Vector3 acc, Vector3 vel){
 
 	this->renderObject = nullptr;
-	this->physicsObject = new PhysicsObject(pos, dir, vel);
+	this->physicsObject = new PhysicsObject(pos, acc, vel);
 
 }
 

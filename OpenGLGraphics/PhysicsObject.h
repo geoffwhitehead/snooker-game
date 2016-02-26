@@ -11,7 +11,7 @@ private:
 	Vector3 acceleration;
 	Vector3 velocity;
 	inline void updateRenderObject(){ 
-		this->renderObject->SetModelMatrix(Matrix4::Translation(this->renderObject->GetModelMatrix() * position));
+		this->renderObject->SetModelMatrix(Matrix4::Translation(position));
 	};
 
 public:
@@ -27,7 +27,9 @@ public:
 	void setVel(Vector3 v);
 
 	inline void update(float dt) {
-		position = Physics::calcSUVAT(velocity, acceleration, dt);
+		velocity = Physics::calcSUVAT(velocity, acceleration, dt);
+		position += Physics::calcDisplacement(velocity, acceleration, dt);
+		updateRenderObject();
 	}
 
 };

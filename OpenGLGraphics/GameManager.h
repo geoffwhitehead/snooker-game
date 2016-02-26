@@ -3,10 +3,7 @@
 #include "RenderObject.h"
 #include "Entity.h"
 #include "Renderer.h"
-
-
-
-
+#include "../nclgl/Camera.h"
 
 
 
@@ -18,6 +15,7 @@ public:
 	void run();
 	void addEntity(Entity* e);
 	GLuint LoadTexture(char* filename, bool textureRepeating = true);
+	Camera* camera;
 private:
 	Window window;
 	Renderer renderer;

@@ -4,11 +4,12 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "../nclgl/OGLRenderer.h"
+#include "../nclgl/Camera.h"
 
 class RenderObject	{
 public:
 	RenderObject(void);
-	RenderObject(Mesh*m, Shader*s, GLuint t = 0);
+	RenderObject(Vector3 pos, Mesh*m, Shader*s, GLuint t = 0);
 	~RenderObject(void);
 
 	Mesh*	GetMesh()	const			{return mesh;}
@@ -35,7 +36,7 @@ public:
 	}
 
 	void setParent(RenderObject* r);
-
+	void UpdateShaderMatrices();
 protected:
 
 	Mesh*	mesh;

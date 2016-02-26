@@ -7,12 +7,12 @@ class Physics
 public:
 	Physics();
 	~Physics();
-	inline static Vector3 calcSUVAT(Vector3 u, Vector3 a, float t){
-		return u + a * t;
+	inline static Vector3 calcSUVAT(Vector3 vel, Vector3 acc, float dt){
+		return vel + (acc * dt);
 	}
 
-	inline static Vector3 calcDisplacement(Vector3 u, Vector3 a, float t){
-		return (u*t) + (a * 0.5f * t*t);
+	inline static Vector3 calcDisplacement(Vector3 vel, Vector3 acc, float dt){
+		return (vel*dt) + (acc * 0.5f * dt*dt);
 	}
 
 };

@@ -48,40 +48,17 @@ public:
 	friend class Window;
 	OGLRenderer(Window &parent);
 	virtual ~OGLRenderer(void);
-
-	virtual void	UpdateScene(float msec);
 	void			SwapBuffers();
-
 	bool			HasInitialised() const;	
-
-	void			SetProjectionMatrix(Matrix4 m) {
-		projMatrix = m;
-	}
-
-	void			SetViewMatrix(Matrix4 m) {
-		viewMatrix = m;
-	}
-
 	void	ClearBuffers();
 	
 protected:
 	virtual void	Resize(int x, int y);
-
-	void			UpdateShaderMatrices(GLuint program);
-
-	Matrix4 projMatrix;		//Projection matrix
-	Matrix4 modelMatrix;	//Model matrix. NOT MODELVIEW
-	Matrix4 viewMatrix;		//View matrix
-	Matrix4 textureMatrix;	//Texture matrix
-
 	bool	init;			//Did the renderer initialise properly?
-
 	HDC		deviceContext;	//...Device context?
 	HGLRC	renderContext;	//Permanent Rendering Context
-
 	static int		width;			//Render area width (not quite the same as window width)
 	static int		height;			//Render area height (not quite the same as window height)
-
 
 #ifdef _DEBUG
 	static void CALLBACK DebugCallback(	GLenum source, GLenum type, GLuint id, GLenum severity,
