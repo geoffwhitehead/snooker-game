@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "RenderObject.h"
-#include "PhysicsObject.h";
+#include "PhysicsObject.h"
 #include <string>
 
 using namespace std;
@@ -21,14 +21,14 @@ public:
 	void setPos(Vector3 v);
 	void setDir(Vector3 v);
 	void setVel(Vector3 v);
-
-	inline void translate(Vector3 v) { this->physicsObject->translate(v); };
-	inline void scale(Vector3 v){ this->physicsObject->scale(v); };
-	inline void rotate(float degree, Vector3 v){ this->physicsObject->rotate(degree, v); };
-
-
+	RenderObject* getRenderObject() const;
+	/*
+	inline void translate(Vector3 pos){ this->renderObject->SetModelMatrix(Matrix4::Translation(this->renderObject->GetModelMatrix() * pos)); };
+	inline void scale(Vector3 scale){ this->renderObject->SetModelMatrix(Matrix4::Scale(this->renderObject->GetModelMatrix() * scale)); };
+	inline void rotate(float degree, Vector3 rotation){ this->renderObject->SetModelMatrix(Matrix4::Rotation(degree, this->renderObject->GetModelMatrix() * rotation)); };
+	*/
 private:
-	Vector3 position;
+	Vector3 pos;
 	Vector3 dir;
 	PhysicsObject* physicsObject;
 	RenderObject* renderObject;

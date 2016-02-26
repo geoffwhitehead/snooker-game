@@ -4,14 +4,14 @@
 Entity::Entity(string name, Vector3 pos, Vector3 dir, Vector3 vel, Mesh* mesh, Shader* shader, GLuint texture){
 	
 	this->renderObject = new RenderObject(mesh, shader, texture);;
-	this->physicsObject = new PhysicsObject(pos, dir, vel);
+	this->physicsObject = new PhysicsObject(pos, dir, vel, renderObject);
 
 }
 
 Entity::Entity(string name, Vector3 pos, Vector3 dir, Vector3 vel, Mesh* mesh, Shader* shader){
 	
 	this->renderObject = new RenderObject(mesh, shader);;
-	this->physicsObject = new PhysicsObject(pos, dir, vel);
+	this->physicsObject = new PhysicsObject(pos, dir, vel, renderObject);
 
 }
 Entity::Entity(string name, Vector3 pos, Vector3 dir, Vector3 vel){
@@ -21,32 +21,17 @@ Entity::Entity(string name, Vector3 pos, Vector3 dir, Vector3 vel){
 
 }
 
-void Entity::setPos(Vector3 v){
-
-}
-void Entity::setDir(Vector3 v){
-
-}
-void Entity::setVel(Vector3 v){
-
-}
-
-void Entity::translate(Vector3 v){
-
-}
-void Entity::scale(Vector3 v){
-
-}
-void Entity::rotate(Vector3 v){
-
-}
-
-
-
+void Entity::setPos(Vector3 pos){ this->physicsObject->setPos(pos); }
+void Entity::setDir(Vector3 dir){ this->physicsObject->setDir(dir); }
+void Entity::setVel(Vector3 vel){ this->physicsObject->setVel(vel); }
 
 //destuctor
 Entity::~Entity()
 {
 	if (renderObject) delete renderObject;
 	delete physicsObject;
+}
+
+RenderObject* Entity::getRenderObject() const {
+	return this->renderObject;
 }

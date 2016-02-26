@@ -194,7 +194,7 @@ Mesh* Mesh::GenerateTriFan(){
 	float x = 0;
 	float y = 0;
 	float z = 0;
-	float radius = 1;
+	float radius = 5;
 	
 	int LOD = 100;
 	float twicePi = 2.0f *PI;
