@@ -51,14 +51,13 @@ public:
 	static Mesh* Mesh::GeneratePoints(unsigned int count);
 	static Mesh* Mesh::GenerateTriFan();
 	static Mesh* Mesh::GenerateTriFanBorder();
-	
-
-	//Generates a single triangle, with RGB colours
 	static Mesh*	GenerateTriangle();
+	static Mesh*	Mesh::GenerateQuad(float, float);
+
 	static Mesh*	LoadMeshFile(const string &filename);
 
 	GLuint	type;	//Primitive type for this mesh (GL_TRIANGLES...etc)
-	static Mesh*	Mesh::GenerateQuad();
+	
 
 protected:
 	//Buffers all VBO data into graphics memory. Required before drawing!

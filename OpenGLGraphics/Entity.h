@@ -33,9 +33,8 @@ public:
 
 	void render(Renderer*);
 
-	void addChild(Entity &child);
+	void addChild(Entity *child);
 
-	const vector<Entity*>& GetChildren() const;
 private:
 	PhysicsObject* physicsObject;
 	RenderObject* renderObject;

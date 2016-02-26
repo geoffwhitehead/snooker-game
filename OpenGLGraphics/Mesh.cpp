@@ -162,16 +162,20 @@ Mesh* Mesh::GenerateTriangle()	{
 	return m;
 }
 
-Mesh* Mesh::GenerateQuad() {
+Mesh* Mesh::GenerateQuad(float width, float height) {
 	Mesh*m = new Mesh();
 	m->type = GL_TRIANGLE_STRIP;
 	m->numVertices = 4;
 
+
+	float half_width = width / 2;
+	float half_height = height / 2;
+
 	m->vertices = new Vector3[m->numVertices];
-	m->vertices[0] = Vector3(-0.5f, 0.5f, 0.0f);
-	m->vertices[1] = Vector3(0.5f, 0.5f, 0.0f);
-	m->vertices[2] = Vector3(-0.5f, -0.5f, 0.0f);
-	m->vertices[3] = Vector3(0.5f, -0.5f, 0.0f);
+	m->vertices[1] = Vector3(-half_width, half_height, 0.0f);
+	m->vertices[0] = Vector3(half_width, half_height, 0.0f);
+	m->vertices[2] = Vector3(half_width, -half_height, 0.0f);
+	m->vertices[3] = Vector3(-half_width, -half_height, 0.0f);
 
 	m->textureCoords = new Vector2[m->numVertices];
 	m->textureCoords[0] = Vector2(0.0f, 1.0f);

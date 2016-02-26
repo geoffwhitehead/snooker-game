@@ -50,12 +50,8 @@ void Entity::render(Renderer* renderer){
 	}
 }
 
-void Entity::addChild(Entity &child) {
-	children.push_back(&child);
-	child.parent = this;
-	child.renderObject->setParent(this->renderObject);
-}
-
-const vector<Entity*>& Entity::GetChildren() const  {
-	return children;
+void Entity::addChild(Entity *child) {
+	children.push_back(child);
+	child->parent = this;
+	child->renderObject->setParent(this->renderObject);
 }
