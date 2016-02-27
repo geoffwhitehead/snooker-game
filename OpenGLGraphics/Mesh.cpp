@@ -172,10 +172,10 @@ Mesh* Mesh::GenerateQuad(float width, float height) {
 	float half_height = height / 2;
 
 	m->vertices = new Vector3[m->numVertices];
-	m->vertices[1] = Vector3(-half_width, half_height, 0.0f);
-	m->vertices[0] = Vector3(half_width, half_height, 0.0f);
-	m->vertices[2] = Vector3(half_width, -half_height, 0.0f);
-	m->vertices[3] = Vector3(-half_width, -half_height, 0.0f);
+	m->vertices[0] = Vector3(-half_width, half_height, 0.0f);
+	m->vertices[1] = Vector3(half_width, half_height, 0.0f);
+	m->vertices[3] = Vector3(half_width, -half_height, 0.0f);
+	m->vertices[2] = Vector3(-half_width, -half_height, 0.0f);
 
 	m->textureCoords = new Vector2[m->numVertices];
 	m->textureCoords[0] = Vector2(0.0f, 1.0f);
@@ -184,21 +184,20 @@ Mesh* Mesh::GenerateQuad(float width, float height) {
 	m->textureCoords[3] = Vector2(1.0f, 0.0f);
 
 	m->colours = new Vector4[m->numVertices];
-	m->colours[0] = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-	m->colours[1] = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-	m->colours[2] = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
-	m->colours[3] = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+	m->colours[0] = Vector4(1.0f, 0.0f, 0.0f, 0.6f);
+	m->colours[1] = Vector4(0.0f, 1.0f, 0.0f, 0.6f);
+	m->colours[2] = Vector4(0.0f, 0.0f, 1.0f, 0.6f);
+	m->colours[3] = Vector4(1.0f, 0.0f, 0.0f, 0.6f);
 
 	m->BufferData();
 
 	return m;
 }
 
-Mesh* Mesh::GenerateTriFan(){
+Mesh* Mesh::GenerateTriFan(float radius, Vector4 colour){
 	float x = 0;
 	float y = 0;
 	float z = 0;
-	float radius = 2.6;
 	
 	int LOD = 100;
 	float twicePi = 2.0f *PI;
@@ -217,7 +216,7 @@ Mesh* Mesh::GenerateTriFan(){
 			y + (radius * sin(i * twicePi / LOD)),
 			z
 			);
-		m->colours[i] = Vector4(1.0f, 1.0f, 0.0f, 1.0f);
+		m->colours[i] = colour;
 	}
 	m->BufferData();
 

@@ -1,11 +1,11 @@
 #pragma once
-#include "../nclgl/OGLRenderer.h";
-#include <iostream>;
-#include <vector>;
-#include "RenderObject.h";
-#include "PhysicsObject.h";
-#include <string>";
-#include "Renderer.h";
+#include "../nclgl/OGLRenderer.h"
+#include <iostream>
+#include <vector>
+#include "RenderObject.h"
+#include "PhysicsObject.h"
+#include <string>"
+#include "Renderer.h"
 
 using namespace std;
 
@@ -40,5 +40,6 @@ private:
 	RenderObject* renderObject;
 	Entity*	parent;
 	vector<Entity*> children;
+	string name;
 };
 

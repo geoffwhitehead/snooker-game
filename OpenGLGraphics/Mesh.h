@@ -49,10 +49,10 @@ public:
 	virtual void Draw();
 	static Mesh* Mesh::GenerateQuadPatch();
 	static Mesh* Mesh::GeneratePoints(unsigned int count);
-	static Mesh* Mesh::GenerateTriFan();
+	static Mesh* Mesh::GenerateTriFan(float radius, Vector4 colour);
 	static Mesh* Mesh::GenerateTriFanBorder();
-	static Mesh*	GenerateTriangle();
-	static Mesh*	Mesh::GenerateQuad(float, float);
+	static Mesh* Mesh::GenerateTriangle();
+	static Mesh* Mesh::GenerateQuad(float, float);
 
 	static Mesh*	LoadMeshFile(const string &filename);
 
