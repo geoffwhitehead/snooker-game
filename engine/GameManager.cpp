@@ -1,31 +1,29 @@
 #include "GameManager.h"
 
-const float WINDOW_X = 1024;
-const float WINDOW_Y = 768;
-
-
-GameManager::GameManager()
-: window(Window(WINDOW_X, WINDOW_Y)), renderer(Renderer(window)){
+GameManager::GameManager(float w_x, float w_y)
+: window(Window(w_x, w_y)), renderer(Renderer(window)){
 
 }
 
-GameManager::~GameManager(){
-	// TODO delete textures
-}
+GameManager::~GameManager(){}
+	//for (vector<GLuint>::iterator tex = textures.begin(); tex != textures.end(); ++tex)
+		//delete (*tex);
+
 
 void GameManager::addEntity(Entity* e){
 	entityObjects.push_back(e);
 }
+void GameManager::addSubSystem(SubSystem* ss) {
+	subSystems.push_back(ss);
+}
 
 void GameManager::run(){
-
-	Camera* camera = new Camera(0.0f, 0.0f, Vector3(0, 0, 400));
-	Camera::projMatrix = Matrix4::Perspective(1, 1000, 1024.0f / 768.0f, 45);
-	Camera::viewMatrix = camera->BuildViewMatrix();
-	
 	while (window.UpdateWindow()){
 		float msec = window.GetTimer()->GetTimedMS();
-		camera->UpdateCamera(msec);
+
+		for (vector<SubSystem*>::iterator system = subSystems.begin(); system != subSystems.end(); ++system)
+			(*system)->update(msec);
+
 		for (vector<Entity*>::iterator entity = entityObjects.begin(); entity != entityObjects.end(); ++entity)
 			(*entity)->update(msec);
 
@@ -36,6 +34,8 @@ void GameManager::run(){
 
 		renderer.SwapBuffers();
 	}
+	for (vector<SubSystem*>::iterator system = subSystems.begin(); system != subSystems.end(); ++system)
+		(*system)->destroy();
 }
 
 GLuint GameManager::LoadTexture(char* filename, bool textureRepeating){

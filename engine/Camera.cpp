@@ -10,7 +10,9 @@ last frame (default value is for simplicities sake...)
 Matrix4 Camera::viewMatrix;
 Matrix4 Camera::projMatrix;
 
-void Camera::UpdateCamera(float msec)	{
+void Camera::destroy() {};
+
+void Camera::update(float msec)	{
 	//Update the mouse by how much
 	pitch -= (Mouse::GetRelativePosition().y);
 	yaw	  -= (Mouse::GetRelativePosition().x);

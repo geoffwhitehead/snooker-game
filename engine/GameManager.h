@@ -3,17 +3,18 @@
 #include "RenderObject.h"
 #include "Entity.h"
 #include "Renderer.h"
-#include "Camera.h"
+#include "SubSystem.h"
 
 
 
 class GameManager
 {
 public:
-	GameManager();
+	GameManager(float, float);
 	~GameManager();
 	void run();
-	void addEntity(Entity* e);
+	void addEntity(Entity*);
+	void addSubSystem(SubSystem*);
 	GLuint LoadTexture(char* filename, bool textureRepeating = true);
 	Camera* camera;
 private:
@@ -21,6 +22,7 @@ private:
 	Renderer renderer;
 	vector<Entity*> entityObjects;
 	vector<GLuint> textures;
+	vector<SubSystem*> subSystems;
 
 	
 };

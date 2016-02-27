@@ -16,8 +16,9 @@ _-_-_-_-_-_-_-""  ""
 #include "../nclgl/Window.h"
 #include "../nclgl/Matrix4.h"
 #include "../nclgl/Vector3.h"
+#include "SubSystem.h"
 
-class Camera	{
+class Camera : public SubSystem {
 public:
 
 
@@ -38,8 +39,8 @@ public:
 
 	~Camera(void){};
 
-	void UpdateCamera(float msec = 10.0f);
-
+	void update(float msec = 10.0f);
+	void destroy();
 	//Builds a view matrix for the current camera variables, suitable for sending straight
 	//to a vertex shader (i.e it's already an 'inverse camera matrix').
 	Matrix4 BuildViewMatrix();
