@@ -12,15 +12,17 @@ class GameManager
 public:
 	GameManager(float, float);
 	~GameManager();
+
 	void run();
 	void addEntity(Entity*);
 	void addSubSystem(SubSystem*);
+
 	GLuint LoadTexture(char* filename, bool textureRepeating = true);
-	Camera* camera;
+
 private:
 	Window window;
 	Renderer renderer;
-	vector<Entity*> entityObjects;
+	vector<Entity*> entities;
 	vector<GLuint> textures;
 	vector<SubSystem*> subSystems;
 

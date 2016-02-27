@@ -11,7 +11,7 @@ GameManager::~GameManager(){}
 
 
 void GameManager::addEntity(Entity* e){
-	entityObjects.push_back(e);
+	entities.push_back(e);
 }
 void GameManager::addSubSystem(SubSystem* ss) {
 	subSystems.push_back(ss);
@@ -24,12 +24,12 @@ void GameManager::run(){
 		for (vector<SubSystem*>::iterator system = subSystems.begin(); system != subSystems.end(); ++system)
 			(*system)->update(msec);
 
-		for (vector<Entity*>::iterator entity = entityObjects.begin(); entity != entityObjects.end(); ++entity)
+		for (vector<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 			(*entity)->update(msec);
 
 		renderer.ClearBuffers();
 
-		for (vector<Entity*>::iterator entity = entityObjects.begin(); entity != entityObjects.end(); ++entity)
+		for (vector<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 			(*entity)->render(&renderer);
 
 		renderer.SwapBuffers();
