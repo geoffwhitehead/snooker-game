@@ -28,14 +28,16 @@ void Camera::UpdateCamera(float msec)	{
 
 	msec *= 5.0f;
 
-	if (Keyboard::KeyDown(KEY_W)) position += Matrix4::Rotation(yaw, Vector3(0,1,0)) * Vector3(0,0,-1) * msec;
-	if (Keyboard::KeyDown(KEY_S)) position -= Matrix4::Rotation(yaw, Vector3(0,1,0)) * Vector3(0,0,-1) * msec;
+	if (Keyboard::KeyDown(KEY_W)) position += Matrix4::Rotation(yaw, Vector3(0, 1, 0)) * Vector3(0, 0, -1) * msec;
+	if (Keyboard::KeyDown(KEY_S)) position -= Matrix4::Rotation(yaw, Vector3(0, 1, 0)) * Vector3(0, 0, -1) * msec;
+
 
 	if (Keyboard::KeyDown(KEY_A)) position += Matrix4::Rotation(yaw, Vector3(0,1,0)) * Vector3(-1,0,0) * msec;
 	if (Keyboard::KeyDown(KEY_D)) position -= Matrix4::Rotation(yaw, Vector3(0,1,0)) * Vector3(-1,0,0) * msec;
 
 	if (Keyboard::KeyDown(KEY_SHIFT)) position.y += msec;
 	if (Keyboard::KeyDown(KEY_SPACE)) position.y -= msec;
+	this->viewMatrix = this->BuildViewMatrix();
 }
 
 /*
