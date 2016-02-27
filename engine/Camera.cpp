@@ -31,7 +31,6 @@ void Camera::UpdateCamera(float msec)	{
 	if (Keyboard::KeyDown(KEY_W)) position += Matrix4::Rotation(yaw, Vector3(0, 1, 0)) * Vector3(0, 0, -1) * msec;
 	if (Keyboard::KeyDown(KEY_S)) position -= Matrix4::Rotation(yaw, Vector3(0, 1, 0)) * Vector3(0, 0, -1) * msec;
 
-
 	if (Keyboard::KeyDown(KEY_A)) position += Matrix4::Rotation(yaw, Vector3(0,1,0)) * Vector3(-1,0,0) * msec;
 	if (Keyboard::KeyDown(KEY_D)) position -= Matrix4::Rotation(yaw, Vector3(0,1,0)) * Vector3(-1,0,0) * msec;
 
@@ -39,6 +38,7 @@ void Camera::UpdateCamera(float msec)	{
 	if (Keyboard::KeyDown(KEY_SPACE)) position.y -= msec;
 	this->viewMatrix = this->BuildViewMatrix();
 }
+
 
 /*
 Generates a view matrix for the camera's viewpoint. This matrix can be sent

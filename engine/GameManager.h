@@ -3,7 +3,7 @@
 #include "RenderObject.h"
 #include "Entity.h"
 #include "Renderer.h"
-#include "../nclgl/Camera.h"
+#include "Camera.h"
 
 
 

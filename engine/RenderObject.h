@@ -4,7 +4,7 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "../nclgl/OGLRenderer.h"
-#include "../nclgl/Camera.h"
+#include "Camera.h"
 
 class RenderObject	{
 public:

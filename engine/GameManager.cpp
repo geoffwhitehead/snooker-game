@@ -36,37 +36,6 @@ void GameManager::run(){
 
 		renderer.SwapBuffers();
 	}
-	/*
-	// *************** SCENE MOVEMENT / TEXTURE CHANGE ******************
-	// enables you to move the camera around the scene with the defined keys
-	if (Keyboard::KeyDown(KEY_A)) {
-		Camera::viewMatrix = Camera::viewMatrix *
-			Matrix4::Translation(Vector3(-0.1f * 50, 0, 0));
-	};
-
-	if (Keyboard::KeyDown(KEY_D)) {
-		Camera::viewMatrix = Camera::viewMatrix *
-			Matrix4::Translation(Vector3(0.1f * 50, 0, 0));
-	}
-	if (Keyboard::KeyDown(KEY_W)) {
-		Camera::viewMatrix = Camera::viewMatrix *
-			Matrix4::Translation(Vector3(0.0, 0.1f * 50, 0));
-	}
-	if (Keyboard::KeyDown(KEY_S)) {
-		Camera::viewMatrix = Camera::viewMatrix *
-			Matrix4::Translation(Vector3(0.0, -0.1f * 50, 0));
-	}
-
-	if (Keyboard::KeyDown(KEY_E)) {
-		Camera::viewMatrix = Camera::viewMatrix *
-			Matrix4::Translation(Vector3(0.0, 0.0, 0.1 * 50));
-	}
-	if (Keyboard::KeyDown(KEY_C)) {
-		Camera::viewMatrix = Camera::viewMatrix *
-			Matrix4::Translation(Vector3(0.0, 0.0, -0.1 * 50));
-	}
-*/
-	
 }
 
 GLuint GameManager::LoadTexture(char* filename, bool textureRepeating){
