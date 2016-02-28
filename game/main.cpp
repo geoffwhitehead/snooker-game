@@ -1,7 +1,6 @@
 #include "../engine/Camera.h"
 #include "../engine/GameManager.h"
 #include "../nclgl/OGLRenderer.h"
-#pragma comment(lib, "../engine/release/nclgl.lib")
 
 #define W_X 1024.0f
 #define W_Y 768.0f
