@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "RenderObject.h"
-#include "Physics.h"
+#include "../physics/Physics.h"
 
 class PhysicsObject
 {

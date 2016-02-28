@@ -35,6 +35,7 @@ enum MeshBuffer {
 	NORMAL_BUFFER	, 
 	TANGENT_BUFFER	,
 	INDEX_BUFFER	,
+
 	MAX_BUFFER
 };
 

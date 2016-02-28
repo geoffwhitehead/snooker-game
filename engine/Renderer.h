@@ -5,7 +5,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <vector>
-#include "Physics.h"
+#include "../physics/Physics.h"
 #include <ctime>
 #include <cstdlib>
 

@@ -16,8 +16,6 @@ Renderer::~Renderer(void)	{
 }
 
 void	Renderer::render(RenderObject *o) {
-
-
 	if (o->GetShader() && o->GetMesh()) {
 		GLuint program = o->GetShader()->GetShaderProgram();
 		glUseProgram(program);
