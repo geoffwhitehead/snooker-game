@@ -82,7 +82,7 @@ void main(void) {
 	Shader* shader_simple = new Shader("./shaders/textureVert.glsl", "./shaders/textureFrag.glsl");
 	
 	//TEXTURES
-	uint tex_table = gm->LoadTexture("./textures/cloth.png");
+	GLuint tex_table = gm->LoadTexture("./textures/cloth.png");
 
 	//MESHES
 	Mesh* mesh_triangle = Mesh::GenerateTriangle();

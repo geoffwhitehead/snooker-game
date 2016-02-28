@@ -18,6 +18,14 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Physics.h" />
+    <ClInclude Include="SnookerBall.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="SnookerBall.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FCE54C78-D1C9-4D09-ADC5-930A6B84757B}</ProjectGuid>
     <RootNamespace>physics</RootNamespace>
@@ -117,12 +125,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\engine\Physics.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\engine\Physics.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
