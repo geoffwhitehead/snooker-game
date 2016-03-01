@@ -21,6 +21,24 @@ void GameManager::run(){
 	while (window.UpdateWindow()){
 		float msec = window.GetTimer()->GetTimedMS();
 
+		msec *= 2.0f;
+
+		// TEMP CODE
+
+		Entity* e1 = entities[0];
+
+
+		if (Keyboard::KeyDown(KEY_Z))
+			e1->setVel(Vector3(0.01, 0.01, 0.0));
+		
+
+
+
+
+
+
+		///////////
+
 		for (vector<SubSystem*>::iterator system = subSystems.begin(); system != subSystems.end(); ++system)
 			(*system)->update(msec);
 

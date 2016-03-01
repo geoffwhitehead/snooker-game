@@ -26,11 +26,7 @@ public:
 	void setAcc(Vector3 v);
 	void setVel(Vector3 v);
 
-	inline void update(float dt) {
-		velocity = Physics::calcSUVAT(velocity, acceleration, dt);
-		position += Physics::calcDisplacement(velocity, acceleration, dt);
-		updateRenderObject();
-	}
+	void update(float dt);
 
 };
 

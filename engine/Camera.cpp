@@ -28,7 +28,7 @@ void Camera::update(float msec)	{
 		yaw -= 360.0f;
 	}
 
-	msec *= 5.0f;
+	msec *= 2.0f;
 
 	if (Keyboard::KeyDown(KEY_W)) position += Matrix4::Rotation(yaw, Vector3(0, 1, 0)) * Vector3(0, 0, -1) * msec;
 	if (Keyboard::KeyDown(KEY_S)) position -= Matrix4::Rotation(yaw, Vector3(0, 1, 0)) * Vector3(0, 0, -1) * msec;

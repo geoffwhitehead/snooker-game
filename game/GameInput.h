@@ -6,7 +6,7 @@ class GameInput : public SubSystem
 public:
 	GameInput();
 	~GameInput();
-	void update();
+	void update(float msec);
 	void destroy();
 };
 

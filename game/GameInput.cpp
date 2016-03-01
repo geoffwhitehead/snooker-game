@@ -1,5 +1,6 @@
 #include "GameInput.h"
 
+#include "../nclgl/Window.h"
 
 GameInput::GameInput()
 {
@@ -10,11 +11,9 @@ GameInput::~GameInput()
 {
 }
 
-void GameInput::update() {
+void GameInput::update(float msec) {
 
-//	if (Keyboard::KeyDown(KEY_SHIFT)) position.y += msec;
-	//if (Keyboard::KeyDown(KEY_SPACE)) position.y -= msec;
-
+	
 }
 
 void GameInput::destroy() {
