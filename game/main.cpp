@@ -71,6 +71,8 @@ const float ball_offset = sqrt(pow(BALL_WIDTH, 2.0) + (pow(BALL_RADIUS, 2.0))) -
 void main(void) {
 
 	//CREATE SUB SYSTEMS
+
+	
 	Camera* camera = new Camera(0.0f, 0.0f, Vector3(0, 0, 400));
 	GameInput* gi = new GameInput();
 	Camera::projMatrix = Matrix4::Perspective(1, 1000, 1024.0f / 768.0f, 45);

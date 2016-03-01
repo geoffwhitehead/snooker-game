@@ -46,8 +46,7 @@ void Entity::update(float dt){
 	this->physicsObject->update(dt);
 	this->renderObject->update(dt);
 	for (vector<Entity*>::iterator i = children.begin(); i != children.end(); ++i) {
-		(*(*i)).physicsObject->update(dt);
-		(*(*i)).renderObject->update(dt);
+		(*i)->update(dt);
 	}
 }
 

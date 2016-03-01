@@ -10,6 +10,7 @@ last frame (default value is for simplicities sake...)
 Matrix4 Camera::viewMatrix;
 Matrix4 Camera::projMatrix;
 
+
 void Camera::destroy() {};
 
 void Camera::update(float msec)	{

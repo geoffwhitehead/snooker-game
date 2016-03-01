@@ -6,6 +6,9 @@ GameInput::GameInput()
 {
 }
 
+void init(){
+
+}
 
 GameInput::~GameInput()
 {

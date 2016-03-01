@@ -25,6 +25,7 @@ public:
 	static Matrix4 viewMatrix;
 	static Matrix4 projMatrix;
 
+	void Camera::init(){};
 
 	Camera(void){
 		yaw		= 0.0f;

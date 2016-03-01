@@ -5,7 +5,7 @@
 #include "Renderer.h"
 #include "SubSystem.h"
 
-
+// init gm with reference to input handler, ui, camera, audio, memory manager 
 
 class GameManager
 {

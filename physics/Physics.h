@@ -6,7 +6,6 @@
 #define DAMPING_FACTOR 0.85
 #define MINIMUM_VELOCITY 0.000001
 
-
 using namespace std;
 
 class Physics
@@ -28,9 +27,10 @@ public:
 		//}
 	}
 
-	inline static void calcDisplacement(Vector3& pos, Vector3 vel, Vector3 acc, float dt){
+	inline static Vector3 calcDisplacement(Vector3& pos, Vector3 vel, Vector3 acc, float dt){
 		//if (abs(vel.x) > MINIMUM_VELOCITY || abs(vel.y) > MINIMUM_VELOCITY){
-		pos += (vel*dt);// +(acc * 0.5f * dt*dt);
+		
+		return (vel*dt) +(acc * 0.5f * dt*dt);
 			//cout << "pos: " << pos << endl;
 		//}
 	}
@@ -40,7 +40,9 @@ public:
 		//vel = vel + 
 	//}
 
-	inline static void semiImplici
+	inline static void semiImplicitEuler(Vector3& pos, Vector3 vel, Vector3 acc, Vector3& disp, float dt){
+
+	}
 
 };
 
