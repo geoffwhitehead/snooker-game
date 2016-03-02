@@ -41,5 +41,32 @@ public:
 		pos += new_disp;
 		disp = new_disp;
 	}
+
+	inline static bool detectCollision(Vector3 c1, Vector3 c2, float* r1, float* r2){
+		float d2 = pow(c2.x - c1.x, 2.0) + pow(c2.y - c1.y, 2.0) + pow(c2.z - c1.z, 2.0);
+
+		if (d2 < (pow((*r1 + *r2), 2.0))) {
+			cout << d2 << endl;
+
+			//calculate p n r and adjust positions with suvat
+
+			return true;
+		}
+		return false;
+	}
+	//normal 
+
+
+	inline static bool detectCollision(Vector3 c1, float* r1, Vector3 normal, float distance){
+		float result = c1.Dot((normal), c1) - distance;
+		if (abs(result) < *r1){
+			return true;
+		}
+		return false;
+	}
+
+
+
 };
+
 

@@ -1,16 +1,17 @@
 #pragma once
 #include "Shape.h"
 #include "../engine-base/PhysicsObject.h"
-
-class Circle : public Shape
+class Plane :
+	public Shape
 {
 public:
-	Circle(PhysicsObject* obj, float* radius);
-	~Circle();
-	float* getRadius() const{ return this->radius; };
+	Plane(PhysicsObject*);
+	~Plane();
 	PhysicsObject* getPhysicsObject() const { return this->physicsObject; };
+	Vector3 getNormal();
+	float Plane::getDistanceFromOrigin();
 private:
-	float* radius;
 	PhysicsObject* physicsObject;
+	float distance;
+	Vector3 normal;
 };
-

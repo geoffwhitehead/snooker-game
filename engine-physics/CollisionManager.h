@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "Circle.h"
 #include "Rectangle.h"
+#include "Plane.h"
 
 class CollisionManager :
 	public SubSystem
@@ -18,9 +19,11 @@ public:
 	~CollisionManager();
 	void addObject(Entity* phys_obj, float* radius);
 	void addObject(Entity* phys_obj, float* x, float* y);
+	void addObject(Entity* phys_obj);
 	void removeEntity(Entity* e);
 
 private:
-	vector<PhysicsObject*> collisionEntities;
+	vector<PhysicsObject*> collidableSpheres;
+	vector<PhysicsObject*> collidablePlanes;
 
 };

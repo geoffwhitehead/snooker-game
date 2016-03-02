@@ -16,9 +16,9 @@
 #define CUSHION_WIDTH 18.0f
 #define POCKET_WIDTH 63.0f
 #define SNOOKER_WIDTH 356.87f
+#define SNOOKER_HEIGHT 177.8f
 #define HALF_WIDTH SNOOKER_WIDTH /2
 #define HALF_HEIGHT SNOOKER_HEIGHT /2
-#define SNOOKER_HEIGHT 177.8f
 #define TABLE_BORDER 50.0f
 #define TABLE_POS Vector3(0.0f, 0.0f, -7.5f)
 
@@ -36,7 +36,7 @@ const float ball_offset = sqrt(pow(BALL_WIDTH, 2.0) + (pow(BALL_RADIUS, 2.0))) -
 #define POS_YELLOW Vector3(M_BAULK_TO_CUSHION, -M_SEMI_RADIUS, BALL_Z)
 #define POS_GREEN Vector3(M_BAULK_TO_CUSHION, M_SEMI_RADIUS, BALL_Z)
 #define POS_WHITE Vector3(M_BAULK_TO_CUSHION - 10.0f, 10.0f, BALL_Z)
-
+//#define POS_WHITE Vector3(HALF_WIDTH, 0.0f, BALL_Z)
 #define RED_TOP 100.0f
 #define POS_RED01 Vector3(RED_TOP, 0, BALL_Z)
 //row1
@@ -141,22 +141,30 @@ void main(void) {
 	table->addChild(new Entity("pink", POS_PINK, VEC_ZERO, VEC_ZERO, mesh_pinkBall, shader_basic));
 	table->addChild(new Entity("black", POS_BLACK, VEC_ZERO, VEC_ZERO, mesh_blackBall, shader_basic));
 	table->addChild(new Entity("brown", POS_BROWN, VEC_ZERO, VEC_ZERO, mesh_brownBall, shader_basic));
-	table->addChild(new Entity("white", POS_WHITE, VEC_ZERO, VEC_ZERO, mesh_whiteBall, shader_basic));
-	table->addChild(new Entity("table_l", Vector3(-HALF_WIDTH, 0, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblLeft, shader_basic));
-	table->addChild(new Entity("table_r", Vector3(HALF_WIDTH, 0, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblRight, shader_basic));
-	table->addChild(new Entity("table_b", Vector3(0, -HALF_HEIGHT, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblBottom, shader_basic));
-	table->addChild(new Entity("table_t", Vector3(0, HALF_HEIGHT, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblTop, shader_basic));
+	Entity* white = new Entity("white", POS_WHITE, VEC_ZERO, VEC_ZERO, mesh_whiteBall, shader_basic);
+	Entity* table_left = new Entity("table_l", Vector3(-HALF_WIDTH, 0, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblLeft, shader_basic);
+	Entity* table_right = new Entity("table_r", Vector3(HALF_WIDTH, 0, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblRight, shader_basic);
+	Entity* table_bottom = new Entity("table_b", Vector3(0, -HALF_HEIGHT, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblBottom, shader_basic);
+	Entity* table_top = new Entity("table_t", Vector3(0, HALF_HEIGHT, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblTop, shader_basic);
 
 	// register collidable entities
-	float* f = new float(1.0f);
+	float* f = new float(BALL_RADIUS);
 	cm->addObject(red01, f);
-	cm->addObject(red02, f);
-
+	cm->addObject(white, f);
+	cm->addObject(table_left);
+	cm->addObject(table_right);
+	cm->addObject(table_bottom);
+	cm->addObject(table_top);
 
 	// register entities
 	gm->addEntity(table);
 	gm->addEntity(red01);
 	gm->addEntity(red02);
+	gm->addEntity(white);
+	gm->addEntity(table_left);
+	gm->addEntity(table_right);
+	gm->addEntity(table_bottom);
+	gm->addEntity(table_top);
 
 	//register subsystems
 	gm->addSubSystem(camera);
