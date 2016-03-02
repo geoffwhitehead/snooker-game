@@ -64,17 +64,17 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\_resources\GLEW\include;..\_resources\SOIL\;\$(IncludePath)$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>..\_libs\$(Configuration)\;..\_resources\GLEW\lib;..\_resources\SOIL\$(Configuration);\;$(LibraryPath);$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
+    <IncludePath>..\_resources\GLEW\include;..\_resources\SOIL;$(IncludePath)</IncludePath>
+    <LibraryPath>..\_resources\GLEW\lib;..\_resources\SOIL;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)</TargetName>
-    <OutDir>$(SolutionDir)_libs\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)_libs\$(Configuration)\intermediates\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)$\_libs\</OutDir>
+    <IntDir>$(SolutionDir)$\_libs\intermediates\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>..\_resources\GLEW\include;..\_resources\SOIL\;\$(IncludePath)$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>..\_libs\$(Configuration)\;..\_resources\GLEW\lib;..\_resources\SOIL\$(Configuration);\;$(LibraryPath);$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
-    <OutDir>$(SolutionDir)_libs\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)_libs\$(Configuration)\intermediates\$(ProjectName)\</IntDir>
+    <IncludePath>..\GLEW\include;..\SOIL;$(IncludePath)</IncludePath>
+    <LibraryPath>..\GLEW\lib;..\SOIL;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)$\_libs\</OutDir>
+    <IntDir>$(SolutionDir)$\_libs\intermediates\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

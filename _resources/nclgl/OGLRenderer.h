@@ -19,10 +19,10 @@ _-_-_-_-_-_-_-""  ""
 #include <vector>
 
 #define GLEW_STATIC 
-#include "../_resources/GLEW/include/GL/glew.h"
-#include "../_resources/GLEW/include/GL/wglew.h"
+#include "GL/glew.h"
+#include "GL/wglew.h"
 
-#include "../_resources/SOIL/SOIL.h"
+#include "SOIL.h"
 
 #include "Vector4.h"
 #include "Vector3.h"

@@ -1,12 +1,11 @@
 #include "GameInput.h"
 
-#include "../nclgl/Window.h"
 
 GameInput::GameInput()
 {
 }
 
-void init(){
+void GameInput::init(){
 
 }
 

@@ -1,5 +1,5 @@
-#include "../engine/Camera.h"
-#include "../engine/GameManager.h"
+#include "../engine-base/Camera.h"
+#include "../engine-base/GameManager.h"
 #include "../nclgl/OGLRenderer.h"
 #include "GameInput.h"
 
