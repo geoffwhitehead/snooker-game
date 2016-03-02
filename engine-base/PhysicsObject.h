@@ -15,7 +15,7 @@ private:
 	inline void updateRenderObject(){ 
 		this->renderObject->SetModelMatrix(Matrix4::Translation(position));
 	};
-	Vector3 prev_displacement;
+	Vector3 prev_displacement = Vector3(0.0f, 0.0f, 0.0f );
 
 public:
 	PhysicsObject(Vector3 pos, Vector3 acc, Vector3 vel, PhysicsObject* parent = nullptr);

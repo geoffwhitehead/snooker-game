@@ -18,21 +18,19 @@ public:
 	
 
 	inline static void calcVelocity(Vector3& vel, Vector3 acc, float dt){
-		//if (abs(vel.x) > MINIMUM_VELOCITY || abs(vel.y) > MINIMUM_VELOCITY) {
+		if (abs(vel.x) > MINIMUM_VELOCITY || abs(vel.y) > MINIMUM_VELOCITY) {
 			vel = (vel + (acc * dt)) * DAMPING_FACTOR;
-			//cout << "vel: " << vel << endl;
-		//}
-		//else {
-		//	vel = Vector3(0.0f, 0.0f, 0.0f);
-		//}
+		}
+		else {
+			vel = Vector3(0.0f, 0.0f, 0.0f);
+		}
 	}
 
-	inline static Vector3 calcDisplacement(Vector3& pos, Vector3 vel, Vector3 acc, float dt){
-		//if (abs(vel.x) > MINIMUM_VELOCITY || abs(vel.y) > MINIMUM_VELOCITY){
-		
-		return (vel*dt) +(acc * 0.5f * dt*dt);
-			//cout << "pos: " << pos << endl;
-		//}
+	inline static void calcDisplacement(Vector3& pos, Vector3 vel, Vector3 acc, float dt, Vector3 disp){
+		if (abs(vel.x) > MINIMUM_VELOCITY || abs(vel.y) > MINIMUM_VELOCITY){
+			disp = (vel*dt) + (acc * 0.5f * dt*dt);
+			pos += disp;
+		}
 	}
 
 	//inline static Vector3 implicitEuler(Vector3& pos, Vector3& vel, Vector3 acc, float dt){
@@ -40,9 +38,16 @@ public:
 		//vel = vel + 
 	//}
 
-	inline static void semiImplicitEuler(Vector3& pos, Vector3 vel, Vector3 acc, Vector3& disp, float dt){
-
+	inline static void semiImplicitEuler(Vector3& pos, Vector3 &vel, Vector3 acc, Vector3& disp, float dt){
+		if (abs(vel.x) > MINIMUM_VELOCITY || abs(vel.y) > MINIMUM_VELOCITY) {
+			vel = (vel + (acc * dt)) * DAMPING_FACTOR;
+		}
+		else {
+			vel = Vector3(0.0f, 0.0f, 0.0f);
+		}
+		Vector3 new_disp = (disp + (vel * dt)) * DAMPING_FACTOR;
+		pos += new_disp;
+		disp = new_disp;
 	}
-
 };
 
