@@ -42,6 +42,10 @@ RenderObject* Entity::getRenderObject() const {
 	return this->renderObject;
 }
 
+PhysicsObject* Entity::getPhysicsObject() const {
+	return this->physicsObject;
+}
+
 void Entity::update(float dt){
 	this->physicsObject->update(dt);
 	this->renderObject->update(dt);

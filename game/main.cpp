@@ -2,6 +2,7 @@
 #include "../engine-base/GameManager.h"
 #include "../nclgl/OGLRenderer.h"
 #include "GameInput.h"
+#include "../engine-physics/CollisionManager.h"
 
 #define W_X 1024.0f
 #define W_Y 768.0f
@@ -23,7 +24,7 @@
 
 #define BALL_RADIUS 2.6f
 #define BALL_WIDTH 5.2f
-const float ball_offset = sqrt(pow(BALL_WIDTH, 2.0) + (pow(BALL_RADIUS, 2.0))) - 1.1;
+const float ball_offset = sqrt(pow(BALL_WIDTH, 2.0) + (pow(BALL_RADIUS, 2.0))) - 1.1f;
 #define BALL_Z 5.0f
 #define M_BAULK_TO_CUSHION -HALF_WIDTH + 73.66f
 #define M_SEMI_RADIUS 29.21f
@@ -77,6 +78,7 @@ void main(void) {
 	GameInput* gi = new GameInput();
 	Camera::projMatrix = Matrix4::Perspective(1, 1000, 1024.0f / 768.0f, 45);
 	Camera::viewMatrix = camera->BuildViewMatrix();
+	CollisionManager* cm = new CollisionManager();
 
 
 	// GAME MANAGER
@@ -117,9 +119,9 @@ void main(void) {
 
 
 	Entity* table = new Entity("table", TABLE_POS, VEC_ZERO, VEC_ZERO, mesh_table, shader_simple, tex_table);
-	
-	table->addChild(new Entity("red01", POS_RED01, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic));
-	table->addChild(new Entity("red02", POS_RED02, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic));
+	Entity* red01 = new Entity("red01", POS_RED01, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic);
+	Entity* red02 = new Entity("red02", POS_RED02, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic);
+
 	table->addChild(new Entity("red03", POS_RED03, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic));
 	table->addChild(new Entity("red04", POS_RED04, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic));
 	table->addChild(new Entity("red05", POS_RED05, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic));
@@ -145,12 +147,21 @@ void main(void) {
 	table->addChild(new Entity("table_b", Vector3(0, -HALF_HEIGHT, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblBottom, shader_basic));
 	table->addChild(new Entity("table_t", Vector3(0, HALF_HEIGHT, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblTop, shader_basic));
 
+	// register collidable entities
+	float* f = new float(1.0f);
+	cm->addObject(red01, f);
+	cm->addObject(red02, f);
+
+
 	// register entities
 	gm->addEntity(table);
+	gm->addEntity(red01);
+	gm->addEntity(red02);
 
 	//register subsystems
 	gm->addSubSystem(camera);
-
+	gm->addSubSystem(cm);
+	//start
 	gm->run();
 
 }

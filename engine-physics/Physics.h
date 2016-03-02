@@ -3,8 +3,8 @@
 #include "../nclgl/Vector3.h"
 
 
-#define DAMPING_FACTOR 0.85
-#define MINIMUM_VELOCITY 0.000001
+#define DAMPING_FACTOR 0.92f
+#define MINIMUM_VELOCITY 0.000001f
 
 using namespace std;
 
@@ -14,37 +14,29 @@ public:
 	Physics();
 	~Physics();
 
-	float adj_acc;
-	
+	inline static bool moving(Vector3 &vel) {
+		if (abs(vel.x) >= MINIMUM_VELOCITY || abs(vel.y) > MINIMUM_VELOCITY)
+			return true;
+		else
+			vel = Vector3(0.0f, 0.0f, 0.0f);
+		return false;
+	};
 
 	inline static void calcVelocity(Vector3& vel, Vector3 acc, float dt){
-		if (abs(vel.x) > MINIMUM_VELOCITY || abs(vel.y) > MINIMUM_VELOCITY) {
+		if (moving(vel))
 			vel = (vel + (acc * dt)) * DAMPING_FACTOR;
-		}
-		else {
-			vel = Vector3(0.0f, 0.0f, 0.0f);
-		}
 	}
 
 	inline static void calcDisplacement(Vector3& pos, Vector3 vel, Vector3 acc, float dt, Vector3 disp){
-		if (abs(vel.x) > MINIMUM_VELOCITY || abs(vel.y) > MINIMUM_VELOCITY){
+		if (moving(vel)){
 			disp = (vel*dt) + (acc * 0.5f * dt*dt);
 			pos += disp;
 		}
 	}
 
-	//inline static Vector3 implicitEuler(Vector3& pos, Vector3& vel, Vector3 acc, float dt){
-		//adj_acc = 
-		//vel = vel + 
-	//}
-
 	inline static void semiImplicitEuler(Vector3& pos, Vector3 &vel, Vector3 acc, Vector3& disp, float dt){
-		if (abs(vel.x) > MINIMUM_VELOCITY || abs(vel.y) > MINIMUM_VELOCITY) {
+		if (moving(vel)) 
 			vel = (vel + (acc * dt)) * DAMPING_FACTOR;
-		}
-		else {
-			vel = Vector3(0.0f, 0.0f, 0.0f);
-		}
 		Vector3 new_disp = (disp + (vel * dt)) * DAMPING_FACTOR;
 		pos += new_disp;
 		disp = new_disp;

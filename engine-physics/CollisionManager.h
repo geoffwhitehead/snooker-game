@@ -1,0 +1,26 @@
+#pragma once
+#include <vector>
+#include "../engine-base/SubSystem.h"
+#include "../engine-base/Entity.h"
+#include <algorithm>
+#include "Circle.h"
+#include "Rectangle.h"
+
+class CollisionManager :
+	public SubSystem
+
+{
+public:
+	void init();
+	void update(float msec);
+	void destroy();
+	CollisionManager();
+	~CollisionManager();
+	void addObject(Entity* phys_obj, float* radius);
+	void addObject(Entity* phys_obj, float* x, float* y);
+	void removeEntity(Entity* e);
+
+private:
+	vector<Shape*> collisionEntities;
+
+};

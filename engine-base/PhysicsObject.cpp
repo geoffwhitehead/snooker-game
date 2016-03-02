@@ -31,13 +31,12 @@ void PhysicsObject::setPos(Vector3 pos){
 	this->position = pos;
 	if (renderObject) { updateRenderObject(); };
 };
+
 void PhysicsObject::update(float dt) {
 	//Physics::calcVelocity(this->velocity, this->acceleration, dt);
 	//Physics::calcDisplacement(this->position, this->velocity, this->acceleration, dt, prev_displacement);
 	
 	Physics::semiImplicitEuler(position, velocity, acceleration, prev_displacement, dt);
-	
-	
 	updateRenderObject();
-}
+};
 
