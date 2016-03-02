@@ -21,6 +21,6 @@ public:
 	void removeEntity(Entity* e);
 
 private:
-	vector<Shape*> collisionEntities;
+	vector<PhysicsObject*> collisionEntities;
 
 };
