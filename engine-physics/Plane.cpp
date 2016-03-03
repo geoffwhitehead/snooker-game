@@ -1,12 +1,12 @@
 #include "Plane.h"
 
 
-Plane::Plane(PhysicsObject* p)
+Plane::Plane(float distance, Vector3 normal)
 {
-	this->physicsObject = p;
-	distance = physicsObject->getPos().Length();
-	this->normal = physicsObject->getPos();
-	this->normal.Normalise();
+	this->distance = distance;
+	this->normal = normal;
+	//this->normal = physicsObject->getPos();
+	//this->normal.Normalise();
 }
 
 

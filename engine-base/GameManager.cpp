@@ -25,11 +25,11 @@ void GameManager::run(){
 
 		// TEMP CODE
 
-		Entity* white = entities[3];
+		Entity* white = entities[0]->getChildren()[0];
 
 
 		if (Keyboard::KeyDown(KEY_Z))
-			white->setVel(Vector3(0.1, -0.005, 0.0));
+			white->setVel(Vector3(0.0051f, 0.00001f, 0.0f));
 		
 
 

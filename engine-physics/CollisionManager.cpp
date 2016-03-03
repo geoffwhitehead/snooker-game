@@ -22,6 +22,10 @@ void CollisionManager::update(float msec){
 				bool result = Physics::detectCollision(
 					collidableSpheres[i]->getPos(),
 					collidableSpheres[j]->getPos(),
+					collidableSpheres[i]->getVel(),
+					collidableSpheres[j]->getVel(),
+					collidableSpheres[i]->getMass(),
+					collidableSpheres[j]->getMass(),
 					(static_cast<Circle*>(collidableSpheres[i]->getRef())->getRadius()),
 					(static_cast<Circle*>(collidableSpheres[j]->getRef())->getRadius())
 					);
@@ -34,6 +38,11 @@ void CollisionManager::update(float msec){
 		for (int j = 0; j < collidablePlanes.size(); j++){
 			bool result = Physics::detectCollision(
 				collidableSpheres[i]->getPos(),
+				collidablePlanes[j]->getPos(),
+				collidableSpheres[i]->getVel(),
+				collidablePlanes[j]->getVel(),
+				collidableSpheres[i]->getMass(),
+				collidablePlanes[j]->getMass(),
 				static_cast<Circle*>(collidableSpheres[i]->getRef())->getRadius(),
 				static_cast<Plane*>(collidablePlanes[j]->getRef())->getNormal(),
 				static_cast<Plane*>(collidablePlanes[j]->getRef())->getDistanceFromOrigin()
@@ -47,18 +56,14 @@ void CollisionManager::destroy(){
 
 }
 
-void CollisionManager::addObject(Entity* entity, float* radius){
-	Shape* s = new Circle(entity->getPhysicsObject(), radius);
+void CollisionManager::addObject(Entity* entity, float radius){
+	Shape* s = new Circle(radius);
 	entity->getPhysicsObject()->setRef(s);
 	collidableSpheres.push_back(entity->getPhysicsObject());
 }
 
-void CollisionManager::addObject(Entity* entity, float* x, float* y){
-	//collidableObjects.push_back(new Rectangle(entity->getPhysicObject(), x, y));
-}
-
-void CollisionManager::addObject(Entity* entity){
-	Shape* p = new Plane(entity->getPhysicsObject());
+void CollisionManager::addObject(Entity* entity, float distance, Vector3 normal){
+	Shape* p = new Plane(distance, normal);
 	entity->getPhysicsObject()->setRef(p);
 	collidablePlanes.push_back(entity->getPhysicsObject());
 }

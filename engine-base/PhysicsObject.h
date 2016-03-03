@@ -11,6 +11,8 @@ private:
 	Vector3 position;
 	Vector3 acceleration;
 	Vector3 velocity;
+	float mass;
+
 	PhysicsObject* parent;
 	vector<PhysicsObject*> children;
 	inline void updateRenderObject(){
@@ -20,19 +22,20 @@ private:
 	
 	Shape* collision_reference;
 public:
-	PhysicsObject(Vector3 pos, Vector3 acc, Vector3 vel, PhysicsObject* parent = nullptr);
-	PhysicsObject(Vector3 pos, Vector3 acc, Vector3 vel, RenderObject *r, PhysicsObject* parent = nullptr);
+	PhysicsObject(Vector3 pos, Vector3 acc, Vector3 vel, float mass = -1.0f, PhysicsObject* parent = nullptr);
+	PhysicsObject(Vector3 pos, Vector3 acc, Vector3 vel, RenderObject *r, float mass = -1.0f, PhysicsObject* parent = nullptr);
 	~PhysicsObject();
 
-	Vector3 getPos() const;
-	Vector3 getAcc() const;
-	Vector3 getVel() const;
+	Vector3& getPos() ;
+	Vector3& getAcc() ;
+	Vector3& getVel() ;
+	float& getMass() ;
 
-	void setPos(Vector3 v);
-	void setAcc(Vector3 v);
-	void setVel(Vector3 v);
-
-	void update(float dt);
+	void setPos(Vector3);
+	void setAcc(Vector3);
+	void setVel(Vector3);
+	void setMass(float);
+	void update(float);
 
 	void setRef(Shape* shape) { this->collision_reference = shape; };
 	Shape* getRef() const { return this->collision_reference; };

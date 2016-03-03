@@ -1,9 +1,8 @@
 #include "Circle.h"
 
 
-Circle::Circle(PhysicsObject* obj, float* radius){
+Circle::Circle(float radius){
 	this->radius = radius;
-	this->physicsObject = obj;
 }
 
 

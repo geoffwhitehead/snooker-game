@@ -17,9 +17,8 @@ public:
 	void destroy();
 	CollisionManager();
 	~CollisionManager();
-	void addObject(Entity* phys_obj, float* radius);
-	void addObject(Entity* phys_obj, float* x, float* y);
-	void addObject(Entity* phys_obj);
+	void addObject(Entity* phys_obj, float radius);
+	void addObject(Entity* entity, float distance, Vector3 normal);
 	void removeEntity(Entity* e);
 
 private:

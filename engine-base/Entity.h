@@ -17,9 +17,10 @@ public:
 
 	virtual ~Entity();
 
-	void setPos(Vector3 v);
-	void setAcc(Vector3 v);
-	void setVel(Vector3 v);
+	void setPos(Vector3);
+	void setAcc(Vector3);
+	void setVel(Vector3);
+	void setMass(float);
 
 	RenderObject* getRenderObject() const;
 	PhysicsObject* getPhysicsObject() const;
@@ -33,7 +34,7 @@ public:
 	void render(Renderer*);
 
 	void addChild(Entity *child);
-
+	vector<Entity*> getChildren();
 private:
 	PhysicsObject* physicsObject;
 	RenderObject* renderObject;

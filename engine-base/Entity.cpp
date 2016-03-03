@@ -30,6 +30,8 @@ Entity::Entity(string name, Vector3 pos, Vector3 acc, Vector3 vel){
 void Entity::setPos(Vector3 pos){ this->physicsObject->setPos(pos); }
 void Entity::setAcc(Vector3 dir){ this->physicsObject->setAcc(dir); }
 void Entity::setVel(Vector3 vel){ this->physicsObject->setVel(vel); }
+void Entity::setMass(float mass){ this->physicsObject->setMass(mass); };
+
 
 //destuctor
 Entity::~Entity()
@@ -65,4 +67,7 @@ void Entity::addChild(Entity *child) {
 	children.push_back(child);
 	child->parent = this;
 	child->renderObject->setParent(this->renderObject);
+}
+vector<Entity*> Entity::getChildren(){
+	return this->children;
 }

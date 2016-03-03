@@ -5,12 +5,10 @@
 class Circle : public Shape
 {
 public:
-	Circle(PhysicsObject* obj, float* radius);
+	Circle(float radius);
 	~Circle();
-	float* getRadius() const{ return this->radius; };
-	PhysicsObject* getPhysicsObject() const { return this->physicsObject; };
+	float getRadius() const{ return this->radius; };
 private:
-	float* radius;
-	PhysicsObject* physicsObject;
+	float radius;
 };
 

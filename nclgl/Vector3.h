@@ -43,6 +43,45 @@ public:
 		}
 	}
 
+
+
+
+
+
+
+
+
+
+	Vector3	getNormal() {
+		float length = Length();
+
+		if (length != 0.0f)	{
+			length = 1.0f / length;
+			return Vector3(
+				x * length,
+				y * length,
+				z * length);
+		};
+	};
+
+	inline float dot(const Vector3 &rhs){
+		return (this->x * rhs.x) + (this->y * rhs.y) + (this->z * rhs.z);
+	}
+
+	Vector3 getAbs() {
+		return Vector3(abs(this->x), abs(this->y), abs(this->z));
+	}
+
+
+
+
+
+
+
+
+
+
+
 	void		ToZero() {
 		x = y = z = 0.0f;
 	}
@@ -61,6 +100,9 @@ public:
 		return Vector3(-x,-y,-z);
 	}
 
+
+
+
 	static float	Dot(const Vector3 &a, const Vector3 &b) {
 		return (a.x*b.x)+(a.y*b.y)+(a.z*b.z);
 	}
@@ -72,6 +114,10 @@ public:
 	inline friend std::ostream& operator<<(std::ostream& o, const Vector3& v) {
 		o << "Vector3(" << v.x << "," << v.y << "," << v.z <<")" << std::endl;
 		return o;
+	}
+
+	inline Vector3 absolute() const{
+		return Vector3(abs(x), abs(y), abs(z));
 	}
 
 	inline Vector3  operator+(const Vector3  &a) const{
@@ -113,6 +159,7 @@ public:
 	inline Vector3  operator/(const float v) const{
 		return Vector3(x / v,y / v, z / v);
 	};
+
 
 	inline bool	operator==(const Vector3 &A)const {return (A.x == x && A.y == y && A.z == z) ? true : false;};
 	inline bool	operator!=(const Vector3 &A)const {return (A.x == x && A.y == y && A.z == z) ? false : true;};

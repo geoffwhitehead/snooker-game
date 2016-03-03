@@ -5,6 +5,7 @@
 
 #define DAMPING_FACTOR 0.92f
 #define MINIMUM_VELOCITY 0.000001f
+#define COEFF_OF_ELASTICITY 0.9f
 
 using namespace std;
 
@@ -42,24 +43,56 @@ public:
 		disp = new_disp;
 	}
 
-	inline static bool detectCollision(Vector3 c1, Vector3 c2, float* r1, float* r2){
-		float d2 = pow(c2.x - c1.x, 2.0) + pow(c2.y - c1.y, 2.0) + pow(c2.z - c1.z, 2.0);
+	inline static bool detectCollision(Vector3& pos1, Vector3& pos2, Vector3& vel1, Vector3& vel2, float mass1, float mass2, float r1, float r2){
+		float d2 = pow(pos2.x - pos1.x, 2.0) + pow(pos2.y - pos1.y, 2.0) + pow(pos2.z - pos1.z, 2.0);
 
-		if (d2 < (pow((*r1 + *r2), 2.0))) {
-			cout << d2 << endl;
+		if (d2 < (pow((r1 + r2), 2.0))) {
 
-			//calculate p n r and adjust positions with suvat
+			//calculate penetration depth
+			//float p = r1 + r2 - sqrt(d2);
+			
+			//calculate point of collision
+			//Vector3 P = pos1 - N * (r1 - p);
 
-			return true;
+			//calculate collision normal
+			Vector3 N = (pos1 - pos2).getAbs();
+
+			Vector3 Vab = vel1 + vel2;
+
+			float VN = Vab.dot(N);
+
+			//float totalForce = -COEFF_OF_ELASTICITY * (vel1 + vel2).dot(N);
+
+			float J = (-(1+COEFF_OF_ELASTICITY) * VN) / (N.dot(N)*((1/mass1) + (1/mass2)));
+
+			vel1 = vel1 - (N * (J / mass1));
+			vel2 = vel2 + (N * (J / mass2));
+
 		}
 		return false;
 	}
 	//normal 
 
 
-	inline static bool detectCollision(Vector3 c1, float* r1, Vector3 normal, float distance){
-		float result = c1.Dot((normal), c1) - distance;
-		if (abs(result) < *r1){
+	inline static bool detectCollision(Vector3& c_pos, Vector3& p_pos, Vector3& c_vel, Vector3& p_vel, float c_mass, float p_mass, float r, Vector3 normal, float distance){
+		float result = c_pos.Dot((normal), c_pos) - distance;
+		if (abs(result) < r){
+			
+			Vector3 N = normal;
+			float p = r - result; // this might not be right regarding distance 
+			Vector3 P = c_pos - N * (r - p);
+
+			Vector3 Vab = c_vel + p_vel;
+
+			float VN = Vab.dot(N);
+
+			//float totalForce = -COEFF_OF_ELASTICITY * (vel1 + vel2).dot(N);
+
+			float J = (-(1 + COEFF_OF_ELASTICITY) * VN) / (N.dot(N)*((1 / c_mass) + (1 / p_mass)));
+
+			c_vel = c_vel - (N * (J / c_mass));
+			p_vel = p_vel + (N * (J / p_mass));
+			
 			return true;
 		}
 		return false;

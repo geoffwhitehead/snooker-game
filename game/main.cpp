@@ -21,7 +21,8 @@
 #define HALF_HEIGHT SNOOKER_HEIGHT /2
 #define TABLE_BORDER 50.0f
 #define TABLE_POS Vector3(0.0f, 0.0f, -7.5f)
-
+#define EDGE_MASS -1.0f
+#define BALL_MASS 0.5f
 #define BALL_RADIUS 2.6f
 #define BALL_WIDTH 5.2f
 const float ball_offset = sqrt(pow(BALL_WIDTH, 2.0) + (pow(BALL_RADIUS, 2.0))) - 1.1f;
@@ -35,9 +36,10 @@ const float ball_offset = sqrt(pow(BALL_WIDTH, 2.0) + (pow(BALL_RADIUS, 2.0))) -
 #define POS_BROWN Vector3(M_BAULK_TO_CUSHION, 0.0f, BALL_Z) 
 #define POS_YELLOW Vector3(M_BAULK_TO_CUSHION, -M_SEMI_RADIUS, BALL_Z)
 #define POS_GREEN Vector3(M_BAULK_TO_CUSHION, M_SEMI_RADIUS, BALL_Z)
-#define POS_WHITE Vector3(M_BAULK_TO_CUSHION - 10.0f, 10.0f, BALL_Z)
-//#define POS_WHITE Vector3(HALF_WIDTH, 0.0f, BALL_Z)
+//#define POS_WHITE Vector3(M_BAULK_TO_CUSHION - 10.0f, 10.0f, BALL_Z)
 #define RED_TOP 100.0f
+#define POS_WHITE Vector3(RED_TOP - 10, 10, BALL_Z)
+
 #define POS_RED01 Vector3(RED_TOP, 0, BALL_Z)
 //row1
 #define POS_RED02 Vector3(RED_TOP + ball_offset, BALL_RADIUS, BALL_Z)
@@ -119,9 +121,10 @@ void main(void) {
 
 
 	Entity* table = new Entity("table", TABLE_POS, VEC_ZERO, VEC_ZERO, mesh_table, shader_simple, tex_table);
-	Entity* red01 = new Entity("red01", POS_RED01, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic);
-	Entity* red02 = new Entity("red02", POS_RED02, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic);
 
+	table->addChild(new Entity("white", POS_WHITE, VEC_ZERO, VEC_ZERO, mesh_whiteBall, shader_basic));
+	table->addChild(new Entity("red01", POS_RED01, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic));
+	table->addChild(new Entity("red02", POS_RED02, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic));
 	table->addChild(new Entity("red03", POS_RED03, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic));
 	table->addChild(new Entity("red04", POS_RED04, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic));
 	table->addChild(new Entity("red05", POS_RED05, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic));
@@ -141,26 +144,32 @@ void main(void) {
 	table->addChild(new Entity("pink", POS_PINK, VEC_ZERO, VEC_ZERO, mesh_pinkBall, shader_basic));
 	table->addChild(new Entity("black", POS_BLACK, VEC_ZERO, VEC_ZERO, mesh_blackBall, shader_basic));
 	table->addChild(new Entity("brown", POS_BROWN, VEC_ZERO, VEC_ZERO, mesh_brownBall, shader_basic));
-	Entity* white = new Entity("white", POS_WHITE, VEC_ZERO, VEC_ZERO, mesh_whiteBall, shader_basic);
 	Entity* table_left = new Entity("table_l", Vector3(-HALF_WIDTH, 0, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblLeft, shader_basic);
 	Entity* table_right = new Entity("table_r", Vector3(HALF_WIDTH, 0, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblRight, shader_basic);
 	Entity* table_bottom = new Entity("table_b", Vector3(0, -HALF_HEIGHT, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblBottom, shader_basic);
 	Entity* table_top = new Entity("table_t", Vector3(0, HALF_HEIGHT, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblTop, shader_basic);
 
+	// set mass
+	float f = BALL_RADIUS;
+	table->setMass(EDGE_MASS);
+	table_left->setMass(EDGE_MASS);
+	table_right->setMass(EDGE_MASS);
+	table_bottom->setMass(EDGE_MASS);
+	table_top->setMass(EDGE_MASS);
+
 	// register collidable entities
-	float* f = new float(BALL_RADIUS);
-	cm->addObject(red01, f);
-	cm->addObject(white, f);
-	cm->addObject(table_left);
-	cm->addObject(table_right);
-	cm->addObject(table_bottom);
-	cm->addObject(table_top);
+	for (int i = 0; i < table->getChildren().size(); i++) {
+		Entity* e = table->getChildren()[i];
+		e->setMass(BALL_MASS);
+		cm->addObject(e, f);
+	}
+	cm->addObject(table_left, table_left->getPhysicsObject()->getPos().Length(), table_left->getPhysicsObject()->getPos().getNormal());
+	cm->addObject(table_right, table_right->getPhysicsObject()->getPos().Length(), table_right->getPhysicsObject()->getPos().getNormal());
+	cm->addObject(table_bottom, table_bottom->getPhysicsObject()->getPos().Length(), table_bottom->getPhysicsObject()->getPos().getNormal());
+	cm->addObject(table_top, table_top->getPhysicsObject()->getPos().Length(), table_top->getPhysicsObject()->getPos().getNormal());
 
 	// register entities
 	gm->addEntity(table);
-	gm->addEntity(red01);
-	gm->addEntity(red02);
-	gm->addEntity(white);
 	gm->addEntity(table_left);
 	gm->addEntity(table_right);
 	gm->addEntity(table_bottom);
