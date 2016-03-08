@@ -3,7 +3,7 @@
 #include "../nclgl/Vector3.h"
 
 
-#define DAMPING_FACTOR 0.92f
+#define DAMPING_FACTOR 0.9f
 #define MINIMUM_VELOCITY 0.000001f
 #define COEFF_OF_ELASTICITY 0.9f
 #define SRRING_STRENGTH 0.8f 
@@ -26,7 +26,11 @@ public:
 
 	inline static void calcVelocity(Vector3& vel, Vector3 acc, float dt){
 		if (moving(vel))
-			vel = (vel + (acc * dt)) * DAMPING_FACTOR;
+			Vector3 new_vel = (vel + (acc * dt)) * DAMPING_FACTOR;
+			//if (){
+			
+		//	}
+			
 	}
 
 	inline static void calcDisplacement(Vector3& pos, Vector3 vel, Vector3 acc, float dt, Vector3 disp){
@@ -68,19 +72,10 @@ public:
 
 			float spring_vel = N.dot(Vab);
 
-			float F = (-SRRING_STRENGTH) * p - (DAMPING_FACTOR * (N.dot(Vab)));
-
-
-
-
-
-
-
-
+			//float F = (-SRRING_STRENGTH) * p - (DAMPING_FACTOR * (N.dot(Vab)));
 
 			vel1 = vel1 - (N * (J / mass1));
 			vel2 = vel2 + (N * (J / mass2));
-
 		}
 		return false;
 	}

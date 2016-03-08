@@ -151,11 +151,11 @@ void main(void) {
 
 	// set mass
 	float f = BALL_RADIUS;
-	table->setMass(EDGE_MASS);
-	table_left->setMass(EDGE_MASS);
-	table_right->setMass(EDGE_MASS);
-	table_bottom->setMass(EDGE_MASS);
-	table_top->setMass(EDGE_MASS);
+	table->setMass(0.0f);
+	table_left->setMass(0.0f);
+	table_right->setMass(0.0f);
+	table_bottom->setMass(0.0f);
+	table_top->setMass(0.0f);
 
 	// register collidable entities
 	for (int i = 0; i < table->getChildren().size(); i++) {
