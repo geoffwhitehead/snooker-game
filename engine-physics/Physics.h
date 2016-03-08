@@ -6,6 +6,7 @@
 #define DAMPING_FACTOR 0.92f
 #define MINIMUM_VELOCITY 0.000001f
 #define COEFF_OF_ELASTICITY 0.9f
+#define SRRING_STRENGTH 0.8f 
 
 using namespace std;
 
@@ -49,7 +50,7 @@ public:
 		if (d2 < (pow((r1 + r2), 2.0))) {
 
 			//calculate penetration depth
-			//float p = r1 + r2 - sqrt(d2);
+			float p = r1 + r2 - sqrt(d2);
 			
 			//calculate point of collision
 			//Vector3 P = pos1 - N * (r1 - p);
@@ -64,6 +65,18 @@ public:
 			//float totalForce = -COEFF_OF_ELASTICITY * (vel1 + vel2).dot(N);
 
 			float J = (-(1+COEFF_OF_ELASTICITY) * VN) / (N.dot(N)*((1/mass1) + (1/mass2)));
+
+			float spring_vel = N.dot(Vab);
+
+			float F = (-SRRING_STRENGTH) * p - (DAMPING_FACTOR * (N.dot(Vab)));
+
+
+
+
+
+
+
+
 
 			vel1 = vel1 - (N * (J / mass1));
 			vel2 = vel2 + (N * (J / mass2));
