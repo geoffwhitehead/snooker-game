@@ -18,6 +18,10 @@ void GameManager::addSubSystem(SubSystem* ss) {
 }
 
 void GameManager::run(){
+	
+	for (vector<SubSystem*>::iterator system = subSystems.begin(); system != subSystems.end(); ++system)
+		(*system)->init();
+
 	while (window.UpdateWindow()){
 		float msec = window.GetTimer()->GetTimedMS();
 
@@ -27,17 +31,10 @@ void GameManager::run(){
 
 		Entity* white = entities[0]->getChildren()[0];
 
-
 		if (Keyboard::KeyDown(KEY_Z))
 			white->setVel(Vector3(0.0051f, 0.00001f, 0.0f));
 		
-
-
-
-
-
-
-		///////////
+		// ENGINE SYSTEMS
 
 		for (vector<SubSystem*>::iterator system = subSystems.begin(); system != subSystems.end(); ++system)
 			(*system)->update(msec);

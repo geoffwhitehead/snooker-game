@@ -3,6 +3,11 @@
 #include "../nclgl/OGLRenderer.h"
 #include "GameInput.h"
 #include "../engine-physics/CollisionManager.h"
+#include "../engine-audio/AudioManager.h"
+#include <iostream>
+#include <map>
+#include "../_resources/jsoncpp/dist/json/json.h"
+
 
 #define W_X 1024.0f
 #define W_Y 768.0f
@@ -71,6 +76,10 @@ const float ball_offset = sqrt(pow(BALL_WIDTH, 2.0) + (pow(BALL_RADIUS, 2.0))) -
 #define BLACK Vector4(0.0f, 0.0f, 0.0f, 0.7f)
 #define WHITE Vector4(1.0f, 1.0f, 1.0f, 0.7f)
 
+std::map<std::string, std::string> map_meshes;
+std::map<std::string, GLuint> map_textures;
+std::map<std::string, std::string> map_entities;
+
 void main(void) {
 
 	//CREATE SUB SYSTEMS
@@ -80,8 +89,9 @@ void main(void) {
 	GameInput* gi = new GameInput();
 	Camera::projMatrix = Matrix4::Perspective(1, 1000, 1024.0f / 768.0f, 45);
 	Camera::viewMatrix = camera->BuildViewMatrix();
-	CollisionManager* cm = new CollisionManager();
 
+	CollisionManager* cm = new CollisionManager();
+	AudioManager* am = new AudioManager();
 
 	// GAME MANAGER
 	GameManager *gm = new GameManager(W_X, W_Y);
@@ -95,6 +105,45 @@ void main(void) {
 
 	//MESHES
 	Mesh* mesh_triangle = Mesh::GenerateTriangle();
+
+	std::string level1 = "./levels/level1.json";
+
+	Json::Value root;
+	Json::Reader reader;
+	bool parsedSuccess = reader.parse(level1, root, false);
+
+	if (!parsedSuccess)
+	{
+		// Report failures and their locations in the document.
+		cout << "Failed to parse JSON" << endl << reader.getFormattedErrorMessages() << endl;
+		return;
+	}
+
+	// Let's extract the array contained in the root object
+	const Json::Value array = root["array"];
+
+	// Iterate over sequence elements and print its values
+	for (unsigned int index = 0; index<array.size(); ++index){
+		cout << "Element "
+			<< index
+			<< " in array: "
+			<< array[index].asString()
+			<< endl;
+	}
+
+	// Lets extract the not array element contained in the root object and print its value
+	const Json::Value notAnArray = root["not an array"];
+
+	if (!notAnArray.isNull()){
+		cout << "Not an array: "
+			<< notAnArray.asString()
+			<< endl;
+	}
+
+	// If we want to print JSON is as easy as doing:
+	cout << "Json Example pretty print: "
+		<< endl << root.toStyledString()
+		<< endl;
 
 	//Mesh* mesh_hollowCircle = Mesh::GenerateTriFanBorder();
 	//Mesh* mesh_bgMesh = Mesh::GeneratePoints(1);
@@ -178,6 +227,8 @@ void main(void) {
 	//register subsystems
 	gm->addSubSystem(camera);
 	gm->addSubSystem(cm);
+	gm->addSubSystem(am);
+
 	//start
 	gm->run();
 
