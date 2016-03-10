@@ -16,7 +16,6 @@ void AudioManager::update(float){
 
 void AudioManager::destroy(){
 
-
 }
 
 void AudioManager::init(){

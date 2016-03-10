@@ -41,8 +41,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\_exe\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\_exe\$(Configuration)\intermediates\$(ProjectName)\</IntDir>
-    <LibraryPath>..\_resources\irrKlang-1.5.0\lib\Win32-visualStudio;..\_libs\$(Configuration)\;..\_resources\GLEW\lib;..\_resources\SOIL\$(Configuration);\;$(LibraryPath);$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
-    <IncludePath>..\_resources\jsoncpp\dist\json\;..\_resources\irrKlang-1.5.0\include;..\nclgl\;..\engine-base\;..\engine-audio;..\engine-input;..\engine-interface;..\engine-physics;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>..\_resources\jsoncpp\dist\json;..\_resources\irrKlang-1.5.0\lib\Win32-visualStudio;..\_libs\$(Configuration)\;..\_resources\GLEW\lib;..\_resources\SOIL\$(Configuration);\;$(LibraryPath);$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
+    <IncludePath>..\_resources\jsoncpp\include\json;..\_resources\jsoncpp\dist\json;..\_resources\irrKlang-1.5.0\include;..\nclgl\;..\engine-base\;..\engine-audio;..\engine-input;..\engine-interface;..\engine-physics;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)_exe\$(Configuration)\</OutDir>

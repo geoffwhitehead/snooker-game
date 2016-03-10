@@ -4,9 +4,9 @@
 #include "GameInput.h"
 #include "../engine-physics/CollisionManager.h"
 #include "../engine-audio/AudioManager.h"
+#include "../_resources/jsoncpp/dist/json/json.h"
 #include <iostream>
 #include <map>
-#include "../_resources/jsoncpp/dist/json/json.h"
 
 
 #define W_X 1024.0f
@@ -84,16 +84,9 @@ void main(void) {
 
 	//CREATE SUB SYSTEMS
 
-	
-	Camera* camera = new Camera(0.0f, 0.0f, Vector3(0, 0, 400));
-	GameInput* gi = new GameInput();
-	Camera::projMatrix = Matrix4::Perspective(1, 1000, 1024.0f / 768.0f, 45);
-	Camera::viewMatrix = camera->BuildViewMatrix();
-
+	GameInput* gi = new GameInput(0.0f, 0.0f, Vector3(0, 0, 400));
 	CollisionManager* cm = new CollisionManager();
 	AudioManager* am = new AudioManager();
-
-	// GAME MANAGER
 	GameManager *gm = new GameManager(W_X, W_Y);
 
 	//SHADERS
@@ -225,7 +218,7 @@ void main(void) {
 	gm->addEntity(table_top);
 
 	//register subsystems
-	gm->addSubSystem(camera);
+	gm->addSubSystem(gi);
 	gm->addSubSystem(cm);
 	gm->addSubSystem(am);
 
