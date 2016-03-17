@@ -77,10 +77,22 @@ const float ball_offset = sqrt(pow(BALL_WIDTH, 2.0) + (pow(BALL_RADIUS, 2.0))) -
 #define WHITE Vector4(1.0f, 1.0f, 1.0f, 0.7f)
 
 std::map<std::string, std::string> map_meshes;
-std::map<std::string, GLuint> map_textures;
+std::map<const std::string, GLuint> map_textures;
 std::map<std::string, std::string> map_entities;
 
 void main(void) {
+
+	std::string level1 = "./levels/level1.json";
+
+
+	Json::Value root;   // 'root' will contain the root value after parsing.
+	Json::Reader reader;
+	ifstream fs(level1);
+	if (!fs) cout << "Failed to read from path.";
+	if (!reader.parse(fs, root)) cout << "Failed to parse.";
+
+
+
 
 	//CREATE SUB SYSTEMS
 
@@ -96,55 +108,25 @@ void main(void) {
 	// GAME MANAGER
 	GameManager *gm = new GameManager(W_X, W_Y);
 
+
+	//TEXTURES
+	for (int i = 0; i < root["level"][0]["textures"].size(); i++)
+	{
+		string name = root["level"][0]["textures"][i]["name"].asString();
+		GLuint tex = gm->LoadTexture(root["level"][0]["textures"][i]["path"].asCString());
+		map_textures.insert(pair <string, GLuint> (name, tex));
+	}
+
 	//SHADERS
 	Shader* shader_basic = new Shader("./shaders/basicVert.glsl", "./shaders/basicFrag.glsl");
 	Shader* shader_simple = new Shader("./shaders/textureVert.glsl", "./shaders/textureFrag.glsl");
 	
-	//TEXTURES
-	GLuint tex_table = gm->LoadTexture("./textures/cloth.png");
+	
 
 	//MESHES
 	Mesh* mesh_triangle = Mesh::GenerateTriangle();
 
-	std::string level1 = "./levels/level1.json";
-
-	Json::Value root;
-	Json::Reader reader;
-	bool parsedSuccess = reader.parse(level1, root, false);
-
-	if (!parsedSuccess)
-	{
-		// Report failures and their locations in the document.
-		cout << "Failed to parse JSON" << endl << reader.getFormattedErrorMessages() << endl;
-		return;
-	}
-
-	// Let's extract the array contained in the root object
-	const Json::Value array = root["array"];
-
-	// Iterate over sequence elements and print its values
-	for (unsigned int index = 0; index<array.size(); ++index){
-		cout << "Element "
-			<< index
-			<< " in array: "
-			<< array[index].asString()
-			<< endl;
-	}
-
-	// Lets extract the not array element contained in the root object and print its value
-	const Json::Value notAnArray = root["not an array"];
-
-	if (!notAnArray.isNull()){
-		cout << "Not an array: "
-			<< notAnArray.asString()
-			<< endl;
-	}
-
-	// If we want to print JSON is as easy as doing:
-	cout << "Json Example pretty print: "
-		<< endl << root.toStyledString()
-		<< endl;
-
+	
 	//Mesh* mesh_hollowCircle = Mesh::GenerateTriFanBorder();
 	//Mesh* mesh_bgMesh = Mesh::GeneratePoints(1);
 	//Mesh* mesh_tessMesh = Mesh::GenerateQuadPatch();
@@ -169,7 +151,7 @@ void main(void) {
 	//gm->addEntity(canvas);
 
 
-	Entity* table = new Entity("table", TABLE_POS, VEC_ZERO, VEC_ZERO, mesh_table, shader_simple, tex_table);
+	Entity* table = new Entity("table", TABLE_POS, VEC_ZERO, VEC_ZERO, mesh_table, shader_simple, map_textures["table"]);
 
 	table->addChild(new Entity("white", POS_WHITE, VEC_ZERO, VEC_ZERO, mesh_whiteBall, shader_basic));
 	table->addChild(new Entity("red01", POS_RED01, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic));

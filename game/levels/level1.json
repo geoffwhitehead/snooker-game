@@ -1,10 +1,24 @@
 {
-	"meshes:"{
-		"table": {
-			type: "function",
-			function: "GenerateQuad",
-			x:"356.87f",
-			y:"177.8f",
-		}
-	}
+  "level": [
+      {
+        "meshes": [
+
+        ],
+        "textures": [
+          {
+            "name":  "table",
+            "path": "./textures/cloth.png"
+          }
+          
+        ]
+      },
+
+
+
+
+      "2": {
+
+      }
+    
+  ]
 }

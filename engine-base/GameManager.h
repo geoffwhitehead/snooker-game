@@ -17,7 +17,7 @@ public:
 	void addEntity(Entity*);
 	void addSubSystem(SubSystem*);
 
-	GLuint LoadTexture(char* filename, bool textureRepeating = true);
+	GLuint LoadTexture(const char* filename, bool textureRepeating = true);
 
 private:
 	Window window;
