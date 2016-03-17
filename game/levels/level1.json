@@ -1,0 +1,10 @@
+{
+	"meshes:"{
+		"table": {
+			type: "function",
+			function: "GenerateQuad",
+			x:"356.87f",
+			y:"177.8f",
+		}
+	}
+}

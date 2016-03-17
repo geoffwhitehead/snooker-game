@@ -1,6 +1,13 @@
-#include "../engine/Camera.h"
-#include "../engine/GameManager.h"
+#include "../engine-base/Camera.h"
+#include "../engine-base/GameManager.h"
 #include "../nclgl/OGLRenderer.h"
+#include "GameInput.h"
+#include "../engine-physics/CollisionManager.h"
+#include "../engine-audio/AudioManager.h"
+#include "../_resources/jsoncpp/dist/json/json.h"
+#include <iostream>
+#include <map>
+
 
 #define W_X 1024.0f
 #define W_Y 768.0f
@@ -14,15 +21,16 @@
 #define CUSHION_WIDTH 18.0f
 #define POCKET_WIDTH 63.0f
 #define SNOOKER_WIDTH 356.87f
+#define SNOOKER_HEIGHT 177.8f
 #define HALF_WIDTH SNOOKER_WIDTH /2
 #define HALF_HEIGHT SNOOKER_HEIGHT /2
-#define SNOOKER_HEIGHT 177.8f
 #define TABLE_BORDER 50.0f
 #define TABLE_POS Vector3(0.0f, 0.0f, -7.5f)
-
+#define EDGE_MASS -1.0f
+#define BALL_MASS 0.5f
 #define BALL_RADIUS 2.6f
 #define BALL_WIDTH 5.2f
-const float ball_offset = sqrt(pow(BALL_WIDTH, 2.0) + (pow(BALL_RADIUS, 2.0))) - 1.1;
+const float ball_offset = sqrt(pow(BALL_WIDTH, 2.0) + (pow(BALL_RADIUS, 2.0))) - 1.1f;
 #define BALL_Z 5.0f
 #define M_BAULK_TO_CUSHION -HALF_WIDTH + 73.66f
 #define M_SEMI_RADIUS 29.21f
@@ -33,9 +41,10 @@ const float ball_offset = sqrt(pow(BALL_WIDTH, 2.0) + (pow(BALL_RADIUS, 2.0))) -
 #define POS_BROWN Vector3(M_BAULK_TO_CUSHION, 0.0f, BALL_Z) 
 #define POS_YELLOW Vector3(M_BAULK_TO_CUSHION, -M_SEMI_RADIUS, BALL_Z)
 #define POS_GREEN Vector3(M_BAULK_TO_CUSHION, M_SEMI_RADIUS, BALL_Z)
-#define POS_WHITE Vector3(M_BAULK_TO_CUSHION - 10.0f, 10.0f, BALL_Z)
-
+//#define POS_WHITE Vector3(M_BAULK_TO_CUSHION - 10.0f, 10.0f, BALL_Z)
 #define RED_TOP 100.0f
+#define POS_WHITE Vector3(RED_TOP - 10, 10, BALL_Z)
+
 #define POS_RED01 Vector3(RED_TOP, 0, BALL_Z)
 //row1
 #define POS_RED02 Vector3(RED_TOP + ball_offset, BALL_RADIUS, BALL_Z)
@@ -67,14 +76,17 @@ const float ball_offset = sqrt(pow(BALL_WIDTH, 2.0) + (pow(BALL_RADIUS, 2.0))) -
 #define BLACK Vector4(0.0f, 0.0f, 0.0f, 0.7f)
 #define WHITE Vector4(1.0f, 1.0f, 1.0f, 0.7f)
 
+std::map<std::string, std::string> map_meshes;
+std::map<std::string, GLuint> map_textures;
+std::map<std::string, std::string> map_entities;
+
 void main(void) {
 
-	Camera* camera = new Camera(0.0f, 0.0f, Vector3(0, 0, 400));
-	Camera::projMatrix = Matrix4::Perspective(1, 1000, 1024.0f / 768.0f, 45);
-	Camera::viewMatrix = camera->BuildViewMatrix();
+	//CREATE SUB SYSTEMS
 
-
-	// GAME MANAGER
+	GameInput* gi = new GameInput(0.0f, 0.0f, Vector3(0, 0, 400));
+	CollisionManager* cm = new CollisionManager();
+	AudioManager* am = new AudioManager();
 	GameManager *gm = new GameManager(W_X, W_Y);
 
 	//SHADERS
@@ -86,6 +98,45 @@ void main(void) {
 
 	//MESHES
 	Mesh* mesh_triangle = Mesh::GenerateTriangle();
+
+	std::string level1 = "./levels/level1.json";
+
+	Json::Value root;
+	Json::Reader reader;
+	bool parsedSuccess = reader.parse(level1, root, false);
+
+	if (!parsedSuccess)
+	{
+		// Report failures and their locations in the document.
+		cout << "Failed to parse JSON" << endl << reader.getFormattedErrorMessages() << endl;
+		return;
+	}
+
+	// Let's extract the array contained in the root object
+	const Json::Value array = root["array"];
+
+	// Iterate over sequence elements and print its values
+	for (unsigned int index = 0; index<array.size(); ++index){
+		cout << "Element "
+			<< index
+			<< " in array: "
+			<< array[index].asString()
+			<< endl;
+	}
+
+	// Lets extract the not array element contained in the root object and print its value
+	const Json::Value notAnArray = root["not an array"];
+
+	if (!notAnArray.isNull()){
+		cout << "Not an array: "
+			<< notAnArray.asString()
+			<< endl;
+	}
+
+	// If we want to print JSON is as easy as doing:
+	cout << "Json Example pretty print: "
+		<< endl << root.toStyledString()
+		<< endl;
 
 	//Mesh* mesh_hollowCircle = Mesh::GenerateTriFanBorder();
 	//Mesh* mesh_bgMesh = Mesh::GeneratePoints(1);
@@ -112,7 +163,8 @@ void main(void) {
 
 
 	Entity* table = new Entity("table", TABLE_POS, VEC_ZERO, VEC_ZERO, mesh_table, shader_simple, tex_table);
-	
+
+	table->addChild(new Entity("white", POS_WHITE, VEC_ZERO, VEC_ZERO, mesh_whiteBall, shader_basic));
 	table->addChild(new Entity("red01", POS_RED01, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic));
 	table->addChild(new Entity("red02", POS_RED02, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic));
 	table->addChild(new Entity("red03", POS_RED03, VEC_ZERO, VEC_ZERO, mesh_redBall, shader_basic));
@@ -134,18 +186,43 @@ void main(void) {
 	table->addChild(new Entity("pink", POS_PINK, VEC_ZERO, VEC_ZERO, mesh_pinkBall, shader_basic));
 	table->addChild(new Entity("black", POS_BLACK, VEC_ZERO, VEC_ZERO, mesh_blackBall, shader_basic));
 	table->addChild(new Entity("brown", POS_BROWN, VEC_ZERO, VEC_ZERO, mesh_brownBall, shader_basic));
-	table->addChild(new Entity("white", POS_WHITE, VEC_ZERO, VEC_ZERO, mesh_whiteBall, shader_basic));
-	table->addChild(new Entity("table_l", Vector3(-HALF_WIDTH, 0, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblLeft, shader_basic));
-	table->addChild(new Entity("table_r", Vector3(HALF_WIDTH, 0, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblRight, shader_basic));
-	table->addChild(new Entity("table_b", Vector3(0, -HALF_HEIGHT, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblBottom, shader_basic));
-	table->addChild(new Entity("table_t", Vector3(0, HALF_HEIGHT, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblTop, shader_basic));
+	Entity* table_left = new Entity("table_l", Vector3(-HALF_WIDTH, 0, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblLeft, shader_basic);
+	Entity* table_right = new Entity("table_r", Vector3(HALF_WIDTH, 0, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblRight, shader_basic);
+	Entity* table_bottom = new Entity("table_b", Vector3(0, -HALF_HEIGHT, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblBottom, shader_basic);
+	Entity* table_top = new Entity("table_t", Vector3(0, HALF_HEIGHT, BALL_Z), VEC_ZERO, VEC_ZERO, mesh_tblTop, shader_basic);
+
+	// set mass
+	float f = BALL_RADIUS;
+	table->setMass(0.0f);
+	table_left->setMass(0.0f);
+	table_right->setMass(0.0f);
+	table_bottom->setMass(0.0f);
+	table_top->setMass(0.0f);
+
+	// register collidable entities
+	for (int i = 0; i < table->getChildren().size(); i++) {
+		Entity* e = table->getChildren()[i];
+		e->setMass(BALL_MASS);
+		cm->addObject(e, f);
+	}
+	cm->addObject(table_left, table_left->getPhysicsObject()->getPos().Length(), table_left->getPhysicsObject()->getPos().getNormal());
+	cm->addObject(table_right, table_right->getPhysicsObject()->getPos().Length(), table_right->getPhysicsObject()->getPos().getNormal());
+	cm->addObject(table_bottom, table_bottom->getPhysicsObject()->getPos().Length(), table_bottom->getPhysicsObject()->getPos().getNormal());
+	cm->addObject(table_top, table_top->getPhysicsObject()->getPos().Length(), table_top->getPhysicsObject()->getPos().getNormal());
 
 	// register entities
 	gm->addEntity(table);
+	gm->addEntity(table_left);
+	gm->addEntity(table_right);
+	gm->addEntity(table_bottom);
+	gm->addEntity(table_top);
 
 	//register subsystems
-	gm->addSubSystem(camera);
+	gm->addSubSystem(gi);
+	gm->addSubSystem(cm);
+	gm->addSubSystem(am);
 
+	//start
 	gm->run();
 
 }
