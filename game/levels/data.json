@@ -11,26 +11,26 @@
         {
           "name": "mesh_cushionLeft",
           "function": "GenerateQuad",
-          "x": 3.0,
+          "x": 10.0,
           "y": 115.0
         },
         {
-          "name": "mesh_cusionRight",
+          "name": "mesh_cushionRight",
           "function": "GenerateQuad",
-          "x": 3.0,
+          "x": 10.0,
           "y": 115.0
         },
         {
           "name": "mesh_cushionBottom",
           "function": "GenerateQuad",
-          "x": 115.0,
-          "y": 3.0
+          "x": 293.0,
+          "y": 10.0
         },
         {
-          "name": "mesh_cussionTop",
+          "name": "mesh_cushionTop",
           "function": "GenerateQuad",
-          "x": 115.0,
-          "y": 3.0
+          "x": 293.0,
+          "y": 10.0
         },
         {
           "name": "mesh_ballRed",
@@ -169,7 +169,7 @@
         {
           "name": "red02",
           "parent": "table",
-          "position": [ 105.81, 2.6, 5.0 ],
+          "position": [ 104.71, 2.6, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_ballRed",
@@ -183,7 +183,7 @@
         {
           "name": "red03",
           "parent": "table",
-          "position": [ 105.81, -2.6, 5.0 ],
+          "position": [ 104.71, -2.6, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_ballRed",
@@ -197,7 +197,7 @@
         {
           "name": "red04",
           "parent": "table",
-          "position": [ 111.63, 2.6, 5.0 ],
+          "position": [ 109.42, 5.2, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_ballRed",
@@ -211,7 +211,7 @@
         {
           "name": "red05",
           "parent": "table",
-          "position": [ 111.63, 0, 5.0 ],
+          "position": [ 109.42, 0, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_ballRed",
@@ -225,7 +225,7 @@
         {
           "name": "red06",
           "parent": "table",
-          "position": [ 111.63, -2.6, 5.0 ],
+          "position": [109.42, -5.2, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_ballRed",
@@ -239,7 +239,7 @@
         {
           "name": "red07",
           "parent": "table",
-          "position": [ 117.44, 7.8, 5.0 ],
+          "position": [114.13, 7.8, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_ballRed",
@@ -253,7 +253,7 @@
         {
           "name": "red08",
           "parent": "table",
-          "position": [ 117.44, 2.6, 5.0 ],
+          "position": [ 114.13, 2.6, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_ballRed",
@@ -267,7 +267,7 @@
         {
           "name": "red09",
           "parent": "table",
-          "position": [ 117.44, -2.6, 5.0 ],
+          "position": [ 114.13, -2.6, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_ballRed",
@@ -281,7 +281,7 @@
         {
           "name": "red10",
           "parent": "table",
-          "position": [ 117.44, -7.8, 5.0 ],
+          "position": [ 114.13, -7.8, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_ballRed",
@@ -295,7 +295,7 @@
         {
           "name": "red11",
           "parent": "table",
-          "position": [ 123.25, 10.4, 5.0 ],
+          "position": [ 118.84, 10.4, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_ballRed",
@@ -309,7 +309,7 @@
         {
           "name": "red12",
           "parent": "table",
-          "position": [ 123.25, 5.2, 5.0 ],
+          "position": [ 118.84, 5.2, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_ballRed",
@@ -323,7 +323,7 @@
         {
           "name": "red13",
           "parent": "table",
-          "position": [ 123.25, 0.0, 5.0 ],
+          "position": [  118.84, 0.0, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_ballRed",
@@ -337,7 +337,7 @@
         {
           "name": "red14",
           "parent": "table",
-          "position": [ 123.25, -5.2, 5.0 ],
+          "position": [  118.84, -5.2, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_ballRed",
@@ -351,7 +351,7 @@
         {
           "name": "red15",
           "parent": "table",
-          "position": [ 123.25, -10.4, 5.0 ],
+          "position": [  118.84, -10.4, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_ballRed",
@@ -365,10 +365,10 @@
         {
           "name": "green",
           "parent": "table",
-          "position": [ 123.25, -10.4, 5.0 ],
+          "position": [  -104.775, 29.21, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
-          "mesh": "mesh_ballRed",
+          "mesh": "mesh_ballGreen",
           "shader": "basic",
           "texture": "",
           "mass": 0.5,
@@ -379,10 +379,10 @@
         {
           "name": "yellow",
           "parent": "table",
-          "position": [ 123.25, -10.4, 5.0 ],
+          "position": [ -104.775, -29.21, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
-          "mesh": "mesh_ballRed",
+          "mesh": "mesh_ballYellow",
           "shader": "basic",
           "texture": "",
           "mass": 0.5,
@@ -393,10 +393,10 @@
         {
           "name": "blue",
           "parent": "table",
-          "position": [ 123.25, -10.4, 5.0 ],
+          "position": [ 0.0, 0.0, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
-          "mesh": "mesh_ballRed",
+          "mesh": "mesh_ballBlue",
           "shader": "basic",
           "texture": "",
           "mass": 0.5,
@@ -407,10 +407,10 @@
         {
           "name": "pink",
           "parent": "table",
-          "position": [ 123.25, -10.4, 5.0 ],
+          "position": [ 88.685, 0.0, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
-          "mesh": "mesh_ballRed",
+          "mesh": "mesh_ballPink",
           "shader": "basic",
           "texture": "",
           "mass": 0.5,
@@ -421,10 +421,10 @@
         {
           "name": "black",
           "parent": "table",
-          "position": [ 123.25, -10.4, 5.0 ],
+          "position": [ 146.685, 0.0, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
-          "mesh": "mesh_ballRed",
+          "mesh": "mesh_ballBlack",
           "shader": "basic",
           "texture": "",
           "mass": 0.5,
@@ -432,19 +432,71 @@
           "collision_object": "CIRCLE",
           "collision_radius": 2.6
         },
-          {
+        {
           "name": "brown",
           "parent": "table",
-          "position": [ 123.25, -10.4, 5.0 ],
+          "position": [ -104.775, 0.0, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
-          "mesh": "mesh_ballRed",
+          "mesh": "mesh_ballBrown",
           "shader": "basic",
           "texture": "",
           "mass": 0.5,
           "collidable": true,
           "collision_object": "CIRCLE",
           "collision_radius": 2.6
+        },
+        {
+          "name": "cushionLeft",
+          "parent": "table",
+          "position": [ -178.435, 0.0, 5.0 ],
+          "acceleration": [ 0.0, 0.0, 0.0 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mesh": "mesh_cushionLeft",
+          "shader": "basic",
+          "texture": "",
+          "mass": 0.0,
+          "collidable": true,
+          "collision_object": "PLANE"
+        },
+        {
+          "name": "cushionRight",
+          "parent": "table",
+          "position": [ 178.435, 0.0, 5.0 ],
+          "acceleration": [ 0.0, 0.0, 0.0 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mesh": "mesh_cushionRight",
+          "shader": "basic",
+          "texture": "",
+          "mass": 0.0,
+          "collidable": true,
+          "collision_object": "PLANE"
+        },
+        {
+          "name": "cushionBottom",
+          "parent": "table",
+          "position": [ 0.0, -88.9, 5.0 ],
+          "acceleration": [ 0.0, 0.0, 0.0 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mesh": "mesh_cushionBottom",
+          "shader": "basic",
+          "texture": "",
+          "mass": 0.0,
+          "collidable": true,
+          "collision_object": "PLANE"
+        },
+        {
+          "name": "cushionTop",
+          "parent": "table",
+          "position": [ 0.0, 88.9, 5.0 ],
+          "acceleration": [ 0.0, 0.0, 0.0 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mesh": "mesh_cushionTop",
+          "shader": "basic",
+          "texture": "",
+          "mass": 0.0,
+          "collidable": true,
+          "collision_object": "PLANE"
         }
       ]
     }
