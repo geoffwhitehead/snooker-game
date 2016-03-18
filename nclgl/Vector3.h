@@ -32,7 +32,7 @@ public:
 	float y;
 	float z;
 
-	void			Normalise() {
+	void Normalise() {
 		float length = Length();
 
 		if(length != 0.0f)	{
@@ -42,11 +42,6 @@ public:
 			z = z * length;
 		}
 	}
-
-
-
-
-
 
 
 
@@ -71,12 +66,6 @@ public:
 	Vector3 getAbs() {
 		return Vector3(abs(this->x), abs(this->y), abs(this->z));
 	}
-
-
-
-
-
-
 
 
 

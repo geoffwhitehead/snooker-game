@@ -102,7 +102,7 @@ void main(void) {
 		if (level["entities"][i]["parent"].asString() == "")
 			map_entities.insert(pair<string, Entity*>(level["entities"][i]["name"].asString(), e));
 		else
-			map_entities[level["entities"][i]["parent"].asString()]->addChild(e);
+			map_entities[level["entities"][i]["parent"].asString()]->addChild(e); 
 	}
 
 	// register entities

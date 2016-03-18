@@ -3,10 +3,11 @@
 #include "../nclgl/Vector3.h"
 
 
-#define DAMPING_FACTOR 0.9f
-#define MINIMUM_VELOCITY 0.000001f
+#define DAMPING_FACTOR 0.98f
+#define MINIMUM_VELOCITY 0.0001f
 #define COEFF_OF_ELASTICITY 0.9f
 #define SRRING_STRENGTH 0.8f 
+#define CLAMP 0.05f
 
 using namespace std;
 
@@ -25,27 +26,33 @@ public:
 	};
 
 	inline static void calcVelocity(Vector3& vel, Vector3 acc, float dt){
-		if (moving(vel))
-			Vector3 new_vel = (vel + (acc * dt)) * DAMPING_FACTOR;
-			//if (){
-			
-		//	}
+		
+			vel = (vel + (acc * dt)) * DAMPING_FACTOR;
+		
+		//clamp
+		if (vel.Length() > CLAMP){
+			Vector3 unit = vel.getNormal();
+			vel = unit * CLAMP;
+		}
 			
 	}
 
-	inline static void calcDisplacement(Vector3& pos, Vector3 vel, Vector3 acc, float dt, Vector3 disp){
+	inline static void calcDisplacement(Vector3& pos, Vector3 vel, Vector3 acc, float dt, Vector3& disp){
 		if (moving(vel)){
-			disp = (vel*dt) + (acc * 0.5f * dt*dt);
+			disp = ((vel*dt) + (acc * 0.5f * dt*dt));
 			pos += disp;
 		}
 	}
 
 	inline static void semiImplicitEuler(Vector3& pos, Vector3 &vel, Vector3 acc, Vector3& disp, float dt){
-		if (moving(vel)) 
-			vel = (vel + (acc * dt)) * DAMPING_FACTOR;
-		Vector3 new_disp = (disp + (vel * dt)) * DAMPING_FACTOR;
-		pos += new_disp;
-		disp = new_disp;
+		if (moving(vel))
+			calcVelocity(vel, acc, dt);
+
+		calcDisplacement(pos, vel, acc, dt, disp);
+		
+		//Vector3 new_disp = (disp + (vel * dt)) * DAMPING_FACTOR;
+		//pos += new_disp;
+		//disp = new_disp;
 	}
 
 	inline static bool detectCollision(Vector3& pos1, Vector3& pos2, Vector3& vel1, Vector3& vel2, float mass1, float mass2, float r1, float r2){
@@ -76,6 +83,8 @@ public:
 
 			vel1 = vel1 - (N * (J / mass1));
 			vel2 = vel2 + (N * (J / mass2));
+
+			return true;
 		}
 		return false;
 	}
