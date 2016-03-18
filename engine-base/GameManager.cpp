@@ -53,7 +53,7 @@ void GameManager::run(){
 		(*system)->destroy();
 }
 
-GLuint GameManager::LoadTexture(char* filename, bool textureRepeating){
+GLuint GameManager::LoadTexture(const char* filename, bool textureRepeating){
 	GLuint texture = SOIL_load_OGL_texture(filename,
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
