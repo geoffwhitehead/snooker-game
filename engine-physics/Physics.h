@@ -5,7 +5,7 @@
 
 #define DAMPING_FACTOR 0.99f
 #define MINIMUM_VELOCITY 0.0001f
-#define COEFF_OF_ELASTICITY 0.9f
+#define COEFF_OF_ELASTICITY 0.8f
 #define SRRING_STRENGTH 0.8f 
 #define CLAMP 0.09f
 
@@ -82,7 +82,7 @@ public:
 
 		//float totalForce = -COEFF_OF_ELASTICITY * (vel1 + vel2).dot(N);
 
-		float J = (-(1+COEFF_OF_ELASTICITY) * VN) / (N.dot(N)*((1/mass1) + (1/mass2)));
+		float J = (-(1+COEFF_OF_ELASTICITY) * VN) / (N.dot(N)*((1*mass1) + (1*mass2)));
 
 		float spring_vel = N.dot(Vab);
 
@@ -112,7 +112,7 @@ public:
 
 		//float totalForce = -COEFF_OF_ELASTICITY * (vel1 + vel2).dot(N);
 
-		float J = (-(1 + COEFF_OF_ELASTICITY) * VN) / ((N.dot(N))*((c_mass) + (p_mass)));
+		float J = (-(1 + COEFF_OF_ELASTICITY) * VN) / ((N.dot(N))*((1*c_mass) + (1*p_mass)));
 
 		c_vel = c_vel + (N * (J / c_mass));
 		p_vel = p_vel - (N * (J / p_mass));

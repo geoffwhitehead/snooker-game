@@ -50,6 +50,19 @@ Window::Window(uint width, uint height)	{
 }
 
 
+Vector2 Window::GetOSMousePosition() {
+
+	POINT p;
+
+	GetCursorPos(&p);
+
+	ScreenToClient(windowHandle, &p);
+	return Vector2(p.x, p.y);
+
+}
+
+
+
 Window::~Window(void)	{
 	Keyboard::Destroy();
 	Mouse::Destroy();

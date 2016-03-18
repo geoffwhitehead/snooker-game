@@ -33,7 +33,9 @@ void GameManager::run(){
 
 		if (Keyboard::KeyDown(KEY_Z))
 			white->setVel(Vector3(0.031f, 0.0007f, 0.0f));
-		
+
+		Vector2 mPos = window.GetOSMousePosition();
+		white->getPhysicsObject()->setPos(Vector3(mPos.x, mPos.y, 0.0f));
 		// ENGINE SYSTEMS
 
 		for (vector<SubSystem*>::iterator system = subSystems.begin(); system != subSystems.end(); ++system)
