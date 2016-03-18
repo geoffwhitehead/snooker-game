@@ -20,8 +20,6 @@ std::map<std::string, Shader*> map_shaders;
 void main(void) {
 
 	std::string data = "./levels/data.json";
-
-
 	Json::Value root;   // 'root' will contain the root value after parsing.
 	Json::Reader reader;
 	ifstream fs(data);
@@ -29,19 +27,15 @@ void main(void) {
 	if (!reader.parse(fs, root)) cout << "Failed to parse.";
 
 	//CREATE SUB SYSTEMS
-
-	
 	Camera* camera = new Camera(0.0f, 0.0f, Vector3(0, 0, 400));
 	GameInput* gi = new GameInput();
 	Camera::projMatrix = Matrix4::Perspective(1, 1000, 1024.0f / 768.0f, 45);
 	Camera::viewMatrix = camera->BuildViewMatrix();
-
 	CollisionManager* cm = new CollisionManager();
 	AudioManager* am = new AudioManager();
 
 	// GAME MANAGER
 	GameManager *gm = new GameManager(W_X, W_Y);
-
 	Json::Value level = root["level"][0];
 
 	//TEXTURES
@@ -109,14 +103,12 @@ void main(void) {
 			map_entities.insert(pair<string, Entity*>(level["entities"][i]["name"].asString(), e));
 		else 
 			map_entities[level["entities"][i]["parent"].asString()]->addChild(e);
-
 	}
 
 	// register entities
 	for (auto iterator = map_entities.begin(); iterator != map_entities.end(); iterator++)
 		gm->addEntity(iterator->second);
 	
-
 	//register subsystems
 	gm->addSubSystem(camera);
 	gm->addSubSystem(cm);
