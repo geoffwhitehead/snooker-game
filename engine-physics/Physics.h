@@ -56,70 +56,71 @@ public:
 		//disp = new_disp;
 	}
 
-	inline static bool detectCollision(Vector3& pos1, Vector3& pos2, Vector3& vel1, Vector3& vel2, float mass1, float mass2, float r1, float r2){
+	inline static bool detectCollision(Vector3 pos1, Vector3 pos2, float r1, float r2) {
+		float d2 = pow(pos2.x - pos1.x, 2.0) + pow(pos2.y - pos1.y, 2.0) + pow(pos2.z - pos1.z, 2.0);
+		if (d2 < (pow((r1 + r2), 2.0)))
+			return true;
+		return false;
+	}
+
+	inline static void resolveCollision(Vector3& pos1, Vector3& pos2, Vector3& vel1, Vector3& vel2, float mass1, float mass2, float r1, float r2){
+		
 		float d2 = pow(pos2.x - pos1.x, 2.0) + pow(pos2.y - pos1.y, 2.0) + pow(pos2.z - pos1.z, 2.0);
 
-		if (d2 < (pow((r1 + r2), 2.0))) {
-
-			//calculate penetration depth
-			float p = r1 + r2 - sqrt(d2);
+		//calculate penetration depth
+		float p = r1 + r2 - sqrt(d2);
 			
-			//calculate point of collision
-			//Vector3 P = pos1 - N * (r1 - p);
+		//calculate point of collision
+		//Vector3 P = pos1 - N * (r1 - p);
 
-			//calculate collision normal
-			Vector3 N = (pos1 - pos2).getAbs();
+		//calculate collision normal
+		Vector3 N = (pos1 - pos2).getAbs();
 
-			Vector3 Vab = vel1 + vel2;
+		Vector3 Vab = vel1 + vel2;
 
-			float VN = Vab.dot(N);
+		float VN = Vab.dot(N);
 
-			//float totalForce = -COEFF_OF_ELASTICITY * (vel1 + vel2).dot(N);
+		//float totalForce = -COEFF_OF_ELASTICITY * (vel1 + vel2).dot(N);
 
-			float J = (-(1+COEFF_OF_ELASTICITY) * VN) / (N.dot(N)*((1/mass1) + (1/mass2)));
+		float J = (-(1+COEFF_OF_ELASTICITY) * VN) / (N.dot(N)*((1/mass1) + (1/mass2)));
 
-			float spring_vel = N.dot(Vab);
+		float spring_vel = N.dot(Vab);
 
-			//float F = (-SRRING_STRENGTH) * p - (DAMPING_FACTOR * (N.dot(Vab)));
+		//float F = (-SRRING_STRENGTH) * p - (DAMPING_FACTOR * (N.dot(Vab)));
 
-			vel1 = vel1 - (N * (J / mass1));
-			vel2 = vel2 + (N * (J / mass2));
+		vel1 = vel1 + (N * (J / mass1));
+		vel2 = vel2 - (N * (J / mass2));
 
-			return true;
-		}
-		return false;
 	}
-	//normal 
 
-
-	inline static bool detectCollision(Vector3& c_pos, Vector3& p_pos, Vector3& c_vel, Vector3& p_vel, float c_mass, float p_mass, float r, Vector3 normal, float distance){
+	inline static bool detectCollision(Vector3& c_pos, float r, Vector3 normal, float distance) {
 		float result = c_pos.Dot((normal), c_pos) - distance;
-		if (abs(result) < r){
-			
-			Vector3 N = normal;
-			float p = r - result; // this might not be right regarding distance 
-			Vector3 P = c_pos - N * (r - p);
-
-			Vector3 Vab = c_vel + p_vel;
-
-			float VN = Vab.dot(N);
-
-			//float totalForce = -COEFF_OF_ELASTICITY * (vel1 + vel2).dot(N);
-
-			float J = (-(1 + COEFF_OF_ELASTICITY) * VN) / ((N.dot(N))*((c_mass) + (p_mass)));
-
-			c_vel = c_vel + (N * (J / c_mass));
-			p_vel = p_vel - (N * (J / p_mass));
-			//p_vel = DAMPING_FACTOR * (p_vel - ((J*p_mass) * N));
-			//c_vel = DAMPING_FACTOR * (c_vel + ((J*c_mass) * N));
-			//c_vel = Vector3(-1.0, 0.0, 0.0 );
+		if (abs(result) < r) 
 			return true;
-		}
 		return false;
 	}
 
+	inline static void resolveCollision(Vector3& c_pos, Vector3& p_pos, Vector3& c_vel, Vector3& p_vel, float c_mass, float p_mass, float r, Vector3 normal, float distance){
+		float result = c_pos.Dot((normal), c_pos) - distance;
+		Vector3 N = normal;
+		float p = r - result; // this might not be right regarding distance 
+		Vector3 P = c_pos - N * (r - p);
 
+		Vector3 Vab = c_vel + p_vel;
 
+		float VN = Vab.dot(N);
+
+		//float totalForce = -COEFF_OF_ELASTICITY * (vel1 + vel2).dot(N);
+
+		float J = (-(1 + COEFF_OF_ELASTICITY) * VN) / ((N.dot(N))*((c_mass) + (p_mass)));
+
+		c_vel = c_vel + (N * (J / c_mass));
+		p_vel = p_vel - (N * (J / p_mass));
+		//p_vel = DAMPING_FACTOR * (p_vel - ((J*p_mass) * N));
+		//c_vel = DAMPING_FACTOR * (c_vel + ((J*c_mass) * N));
+		//c_vel = Vector3(-1.0, 0.0, 0.0 );
+	
+	}
 };
 
 

@@ -6,6 +6,7 @@
 #include "Circle.h"
 #include "Rectangle.h"
 #include "Plane.h"
+#include <map>
 
 class CollisionManager :
 	public SubSystem
@@ -24,5 +25,6 @@ public:
 private:
 	vector<PhysicsObject*> collidableSpheres;
 	vector<PhysicsObject*> collidablePlanes;
+	std::map<PhysicsObject*, std::map<PhysicsObject*, bool>> collision_map;
 
 };

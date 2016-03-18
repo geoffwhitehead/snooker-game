@@ -32,7 +32,7 @@ void GameManager::run(){
 		Entity* white = entities[0]->getChildren()[0];
 
 		if (Keyboard::KeyDown(KEY_Z))
-			white->setVel(Vector3(0.0051f, 0.00001f, 0.0f));
+			white->setVel(Vector3(0.031f, 0.0007f, 0.0f));
 		
 		// ENGINE SYSTEMS
 

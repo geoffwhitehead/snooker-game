@@ -14,44 +14,82 @@ void CollisionManager::init(){
 
 }
 void CollisionManager::update(float msec){
+	// LOOPS THROUGH SPHERES
 	for (int i = 0; i < collidableSpheres.size() - 1; i++){
 		//SPHERES
 		for (int j = 1; j < collidableSpheres.size(); j++){
 			if (collidableSpheres[i] != collidableSpheres[j]) {
 				
-				bool result = Physics::detectCollision(
+				// Detect collision
+				bool collision = Physics::detectCollision(
 					collidableSpheres[i]->getPos(),
 					collidableSpheres[j]->getPos(),
-					collidableSpheres[i]->getVel(),
-					collidableSpheres[j]->getVel(),
-					collidableSpheres[i]->getMass(),
-					collidableSpheres[j]->getMass(),
 					(static_cast<Circle*>(collidableSpheres[i]->getRef())->getRadius()),
 					(static_cast<Circle*>(collidableSpheres[j]->getRef())->getRadius())
-					);
-				//if (result) cout << "CIRCLE COLLISION" << i << " : " << j<< endl;
-			};
+				);
+
+				if (collision) {
+					// check that a collision hasnt already occured
+					if (collision_map[collidableSpheres[i]][collidableSpheres[j]] == false) {
+						Physics::resolveCollision(
+							collidableSpheres[i]->getPos(),
+							collidableSpheres[j]->getPos(),
+							collidableSpheres[i]->getVel(),
+							collidableSpheres[j]->getVel(),
+							collidableSpheres[i]->getMass(),
+							collidableSpheres[j]->getMass(),
+							(static_cast<Circle*>(collidableSpheres[i]->getRef())->getRadius()),
+							(static_cast<Circle*>(collidableSpheres[j]->getRef())->getRadius())
+						);
+						collision_map[collidableSpheres[i]][collidableSpheres[j]] = true;
+						collision_map[collidableSpheres[j]][collidableSpheres[i]] = true;
+					}
+					// else do nothing - this collision has already been resolved
+				}
+				else {
+					// else no collision - set both maps to false to mark the objects as not colliding
+					collision_map[collidableSpheres[i]][collidableSpheres[j]] = false;
+					collision_map[collidableSpheres[j]][collidableSpheres[i]] = false;
+				}
+			}
 		}
 	}
-	//PLANES
+	//LOOP THROUGH PLANES
 	for (int i = 0; i < collidableSpheres.size(); i++){
 		for (int j = 0; j < collidablePlanes.size(); j++){
-			bool result = Physics::detectCollision(
+
+			// Detect collision
+			bool collision = Physics::detectCollision(
 				collidableSpheres[i]->getPos(),
-				collidablePlanes[j]->getPos(),
-				collidableSpheres[i]->getVel(),
-				collidablePlanes[j]->getVel(),
-				collidableSpheres[i]->getMass(),
-				collidablePlanes[j]->getMass(),
 				static_cast<Circle*>(collidableSpheres[i]->getRef())->getRadius(),
 				static_cast<Plane*>(collidablePlanes[j]->getRef())->getNormal(),
 				static_cast<Plane*>(collidablePlanes[j]->getRef())->getDistanceFromOrigin()
-				);
-			if (result) {
-				cout << "PLANE COLLISION" << i << " : " << j << endl;
+			);
+
+			if (collision) {
+				// check that a collision hasnt already occured
+				if (collision_map[collidableSpheres[i]][collidablePlanes[j]] == false) {
+					Physics::resolveCollision(
+						collidableSpheres[i]->getPos(),
+						collidablePlanes[j]->getPos(),
+						collidableSpheres[i]->getVel(),
+						collidablePlanes[j]->getVel(),
+						collidableSpheres[i]->getMass(),
+						collidablePlanes[j]->getMass(),
+						static_cast<Circle*>(collidableSpheres[i]->getRef())->getRadius(),
+						static_cast<Plane*>(collidablePlanes[j]->getRef())->getNormal(),
+						static_cast<Plane*>(collidablePlanes[j]->getRef())->getDistanceFromOrigin()
+					);
+					collision_map[collidableSpheres[i]][collidablePlanes[j]] = true;
+					collision_map[collidablePlanes[j]][collidableSpheres[i]] = true;
+				}
+				// else do nothing as collision has already been resolved
+			}
+			else {
+				collision_map[collidableSpheres[i]][collidablePlanes[j]] = false;
+				collision_map[collidablePlanes[j]][collidableSpheres[i]] = false;
 			}
 		}
-
 	}
 }
 void CollisionManager::destroy(){
