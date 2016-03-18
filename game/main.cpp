@@ -4,9 +4,9 @@
 #include "GameInput.h"
 #include "../engine-physics/CollisionManager.h"
 #include "../engine-audio/AudioManager.h"
-#include "../_resources/jsoncpp/dist/json/json.h"
 #include <iostream>
 #include <map>
+#include "../_resources/jsoncpp/dist/json/json.h"
 
 
 #define W_X 1024.0f
@@ -33,6 +33,8 @@ void main(void) {
 	Camera::viewMatrix = camera->BuildViewMatrix();
 	CollisionManager* cm = new CollisionManager();
 	AudioManager* am = new AudioManager();
+
+	// GAME MANAGER
 	GameManager *gm = new GameManager(W_X, W_Y);
 	Json::Value level = root["level"][0];
 
@@ -41,16 +43,16 @@ void main(void) {
 	{
 		string name = level["textures"][i]["name"].asString();
 		GLuint tex = gm->LoadTexture(level["textures"][i]["path"].asCString());
-		map_textures.insert(pair <string, GLuint> (name, tex));
+		map_textures.insert(pair <string, GLuint>(name, tex));
 	}
 
 	//SHADERS
-	for (int i = 0;  i < level["shaders"].size();  i++)
+	for (int i = 0; i < level["shaders"].size(); i++)
 	{
 		Shader* s = new Shader(level["shaders"][i]["vert"].asString(), level["shaders"][i]["frag"].asString());
 		map_shaders.insert(pair <string, Shader*>(level["shaders"][i]["name"].asString(), s));
 	}
-	
+
 	//MESHES
 	for (int i = 0; i < level["meshes"].size(); i++)
 	{
@@ -58,13 +60,13 @@ void main(void) {
 		Mesh * m;
 		if (function == "GenerateQuad") {
 			m = Mesh::GenerateQuad(level["meshes"][i]["x"].asFloat(), level["meshes"][i]["y"].asFloat());
-		} 
+		}
 		else if (function == "GenerateTriFan") {
 			m = Mesh::GenerateTriFan(level["meshes"][i]["radius"].asFloat(), Vector4(level["meshes"][i]["x"].asFloat(), level["meshes"][i]["y"].asFloat(), level["meshes"][i]["z"].asFloat(), level["meshes"][i]["w"].asFloat()));
 		}
 		map_meshes.insert(pair<string, Mesh*>(level["meshes"][i]["name"].asString(), m));
 	}
-	
+
 	//ENTITIES
 	for (int i = 0; i < level["entities"].size(); i++)
 	{
@@ -99,16 +101,16 @@ void main(void) {
 		}
 		if (level["entities"][i]["parent"].asString() == "")
 			map_entities.insert(pair<string, Entity*>(level["entities"][i]["name"].asString(), e));
-		else 
+		else
 			map_entities[level["entities"][i]["parent"].asString()]->addChild(e);
 	}
 
 	// register entities
 	for (auto iterator = map_entities.begin(); iterator != map_entities.end(); iterator++)
 		gm->addEntity(iterator->second);
-	
+
 	//register subsystems
-	gm->addSubSystem(gi);
+	gm->addSubSystem(camera);
 	gm->addSubSystem(cm);
 	gm->addSubSystem(am);
 
