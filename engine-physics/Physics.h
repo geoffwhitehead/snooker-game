@@ -3,13 +3,14 @@
 #include "../nclgl/Vector3.h"
 
 
-#define DAMPING_FACTOR 0.98f
+#define DAMPING_FACTOR 0.99f
 #define MINIMUM_VELOCITY 0.0001f
 #define COEFF_OF_ELASTICITY 0.9f
 #define SRRING_STRENGTH 0.8f 
-#define CLAMP 0.05f
+#define CLAMP 0.09f
 
 using namespace std;
+
 
 class Physics
 {
@@ -105,11 +106,13 @@ public:
 
 			//float totalForce = -COEFF_OF_ELASTICITY * (vel1 + vel2).dot(N);
 
-			float J = (-(1 + COEFF_OF_ELASTICITY) * VN) / (N.dot(N)*((1 / c_mass) + (1 / p_mass)));
+			float J = (-(1 + COEFF_OF_ELASTICITY) * VN) / ((N.dot(N))*((c_mass) + (p_mass)));
 
-			c_vel = c_vel - (N * (J / c_mass));
-			p_vel = p_vel + (N * (J / p_mass));
-			
+			c_vel = c_vel + (N * (J / c_mass));
+			p_vel = p_vel - (N * (J / p_mass));
+			//p_vel = DAMPING_FACTOR * (p_vel - ((J*p_mass) * N));
+			//c_vel = DAMPING_FACTOR * (c_vel + ((J*c_mass) * N));
+			//c_vel = Vector3(-1.0, 0.0, 0.0 );
 			return true;
 		}
 		return false;

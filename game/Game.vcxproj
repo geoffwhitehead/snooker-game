@@ -87,7 +87,7 @@
     <ClCompile Include="SnookerBall.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="levels\level1.json" />
+    <None Include="levels\data.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

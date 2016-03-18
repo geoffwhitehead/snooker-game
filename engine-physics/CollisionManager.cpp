@@ -29,7 +29,7 @@ void CollisionManager::update(float msec){
 					(static_cast<Circle*>(collidableSpheres[i]->getRef())->getRadius()),
 					(static_cast<Circle*>(collidableSpheres[j]->getRef())->getRadius())
 					);
-				if (result) cout << "CIRCLE COLLISION" << i << " : " << j<< endl;
+				//if (result) cout << "CIRCLE COLLISION" << i << " : " << j<< endl;
 			};
 		}
 	}
@@ -47,7 +47,9 @@ void CollisionManager::update(float msec){
 				static_cast<Plane*>(collidablePlanes[j]->getRef())->getNormal(),
 				static_cast<Plane*>(collidablePlanes[j]->getRef())->getDistanceFromOrigin()
 				);
-			if (result) cout << "PLANE COLLISION" << i << " : " << j << endl;
+			if (result) {
+				cout << "PLANE COLLISION" << i << " : " << j << endl;
+			}
 		}
 
 	}

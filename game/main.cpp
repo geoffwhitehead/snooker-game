@@ -97,7 +97,12 @@ void main(void) {
 			if (level["entities"][i]["collision_object"].asString() == "CIRCLE")
 				cm->addObject(e, level["entities"][i]["collision_radius"].asFloat());
 			if (level["entities"][i]["collision_object"].asString() == "PLANE")
-				cm->addObject(e, e->getPhysicsObject()->getPos().Length(), e->getPhysicsObject()->getPos().getNormal());
+				cm->addObject(e, e->getPhysicsObject()->getPos().Length(), 
+					Vector3(
+						level["entities"][i]["normal"][0].asFloat(),
+						level["entities"][i]["normal"][1].asFloat(),
+						level["entities"][i]["normal"][2].asFloat()
+						));
 		}
 		if (level["entities"][i]["parent"].asString() == "")
 			map_entities.insert(pair<string, Entity*>(level["entities"][i]["name"].asString(), e));

@@ -34,6 +34,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="levels\level1.json" />
+    <None Include="levels\data.json" />
   </ItemGroup>
 </Project>

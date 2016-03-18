@@ -457,7 +457,8 @@
           "texture": "",
           "mass": 0.0,
           "collidable": true,
-          "collision_object": "PLANE"
+          "collision_object": "PLANE",
+          "normal": [ 1.0, 0.0, 0.0]
         },
         {
           "name": "cushionRight",
@@ -470,7 +471,8 @@
           "texture": "",
           "mass": 0.0,
           "collidable": true,
-          "collision_object": "PLANE"
+          "collision_object": "PLANE",
+          "normal": [ -1.0, 0.0, 0.0]
         },
         {
           "name": "cushionBottom",
@@ -483,7 +485,8 @@
           "texture": "",
           "mass": 0.0,
           "collidable": true,
-          "collision_object": "PLANE"
+          "collision_object": "PLANE",
+          "normal": [ 0.0, 1.0, 0.0]
         },
         {
           "name": "cushionTop",
@@ -496,7 +499,8 @@
           "texture": "",
           "mass": 0.0,
           "collidable": true,
-          "collision_object": "PLANE"
+          "collision_object": "PLANE",
+           "normal": [ 0.0, -1.0, 0.0]
         }
       ]
     }
