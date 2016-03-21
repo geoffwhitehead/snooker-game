@@ -32,6 +32,7 @@ public:
 	GameTimer* GetTimer() {
 		return &timer;
 	}
+	Vector2 convertToScreenCoords(Vector2 coord);
 	 Vector2 GetOSMousePosition();
 protected:
 	void CheckMessages(MSG &msg);

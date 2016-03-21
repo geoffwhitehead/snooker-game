@@ -38,7 +38,8 @@ Window::Window(uint width, uint height)	{
 
 	RECT    rt; 
 	GetClientRect(windowHandle, &rt);
-
+	//screenWidth = width;
+	//screenHeight = height;
 	screenWidth		= rt.right;
 	screenHeight	= rt.bottom;
 
@@ -55,10 +56,27 @@ Vector2 Window::GetOSMousePosition() {
 	POINT p;
 	GetCursorPos(&p);
 	ScreenToClient(windowHandle, &p);
-	return Vector2(p.x, p.y);
+	Vector2 hackPos(p.x, p.y);
+	hackPos.x = hackPos.x * 1.015625f;
+	hackPos.y = hackPos.y * 1.0560416f;
+	return hackPos;
 
 }
 
+Vector2 Window::convertToScreenCoords(Vector2 coord) {
+	float screen_x = 1024.0f;
+	float screen_y = 768.0f;
+
+	float x = coord.x / 1024.0f;
+	float y = coord.y / 768.0f;
+
+	x = ((x * screen_x)/2.0f) - (screen_x / 4.0f) ;
+	y = -(((y * screen_y) / 2.0f) - (screen_y / 4.0f));
+
+	Vector2 Y = Vector2(x,y);
+	return Y;
+	//x = ((y - y1)(x2 - x1) / (y2 - y1)) + x1
+}
 
 Window::~Window(void)	{
 	Keyboard::Destroy();
