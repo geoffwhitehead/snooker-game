@@ -94,10 +94,16 @@ void main(void) {
 				),
 			map_meshes[level["entities"][i]["mesh"].asString()],
 			map_shaders[level["entities"][i]["shader"].asString()],
-			map_textures[level["entities"][i]["texture"].asString()]);
+			map_textures[level["entities"][i]["texture"].asString()]
+			);
 
 		e->setMass(level["entities"][i]["mass"].asFloat());
 
+		if (level["entities"][i]["hidden"].asBool() == true) {
+			e->renderable = false;
+		}
+			
+		cout << "whagtever";
 		if (level["entities"][i]["collidable"].asBool()) {
 
 			if (level["entities"][i]["collision_object"].asString() == "CIRCLE")

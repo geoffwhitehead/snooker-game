@@ -5,6 +5,7 @@ Entity::Entity(){
 	this->name = "def";
 	this->renderObject = nullptr;
 	this->physicsObject = nullptr;
+	this->renderable = true;
 }
 
 Entity::Entity(string name, Vector3 pos, Vector3 acc, Vector3 vel, Mesh* mesh, Shader* shader, GLuint texture){
@@ -12,18 +13,20 @@ Entity::Entity(string name, Vector3 pos, Vector3 acc, Vector3 vel, Mesh* mesh, S
 	this->name = name;
 	this->renderObject = new RenderObject(pos, mesh, shader, texture);;
 	this->physicsObject = new PhysicsObject(pos, acc, vel, renderObject);
-
+	this->renderable = true;
 }
 
 Entity::Entity(string name, Vector3 pos, Vector3 acc, Vector3 vel, Mesh* mesh, Shader* shader){
 	this->name = name;
 	this->renderObject = new RenderObject(pos, mesh, shader);;
 	this->physicsObject = new PhysicsObject(pos, acc, vel, renderObject);
+	this->renderable = true;
 }
 Entity::Entity(string name, Vector3 pos, Vector3 acc, Vector3 vel){
 	this->name = name;
 	this->renderObject = nullptr;
 	this->physicsObject = new PhysicsObject(pos, acc, vel);
+	this->renderable = true;
 
 }
 
@@ -54,12 +57,18 @@ void Entity::update(float dt){
 	for (vector<Entity*>::iterator i = children.begin(); i != children.end(); ++i) {
 		(*i)->update(dt);
 	}
+	
+		
 }
 
 void Entity::render(Renderer* renderer){
-	renderer->render(renderObject);
+	
+	if (this->renderable) {
+		renderer->render(renderObject);
+	}
+
 	for (vector<Entity*>::iterator child = children.begin(); child != children.end(); ++child) {
-		renderer->render((*child)->renderObject);
+		(*child)->render(renderer);
 	}
 }
 

@@ -35,6 +35,7 @@ public:
 
 	void addChild(Entity *child);
 	vector<Entity*> getChildren();
+	bool renderable;
 private:
 	PhysicsObject* physicsObject;
 	RenderObject* renderObject;

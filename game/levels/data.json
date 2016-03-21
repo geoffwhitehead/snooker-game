@@ -9,8 +9,8 @@
           "y": 177.8
         },
         {
-          "name": "mesh_cushionLeft",
           "function": "GenerateQuad",
+          "name": "mesh_cushionLeft",
           "x": 10.0,
           "y": 115.0
         },
@@ -458,6 +458,7 @@
           "mass": 0.0,
           "collidable": true,
           "collision_object": "PLANE",
+          "hidden": true,
           "normal": [ 1.0, 0.0, 0.0]
         },
         {
@@ -472,6 +473,7 @@
           "mass": 0.0,
           "collidable": true,
           "collision_object": "PLANE",
+          "hidden": true,
           "normal": [ -1.0, 0.0, 0.0]
         },
         {
@@ -486,6 +488,7 @@
           "mass": 0.0,
           "collidable": true,
           "collision_object": "PLANE",
+           "hidden": true,
           "normal": [ 0.0, 1.0, 0.0]
         },
         {
@@ -500,6 +503,7 @@
           "mass": 0.0,
           "collidable": true,
           "collision_object": "PLANE",
+          "hidden": true,
            "normal": [ 0.0, -1.0, 0.0]
         }
       ]

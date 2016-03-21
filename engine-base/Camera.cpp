@@ -57,13 +57,6 @@ Matrix4 Camera::BuildViewMatrix()	{
 };
 
 
-
-
-
-
-
-
-
 /*
 If you've read through the Deferred Rendering tutorial you should have a pretty
 good idea what this function does. It takes a 2D position, such as the mouse
