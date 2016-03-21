@@ -30,12 +30,12 @@ void main(void) {
 	
 
 	//CREATE SUB SYSTEMS
-	Camera* camera = new Camera(0.0f, 0.0f, Vector3(0, 0, 400));
+	Camera* camera = new Camera(0.0f, 0.0f, Vector3(0, 0, 400), W_X, W_Y);
 	Camera::projMatrix = Matrix4::Perspective(1, 1000, 1024.0f / 768.0f, 45);
 	Camera::viewMatrix = camera->BuildViewMatrix();
 	CollisionManager* cm = new CollisionManager();
 	AudioManager* am = new AudioManager();
-	GameInput* gi = new GameInput(gm);
+	GameInput* gi = new GameInput(gm, camera);
 
 	
 	// JSON STUFF

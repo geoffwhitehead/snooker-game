@@ -6,7 +6,6 @@
 #include "GameTimer.h"
 
 #include <vector>
-
 #include <windows.h>
 #include <fcntl.h>
 
@@ -33,7 +32,7 @@ public:
 	GameTimer* GetTimer() {
 		return &timer;
 	}
-	Vector2 GetOSMousePosition();
+	 Vector2 GetOSMousePosition();
 protected:
 	void CheckMessages(MSG &msg);
 

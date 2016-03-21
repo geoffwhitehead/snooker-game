@@ -60,7 +60,6 @@ Vector2 Window::GetOSMousePosition() {
 }
 
 
-
 Window::~Window(void)	{
 	Keyboard::Destroy();
 	Mouse::Destroy();
@@ -184,3 +183,14 @@ void Window::Resize() {
 		(*i)(screenWidth, screenHeight);
 	}
 };
+
+
+
+
+
+
+
+
+
+
+

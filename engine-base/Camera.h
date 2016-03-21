@@ -32,10 +32,12 @@ public:
 		pitch	= 0.0f;
 	};
 
-	Camera(float pitch, float yaw, Vector3 position){
+	Camera(float pitch, float yaw, Vector3 position, float height, float width){
 		this->pitch		= pitch;
 		this->yaw		= yaw;
 		this->position	= position;
+		this->height	= height;
+		this->width		= width;
 	}
 
 	~Camera(void){};
@@ -63,9 +65,17 @@ public:
 	//Sets pitch, in degrees
 	void	SetPitch(float p) {pitch = p;}
 
+	Vector3	UnProject(Vector3 position, float aspect, float fov);
+	Matrix4 GenerateInverseProjection(float aspect, float fov);
+	Matrix4 GenerateInverseView();
+	//Vector3 GetMouseDirectionVector3(float aspect, float fov);
+
+
 
 protected:
 	float	yaw;
 	float	pitch;
 	Vector3 position;
+	float width;
+	float height;
 };
