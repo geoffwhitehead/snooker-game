@@ -16,6 +16,8 @@ public:
 	void run();
 	void addEntity(Entity*);
 	void addSubSystem(SubSystem*);
+	Window* getWindow();
+	vector<Entity*>* getEntities();
 
 	GLuint LoadTexture(const char* filename, bool textureRepeating = true);
 

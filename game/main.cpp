@@ -25,17 +25,20 @@ void main(void) {
 	ifstream fs(data);
 	if (!fs) cout << "Failed to read from path.";
 	if (!reader.parse(fs, root)) cout << "Failed to parse.";
+	// GAME MANAGER
+	GameManager *gm = new GameManager(W_X, W_Y);
+	
 
 	//CREATE SUB SYSTEMS
 	Camera* camera = new Camera(0.0f, 0.0f, Vector3(0, 0, 400));
-	GameInput* gi = new GameInput();
 	Camera::projMatrix = Matrix4::Perspective(1, 1000, 1024.0f / 768.0f, 45);
 	Camera::viewMatrix = camera->BuildViewMatrix();
 	CollisionManager* cm = new CollisionManager();
 	AudioManager* am = new AudioManager();
+	GameInput* gi = new GameInput(gm);
 
-	// GAME MANAGER
-	GameManager *gm = new GameManager(W_X, W_Y);
+	
+	// JSON STUFF
 	Json::Value level = root["level"][0];
 
 	//TEXTURES
@@ -118,6 +121,7 @@ void main(void) {
 	gm->addSubSystem(camera);
 	gm->addSubSystem(cm);
 	gm->addSubSystem(am);
+	gm->addSubSystem(gi);
 
 	//start
 	gm->run();

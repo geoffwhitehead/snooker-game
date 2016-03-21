@@ -14,6 +14,7 @@ Matrix4 Camera::projMatrix;
 void Camera::destroy() {};
 
 void Camera::update(float msec)	{
+	/*
 	//Update the mouse by how much
 	pitch -= (Mouse::GetRelativePosition().y);
 	yaw	  -= (Mouse::GetRelativePosition().x);
@@ -28,7 +29,7 @@ void Camera::update(float msec)	{
 	if(yaw > 360.0f) {
 		yaw -= 360.0f;
 	}
-
+*/
 	msec *= 2.0f;
 
 	if (Keyboard::KeyDown(KEY_W)) position += Matrix4::Rotation(yaw, Vector3(0, 1, 0)) * Vector3(0, 0, -1) * msec*0.2;

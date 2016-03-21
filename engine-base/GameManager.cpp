@@ -17,6 +17,14 @@ void GameManager::addSubSystem(SubSystem* ss) {
 	subSystems.push_back(ss);
 }
 
+Window* GameManager::getWindow() {
+	return &window;
+}
+
+vector<Entity*>* GameManager::getEntities() {
+	return &entities;
+}
+
 void GameManager::run(){
 	
 	for (vector<SubSystem*>::iterator system = subSystems.begin(); system != subSystems.end(); ++system)
@@ -29,13 +37,6 @@ void GameManager::run(){
 
 		// TEMP CODE
 
-		Entity* white = entities[0]->getChildren()[0];
-
-		if (Keyboard::KeyDown(KEY_Z))
-			white->setVel(Vector3(0.031f, 0.0007f, 0.0f));
-
-		Vector2 mPos = window.GetOSMousePosition();
-		white->getPhysicsObject()->setPos(Vector3(mPos.x, mPos.y, 0.0f));
 		// ENGINE SYSTEMS
 
 		for (vector<SubSystem*>::iterator system = subSystems.begin(); system != subSystems.end(); ++system)
