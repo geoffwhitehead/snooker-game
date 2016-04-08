@@ -1,0 +1,3 @@
+﻿  Window.cpp
+c:\users\geoff\projects\gamedev\game-engine\nclgl\window.cpp(59): warning C4244: 'argument': conversion from 'LONG' to 'const float', possible loss of data
+  nclgl.vcxproj -> C:\Users\geoff\Projects\GameDev\game-engine\_libs\Debug\nclgl.lib

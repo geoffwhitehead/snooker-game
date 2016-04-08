@@ -1,0 +1,4 @@
+﻿  Entity.cpp
+c:\users\geoff\projects\gamedev\game-engine\engine-physics\physics.h(60): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\geoff\projects\gamedev\game-engine\engine-physics\physics.h(68): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  engine-base.vcxproj -> C:\Users\geoff\Projects\GameDev\game-engine\_libs\Debug\engine-base.lib
