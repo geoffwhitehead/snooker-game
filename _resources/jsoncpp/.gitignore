@@ -9,7 +9,6 @@
 /buildscons/
 /libs/
 /doc/doxyfile
-/dist/
 #/version
 #/include/json/version.h
 
