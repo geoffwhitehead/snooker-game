@@ -35,5 +35,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="levels\data.json" />
+    <None Include="shaders\BasicVert.glsl" />
+    <None Include="shaders\BasicFrag.glsl" />
+    <None Include="shaders\textureVert.glsl" />
+    <None Include="shaders\TextureFrag.glsl" />
   </ItemGroup>
 </Project>

@@ -36,7 +36,6 @@ void GameManager::run(){
 		msec *= 2.0f;
 
 		// TEMP CODE
-
 		// ENGINE SYSTEMS
 
 		for (vector<SubSystem*>::iterator system = subSystems.begin(); system != subSystems.end(); ++system)

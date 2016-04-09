@@ -2,7 +2,7 @@
 #include "Entity.h"
 
 Entity::Entity(){
-	this->name = "def";
+	this->name = "default";
 	this->renderObject = nullptr;
 	this->physicsObject = nullptr;
 	this->renderable = true;

@@ -14,6 +14,7 @@ void CollisionManager::init(){
 
 }
 void CollisionManager::update(float msec){
+
 	// LOOPS THROUGH SPHERES
 	for (int i = 0; i < collidableSpheres.size() - 1; i++){
 		//SPHERES
@@ -96,18 +97,21 @@ void CollisionManager::destroy(){
 
 }
 
+// add circle to the collision manager to enable it to be factored into collision checks
 void CollisionManager::addObject(Entity* entity, float radius){
 	Shape* s = new Circle(radius);
 	entity->getPhysicsObject()->setRef(s);
 	collidableSpheres.push_back(entity->getPhysicsObject());
 }
 
+// add plane to the collision manager to enable it to be factored into collision checks
 void CollisionManager::addObject(Entity* entity, float distance, Vector3 normal){
 	Shape* p = new Plane(distance, normal);
 	entity->getPhysicsObject()->setRef(p);
 	collidablePlanes.push_back(entity->getPhysicsObject());
 }
 
+// remove an entity from the collision manager so that it isnt factored into collision checks
 void CollisionManager::removeEntity(Entity* e){
 	collidableSpheres.erase(std::remove(collidableSpheres.begin(), collidableSpheres.end(), e->getPhysicsObject()), collidableSpheres.end());
 	collidablePlanes.erase(std::remove(collidablePlanes.begin(), collidablePlanes.end(), e->getPhysicsObject()), collidablePlanes.end());
