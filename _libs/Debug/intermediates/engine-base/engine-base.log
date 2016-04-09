@@ -1,4 +1,12 @@
 ﻿  Entity.cpp
 c:\users\geoff\projects\gamedev\game-engine\engine-physics\physics.h(60): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\users\geoff\projects\gamedev\game-engine\engine-physics\physics.h(68): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Camera.cpp
+c:\users\geoff\projects\gamedev\game-engine\engine-base\camera.cpp(35): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\geoff\projects\gamedev\game-engine\engine-base\camera.cpp(36): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\geoff\projects\gamedev\game-engine\engine-base\camera.cpp(38): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\geoff\projects\gamedev\game-engine\engine-base\camera.cpp(39): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\geoff\projects\gamedev\game-engine\engine-base\camera.cpp(41): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\geoff\projects\gamedev\game-engine\engine-base\camera.cpp(42): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   engine-base.vcxproj -> C:\Users\geoff\Projects\GameDev\game-engine\_libs\Debug\engine-base.lib
