@@ -8,22 +8,25 @@ Entity::Entity(){
 	this->renderable = true;
 }
 
-Entity::Entity(string name, Vector3 pos, Vector3 acc, Vector3 vel, Mesh* mesh, Shader* shader, GLuint texture){
+Entity::Entity(string name, string group, Vector3 pos, Vector3 acc, Vector3 vel, Mesh* mesh, Shader* shader, GLuint texture){
 	
 	this->name = name;
+	this->group = group;
 	this->renderObject = new RenderObject(pos, mesh, shader, texture);;
 	this->physicsObject = new PhysicsObject(pos, acc, vel, renderObject);
 	this->renderable = true;
 }
 
-Entity::Entity(string name, Vector3 pos, Vector3 acc, Vector3 vel, Mesh* mesh, Shader* shader){
+Entity::Entity(string name, string group, Vector3 pos, Vector3 acc, Vector3 vel, Mesh* mesh, Shader* shader){
 	this->name = name;
+	this->group = group;
 	this->renderObject = new RenderObject(pos, mesh, shader);;
 	this->physicsObject = new PhysicsObject(pos, acc, vel, renderObject);
 	this->renderable = true;
 }
-Entity::Entity(string name, Vector3 pos, Vector3 acc, Vector3 vel){
+Entity::Entity(string name, string group, Vector3 pos, Vector3 acc, Vector3 vel){
 	this->name = name;
+	this->group = group;
 	this->renderObject = nullptr;
 	this->physicsObject = new PhysicsObject(pos, acc, vel);
 	this->renderable = true;

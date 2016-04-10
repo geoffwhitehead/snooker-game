@@ -8,6 +8,7 @@
 
 #include "GameInput.h"
 #include "GameAudio.h"
+#include "CollisionResponse.h"
 
 #include <iostream>
 #include <map>
@@ -47,6 +48,7 @@ void main(void) {
 	
 	GameInput* gi = new GameInput(gm, camera);
 	GameAudio* ga = new GameAudio(am);
+	CollisionResponse* cr = new CollisionResponse(cm);
 
 	
 	// JSON STUFF
@@ -93,7 +95,9 @@ void main(void) {
 	//ENTITIES
 	for (int i = 0; i < level["entities"].size(); i++)
 	{
-		Entity *e = new Entity(level["entities"][i]["name"].asString(),
+		Entity *e = new Entity(
+			level["entities"][i]["name"].asString(),
+			level["entities"][i]["group"].asString(),
 			Vector3(
 				level["entities"][i]["position"][0].asFloat(),
 				level["entities"][i]["position"][1].asFloat(),
@@ -151,8 +155,10 @@ void main(void) {
 	im->addSubSystem(camera);
 	im->addSubSystem(gi);
 	am->addSubSystem(ga);
+	cm->addSubSystem(cr);
 
 	am->play2D("bg_music");
+	//am->play2D("game_over");
 	//start
 	gm->run();
 

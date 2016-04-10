@@ -5,7 +5,6 @@ AudioManager::AudioManager()
 {
 	// Create the sound engine
 	se = createIrrKlangDevice();
-	//se->play2D("../game/audio/explosion.wav");
 	// check for errors with creation
 	if (!se) {
 		cout << "Error: Could not create Sound Engine" << endl;

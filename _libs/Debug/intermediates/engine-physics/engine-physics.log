@@ -1,14 +1,9 @@
 ﻿  CollisionManager.cpp
 c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\geoff\source\repos\game-engine\engine-physics\collisionmanager.cpp(23): warning C4018: '<': signed/unsigned mismatch
+c:\users\geoff\source\repos\game-engine\engine-physics\collisionmanager.cpp(24): warning C4018: '<': signed/unsigned mismatch
 c:\users\geoff\source\repos\game-engine\engine-physics\collisionmanager.cpp(35): warning C4018: '<': signed/unsigned mismatch
 c:\users\geoff\source\repos\game-engine\engine-physics\collisionmanager.cpp(37): warning C4018: '<': signed/unsigned mismatch
-c:\users\geoff\source\repos\game-engine\engine-physics\collisionmanager.cpp(77): warning C4018: '<': signed/unsigned mismatch
-c:\users\geoff\source\repos\game-engine\engine-physics\collisionmanager.cpp(78): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  Rectangle.cpp
-  Plane.cpp
-  Circle.cpp
+c:\users\geoff\source\repos\game-engine\engine-physics\collisionmanager.cpp(80): warning C4018: '<': signed/unsigned mismatch
+c:\users\geoff\source\repos\game-engine\engine-physics\collisionmanager.cpp(81): warning C4018: '<': signed/unsigned mismatch
   engine-physics.vcxproj -> C:\Users\Geoff\Source\Repos\game-engine\_libs\Debug\engine-physics.lib

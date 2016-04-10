@@ -11,9 +11,9 @@ class Entity
 {
 public:
 	Entity();
-	Entity(string name, Vector3 pos, Vector3 acc, Vector3 vel, Mesh* mesh, Shader* shader, GLuint texture);
-	Entity(string name, Vector3 pos, Vector3 acc, Vector3 vel, Mesh* mesh, Shader* shader);
-	Entity(string name, Vector3 pos, Vector3 acc, Vector3 vel);
+	Entity(string name, string group, Vector3 pos, Vector3 acc, Vector3 vel, Mesh* mesh, Shader* shader, GLuint texture);
+	Entity(string name, string group, Vector3 pos, Vector3 acc, Vector3 vel, Mesh* mesh, Shader* shader);
+	Entity(string name, string group, Vector3 pos, Vector3 acc, Vector3 vel);
 
 	virtual ~Entity();
 
@@ -39,6 +39,7 @@ public:
 	vector<Entity*> getChildren();
 	bool renderable;
 	string name;
+	string group;
 
 private:
 	PhysicsObject* physicsObject;

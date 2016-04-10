@@ -1,4 +1,8 @@
-﻿  SystemManager.cpp
+﻿  Entity.cpp
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+  Compiling...
   GameManager.cpp
 c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
@@ -7,11 +11,4 @@ c:\users\geoff\source\repos\game-engine\engine-base\gamemanager.cpp(30): warning
 c:\users\geoff\source\repos\game-engine\engine-base\gamemanager.cpp(37): warning C4018: '<': signed/unsigned mismatch
 c:\users\geoff\source\repos\game-engine\engine-base\gamemanager.cpp(39): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
-  Skipping... (no relevant changes detected)
-  SubSystem.cpp
-  RenderObject.cpp
-  Renderer.cpp
-  PhysicsObject.cpp
-  Entity.cpp
-  Camera.cpp
   engine-base.vcxproj -> C:\Users\Geoff\Source\Repos\game-engine\_libs\Debug\engine-base.lib

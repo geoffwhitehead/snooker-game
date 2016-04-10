@@ -25,14 +25,17 @@ public:
 	void addObject(Entity* phys_obj, float radius);
 	void addObject(Entity* entity, float distance, Vector3 normal);
 	void removeEntity(Entity* e);
-	
-	vector<SubSystem*> sub_systems;
-
 	void manageCollisions(float msec);
+	void clearFrame();
+
+	vector<SubSystem*> sub_systems;
+	vector<pair<Entity*, Entity*> > collisions_this_frame;
+
+
 
 private:
-	vector<PhysicsObject*> collidableSpheres;
-	vector<PhysicsObject*> collidablePlanes;
-	std::map<PhysicsObject*, std::map<PhysicsObject*, bool>> collision_map;
-
+	vector<Entity*> collidableSpheres;
+	vector<Entity*> collidablePlanes;
+	std::map<Entity*, std::map<Entity*, bool>> collision_map;
+	
 };
