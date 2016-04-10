@@ -1,4 +1,5 @@
 #pragma once
+#include "../engine-base/SystemManager.h"
 #include "../engine-base/SubSystem.h"
 #include "../_resources/irrKlang-1.5.0/include/irrKlang.h"
 #include <iostream>
@@ -10,7 +11,7 @@ using namespace std;
 
 
 class AudioManager :
-	public SubSystem
+	public SystemManager
 {
 public:
 	AudioManager();
@@ -18,10 +19,13 @@ public:
 	void update(float);
 	void destroy();
 	void init();
-	
+	void addSubSystem(SubSystem*);
+
 	ISoundSource* loadSound(string name, const ik_c8* path, float default_volume = 1.0f);
 	vector<SubSystem*> sub_systems;
 	ISoundSource* getSound(string name);
+	
+
 	
 private:
 	ISoundEngine* se;

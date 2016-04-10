@@ -19,3 +19,11 @@ void InputManager::update(float msec) {
 void InputManager::destroy() {
 
 }
+
+void InputManager::init() {
+
+}
+
+void InputManager::addSubSystem(SubSystem* ss) {
+	sub_systems.push_back(ss);
+}

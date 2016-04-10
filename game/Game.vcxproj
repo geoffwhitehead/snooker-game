@@ -78,10 +78,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GameAudio.h" />
     <ClInclude Include="GameInput.h" />
     <ClInclude Include="SnookerBall.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameAudio.cpp" />
     <ClCompile Include="GameInput.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SnookerBall.cpp" />

@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "../engine-base/SystemManager.h"
 #include "../engine-base/SubSystem.h"
 #include "../engine-base/Entity.h"
 #include <algorithm>
@@ -9,18 +10,25 @@
 #include <map>
 
 class CollisionManager :
-	public SubSystem
+	public SystemManager
 
 {
 public:
+	CollisionManager();
+	~CollisionManager();
+
 	void init();
 	void update(float msec);
 	void destroy();
-	CollisionManager();
-	~CollisionManager();
+	void addSubSystem(SubSystem*);
+	
 	void addObject(Entity* phys_obj, float radius);
 	void addObject(Entity* entity, float distance, Vector3 normal);
 	void removeEntity(Entity* e);
+	
+	vector<SubSystem*> sub_systems;
+
+	void manageCollisions(float msec);
 
 private:
 	vector<PhysicsObject*> collidableSpheres;

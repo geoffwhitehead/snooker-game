@@ -20,7 +20,7 @@ void AudioManager::destroy(){
 
 }
 
-ISoundSource* AudioManager::loadSound(string name, const ik_c8* path, float default_volume = 1.0f) {
+ISoundSource* AudioManager::loadSound(string name, const ik_c8* path, float default_volume) {
 	// create new sound source
 	ISoundSource* sound = se->addSoundSourceFromFile(path);
 	// set the default volume if specified- 1.0 by default
@@ -45,4 +45,12 @@ void AudioManager::init(){
 	se->play2D("../_resources/irrKlang-1.5.0/media/MF-W-90.XM");
 
 
+}
+
+ISoundSource* AudioManager::getSound(string name) {
+	return audio[name];
+}
+
+void AudioManager::addSubSystem(SubSystem* ss) {
+	sub_systems.push_back(ss);
 }

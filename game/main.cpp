@@ -1,12 +1,18 @@
+#include "../nclgl/OGLRenderer.h"
+
 #include "../engine-base/Camera.h"
 #include "../engine-base/GameManager.h"
-#include "../nclgl/OGLRenderer.h"
-#include "GameInput.h"
 #include "../engine-physics/CollisionManager.h"
 #include "../engine-audio/AudioManager.h"
+#include "../engine-input/InputManager.h"
+
+#include "GameInput.h"
+#include "GameAudio.h"
+
 #include <iostream>
 #include <map>
 #include "../_resources/jsoncpp/dist/json/json.h"
+
 
 
 #define W_X 1024.0f
@@ -28,14 +34,17 @@ void main(void) {
 
 	// GAME MANAGER
 	GameManager *gm = new GameManager(W_X, W_Y);
-	
+
+	//ADD SYSTEM MANAGERS
+	CollisionManager* cm = new CollisionManager();
+	AudioManager* am = new AudioManager();
+	InputManager* im = new InputManager();
 
 	//CREATE SUB SYSTEMS
 	Camera* camera = new Camera(0.0f, 0.0f, Vector3(0, 0, 400), W_X, W_Y);
 	Camera::projMatrix = Matrix4::Orthographic(1, 1000, W_X/4.0f, -W_X/4.0f, W_Y/4.0f, -W_Y/4.0f);
 	Camera::viewMatrix = camera->BuildViewMatrix();
-	CollisionManager* cm = new CollisionManager();
-	AudioManager* am = new AudioManager();
+	
 	GameInput* gi = new GameInput(gm, camera);
 	GameAudio* ga = new GameAudio(gm);
 
@@ -126,12 +135,15 @@ void main(void) {
 	for (auto iterator = map_entities.begin(); iterator != map_entities.end(); iterator++)
 		gm->addEntity(iterator->second);
 
-	//register subsystems
-	gm->addSubSystem(camera);
-	gm->addSubSystem(cm);
-	gm->addSubSystem(am);
-	gm->addSubSystem(gi);
-	gm->addSubSystem(ga);
+	//register managers
+	gm->addSystemManager(am);
+	gm->addSystemManager(cm);
+	gm->addSystemManager(im);
+
+	//register sub systems
+	im->addSubSystem(camera);
+	im->addSubSystem(gi);
+	am->addSubSystem(ga);
 
 	//start
 	gm->run();

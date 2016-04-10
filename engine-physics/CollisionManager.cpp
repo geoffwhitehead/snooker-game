@@ -13,14 +13,30 @@ CollisionManager::~CollisionManager()
 void CollisionManager::init(){
 
 }
+void CollisionManager::addSubSystem(SubSystem* ss) {
+	sub_systems.push_back(ss);
+}
+
 void CollisionManager::update(float msec){
 
+	// update all sub systems
+	for (int i = 0; i < sub_systems.size(); i++) {
+		sub_systems[i]->update(msec);
+	}
+
+	manageCollisions(msec);
+
+}
+
+
+void CollisionManager::manageCollisions(float msec) {
+
 	// circle - circle collisions
-	for (int i = 0; i < collidableSpheres.size() - 1; i++){
+	for (int i = 0; i < collidableSpheres.size() - 1; i++) {
 		//circles
-		for (int j = 1; j < collidableSpheres.size(); j++){
+		for (int j = 1; j < collidableSpheres.size(); j++) {
 			if (collidableSpheres[i] != collidableSpheres[j]) {
-				
+
 				// Detect collision
 				bool collision = Physics::detectCollision(
 					collidableSpheres[i]->getPos(),
@@ -58,8 +74,8 @@ void CollisionManager::update(float msec){
 		}
 	}
 	//circle - plane collisions
-	for (int i = 0; i < collidableSpheres.size(); i++){
-		for (int j = 0; j < collidablePlanes.size(); j++){
+	for (int i = 0; i < collidableSpheres.size(); i++) {
+		for (int j = 0; j < collidablePlanes.size(); j++) {
 
 			// Detect collision
 			bool collision = Physics::detectCollision(
@@ -85,7 +101,8 @@ void CollisionManager::update(float msec){
 					);
 					collision_map[collidableSpheres[i]][collidablePlanes[j]] = true;
 					collision_map[collidablePlanes[j]][collidableSpheres[i]] = true;
-				} else {
+				}
+				else {
 					// else do nothing - this collision has already been resolved
 				}
 			}
@@ -97,6 +114,7 @@ void CollisionManager::update(float msec){
 	}
 
 }
+
 void CollisionManager::destroy(){
 
 }
