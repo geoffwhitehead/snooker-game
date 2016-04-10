@@ -3,6 +3,13 @@
 
 AudioManager::AudioManager()
 {
+	// Create the sound engine
+	se = createIrrKlangDevice();
+	//se->play2D("../game/audio/explosion.wav");
+	// check for errors with creation
+	if (!se) {
+		cout << "Error: Could not create Sound Engine" << endl;
+	}
 }
 
 
@@ -21,36 +28,29 @@ void AudioManager::destroy(){
 }
 
 ISoundSource* AudioManager::loadSound(string name, const ik_c8* path, float default_volume) {
-	// create new sound source
-	ISoundSource* sound = se->addSoundSourceFromFile(path);
-	// set the default volume if specified- 1.0 by default
-	sound->setDefaultVolume(default_volume);
+
 	// insert into map, can be accessed later with the name
-	audio.insert(pair<string, ISoundSource*>(name, sound));
+	audio.insert(pair<string, ISoundSource*>(name, se->addSoundSourceFromFile(path)));
+	// set the default volume if specified- 1.0 by default
+	audio[name]->setDefaultVolume(default_volume);
 
 	return audio[name];
-
+	
 }
 
 void AudioManager::init(){
 
-	// Create the sound engine
-	ISoundEngine* se = createIrrKlangDevice();
-		
-	// check for errors with creation
-	if (!se){
-		cout << "Error: Could not create Sound Engine" << endl;
-	}
-
-	se->play2D("../_resources/irrKlang-1.5.0/media/MF-W-90.XM");
-
-
+	
 }
 
-ISoundSource* AudioManager::getSound(string name) {
+ISoundSource* AudioManager::getSoundSource(string name) {
 	return audio[name];
 }
 
 void AudioManager::addSubSystem(SubSystem* ss) {
 	sub_systems.push_back(ss);
+}
+
+void AudioManager::play2D(string name) {
+	se->play2D(audio[name]);
 }

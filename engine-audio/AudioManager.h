@@ -23,8 +23,8 @@ public:
 
 	ISoundSource* loadSound(string name, const ik_c8* path, float default_volume = 1.0f);
 	vector<SubSystem*> sub_systems;
-	ISoundSource* getSound(string name);
-	
+	ISoundSource* getSoundSource(string name);
+	void play2D(string name);
 
 	
 private:

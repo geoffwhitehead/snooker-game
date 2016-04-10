@@ -2,9 +2,9 @@
 
 
 
-GameAudio::GameAudio(GameManager* gm)
+GameAudio::GameAudio(AudioManager* am)
 {
-	this->gm = gm;
+	this->am = am;
 }
 
 
@@ -14,7 +14,8 @@ GameAudio::~GameAudio()
 
 
 void GameAudio::init() {
-
+	
+	am->play2D("bg_music");
 }
 
 void GameAudio::update(float msec) {

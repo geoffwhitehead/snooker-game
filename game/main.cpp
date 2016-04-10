@@ -46,7 +46,7 @@ void main(void) {
 	Camera::viewMatrix = camera->BuildViewMatrix();
 	
 	GameInput* gi = new GameInput(gm, camera);
-	GameAudio* ga = new GameAudio(gm);
+	GameAudio* ga = new GameAudio(am);
 
 	
 	// JSON STUFF
@@ -61,6 +61,13 @@ void main(void) {
 		map_textures.insert(pair <string, GLuint>(name, tex));
 	}
 
+	//AUDIO
+	for (int i = 0; i < level["audio"].size(); i++)
+	{
+		string name = level["audio"][i]["name"].asString();
+		string path = level["audio"][i]["path"].asCString();
+		am->loadSound(name, path.c_str());
+	}
 
 	//SHADERS
 	for (int i = 0; i < level["shaders"].size(); i++)
@@ -145,6 +152,7 @@ void main(void) {
 	im->addSubSystem(gi);
 	am->addSubSystem(ga);
 
+	am->play2D("bg_music");
 	//start
 	gm->run();
 

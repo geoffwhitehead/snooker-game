@@ -1,18 +1,18 @@
 #pragma once
 #include "C:\Users\Geoff\Source\Repos\game-engine\engine-base\SubSystem.h"
 #include "../engine-base/SubSystem.h"
-#include "../engine-base/GameManager.h"
+#include "../engine-audio/AudioManager.h"
 
 class GameAudio :
 	public SubSystem
 {
 public:
-	GameAudio(GameManager* gm);
+	GameAudio(AudioManager* am);
 	~GameAudio();
 	void init();
 	void update(float msec);
 	void destroy();
 private:
-	GameManager* gm;
+	AudioManager* am;
 };
 
