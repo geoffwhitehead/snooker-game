@@ -31,8 +31,6 @@ public:
 	vector<SubSystem*> sub_systems;
 	vector<pair<Entity*, Entity*> > collisions_this_frame;
 
-
-
 private:
 	vector<Entity*> collidableSpheres;
 	vector<Entity*> collidablePlanes;

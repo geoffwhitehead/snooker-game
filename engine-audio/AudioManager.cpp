@@ -39,7 +39,9 @@ ISoundSource* AudioManager::loadSound(string name, const ik_c8* path, float defa
 
 void AudioManager::init(){
 
-	
+	for (int i = 0; i < sub_systems.size(); i++) {
+		sub_systems[i]->init();
+	}
 }
 
 ISoundSource* AudioManager::getSoundSource(string name) {

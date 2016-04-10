@@ -40,6 +40,7 @@ public:
 	bool renderable;
 	string name;
 	string group;
+	bool is_enabled = true;
 
 private:
 	PhysicsObject* physicsObject;

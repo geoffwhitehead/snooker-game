@@ -5,10 +5,12 @@
 #include "../engine-physics/CollisionManager.h"
 #include "../engine-audio/AudioManager.h"
 #include "../engine-input/InputManager.h"
+#include "../engine-base/EventManager.h"
 
 #include "GameInput.h"
 #include "GameAudio.h"
 #include "CollisionResponse.h"
+#include "GameEvents.h"
 
 #include <iostream>
 #include <map>
@@ -40,15 +42,20 @@ void main(void) {
 	CollisionManager* cm = new CollisionManager();
 	AudioManager* am = new AudioManager();
 	InputManager* im = new InputManager();
+	EventManager* em = new EventManager();
 
 	//CREATE SUB SYSTEMS
+	GameEvents* ge = new GameEvents(gm);
+
 	Camera* camera = new Camera(0.0f, 0.0f, Vector3(0, 0, 400), W_X, W_Y);
 	Camera::projMatrix = Matrix4::Orthographic(1, 1000, W_X/4.0f, -W_X/4.0f, W_Y/4.0f, -W_Y/4.0f);
-	Camera::viewMatrix = camera->BuildViewMatrix();
+	//Camera::viewMatrix = Matrix4::BuildCamera(Vector3(0.0, 50.0, 20.0), Vector3(0.0, 0.0, 0.0));
+		
+		//camera->BuildViewMatrix();
 	
 	GameInput* gi = new GameInput(gm, camera);
-	GameAudio* ga = new GameAudio(am);
-	CollisionResponse* cr = new CollisionResponse(cm);
+	GameAudio* ga = new GameAudio(am, ge);
+	CollisionResponse* cr = new CollisionResponse(cm, ge);
 
 	
 	// JSON STUFF
@@ -68,7 +75,8 @@ void main(void) {
 	{
 		string name = level["audio"][i]["name"].asString();
 		string path = level["audio"][i]["path"].asCString();
-		am->loadSound(name, path.c_str());
+		float vol = level["audio"][i]["default_volume"].asFloat();
+		am->loadSound(name, path.c_str(), vol);
 	}
 
 	//SHADERS
@@ -150,14 +158,17 @@ void main(void) {
 	gm->addSystemManager(am);
 	gm->addSystemManager(cm);
 	gm->addSystemManager(im);
+	gm->addSystemManager(em);
 
 	//register sub systems
 	im->addSubSystem(camera);
 	im->addSubSystem(gi);
 	am->addSubSystem(ga);
 	cm->addSubSystem(cr);
+	em->addSubSystem(ge);
 
-	am->play2D("bg_music");
+
+	//am->play2D("bg_music");
 	//am->play2D("game_over");
 	//start
 	gm->run();

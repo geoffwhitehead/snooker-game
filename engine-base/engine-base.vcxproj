@@ -80,6 +80,7 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="json\jsoncpp.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -93,6 +94,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="EventManager.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="json\json\json-forwards.h" />
     <ClInclude Include="json\json\json.h" />

@@ -30,7 +30,6 @@ Entity::Entity(string name, string group, Vector3 pos, Vector3 acc, Vector3 vel)
 	this->renderObject = nullptr;
 	this->physicsObject = new PhysicsObject(pos, acc, vel);
 	this->renderable = true;
-
 }
 
 void Entity::setPos(Vector3 pos){ this->physicsObject->setPos(pos); }
@@ -55,24 +54,24 @@ PhysicsObject* Entity::getPhysicsObject() const {
 }
 
 void Entity::update(float dt){
-	this->physicsObject->update(dt);
-	this->renderObject->update(dt);
-	for (vector<Entity*>::iterator i = children.begin(); i != children.end(); ++i) {
-		(*i)->update(dt);
+	if (is_enabled) {
+		this->physicsObject->update(dt);
+		this->renderObject->update(dt);
 	}
+	for (vector<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
+		(*i)->update(dt);
 	
 		
 }
 
 void Entity::render(Renderer* renderer){
 	
-	if (this->renderable) {
+	if (this->renderable && this->is_enabled){
 		renderer->render(renderObject);
 	}
 
-	for (vector<Entity*>::iterator child = children.begin(); child != children.end(); ++child) {
+	for (vector<Entity*>::iterator child = children.begin(); child != children.end(); ++child)
 		(*child)->render(renderer);
-	}
 }
 
 void Entity::addChild(Entity *child) {

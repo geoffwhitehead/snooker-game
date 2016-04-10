@@ -15,6 +15,12 @@
           "y": 115.0
         },
         {
+          "name": "mesh_point",
+          "function": "GenerateQuad",
+          "x": 1.0,
+          "y": 1.0
+        },
+        {
           "name": "mesh_cushionRight",
           "function": "GenerateQuad",
           "x": 1.0,
@@ -35,7 +41,7 @@
         {
           "name": "mesh_pocket",
           "function": "GenerateTriFan",
-          "radius": 3.6,
+          "radius": 5,
           "x": 0.0,
           "y": 0.0,
           "z": 0.0,
@@ -153,7 +159,7 @@
           "name": "pocketBR",
           "group":  "pocket",
           "parent": "table",
-          "position": [ 178.435, -88.9, 1.0 ],
+          "position": [ 176.65, -87.5, 1.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_pocket",
@@ -167,7 +173,7 @@
           "name": "pocketBL",
           "group":  "pocket",
           "parent": "table",
-          "position": [ -178.435, -88.9, 1.0 ],
+          "position": [ -176.65, -87.5, 1.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_pocket",
@@ -182,7 +188,7 @@
           "name": "pocketTL",
           "group":  "pocket",
           "parent": "table",
-          "position": [ -178.435, 88.9, 1.0 ],
+          "position": [ -176.65, 87.5, 1.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_pocket",
@@ -197,7 +203,7 @@
           "name": "pocketTR",
           "group":  "pocket",
           "parent": "table",
-          "position": [ 178.435, 88.9, 1.0 ],
+          "position": [ 176.65, 87.5, 1.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_pocket",
@@ -602,13 +608,13 @@
           "normal": [ 0.0, -1.0, 0.0 ]
         },
         {
-          "name": "pocketTLPlane",
+          "name": "pocketBRPlane",
           "group":  "pocket_plane",
           "parent": "table",
-          "position": [ -177, 87.5, 5.0 ],
+          "position": [ -245, 87.5, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
-          "mesh": "mesh_cushionTop",
+          "mesh": "mesh_point",
           "shader": "basic",
           "texture": "",
           "mass": 0.0,
@@ -618,13 +624,13 @@
           "normal": [ 1.0, -1.0, 0.0 ]
         },
         {
-          "name": "pocketBLPlane",
+          "name": "pocketTRPlane",
           "group":  "pocket_plane",
           "parent": "table",
-          "position": [ -177, -87.5, 5.0 ],
+          "position": [ -245, -87.5, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
-          "mesh": "mesh_cushionTop",
+          "mesh": "mesh_point",
           "shader": "basic",
           "texture": "",
           "mass": 0.0,
@@ -634,13 +640,13 @@
           "normal": [ 1.0, 1.0, 0.0 ]
         },
         {
-          "name": "pocketTRPlane",
+          "name": "pocketBLPlane",
           "group":  "pocket_plane",
           "parent": "table",
-          "position": [ 177, 87.5, 5.0 ],
+          "position": [ 245, 87.5, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
-          "mesh": "mesh_cushionTop",
+          "mesh": "mesh_point",
           "shader": "basic",
           "texture": "",
           "mass": 0.0,
@@ -650,13 +656,13 @@
           "normal": [ -1.0, -1.0, 0.0 ]
         },
         {
-          "name": "pocketBRPlane",
-          "group":  "pocket_plane",
+          "name": "pocketTLPlane",
+          "group": "pocket_plane",
           "parent": "table",
-          "position": [ 177, -87.5, 5.0 ],
+          "position": [ 245, -87.5, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
-          "mesh": "mesh_cushionTop",
+          "mesh": "mesh_point",
           "shader": "basic",
           "texture": "",
           "mass": 0.0,
@@ -669,15 +675,58 @@
       "audio": [
         {
           "name": "bg_music",
-          "path": "./audio/MF-W-90.XM"
+          "path": "./audio/MF-W-90.XM",
+          "default_volume": 0.3
+        },
+        {
+          "name": "bell",
+          "path": "./audio/bell.wav",
+          "default_volume":  1.0
         },
         {
           "name": "game_over",
-          "path": "./audio/gameover.wav"
+          "path": "./audio/gameover.wav",
+          "default_volume": 1.0
         },
         {
           "name": "collision",
-          "path": "./audio/explosion.wav"
+          "path": "./audio/explosion.wav",
+          "default_volume": 0.4
+        },
+        {
+          "name": "hit_cushion_1",
+          "path": "./audio/fart-1.wav",
+          "default_volume": 0.8
+        },
+        {
+          "name": "hit_cushion_2",
+          "path": "./audio/fart-2.wav",
+          "default_volume": 0.8
+        },
+        {
+          "name": "hit_cushion_3",
+          "path": "./audio/fart-3.wav",
+          "default_volume": 0.8
+        },
+        {
+          "name": "hit_cushion_4",
+          "path": "./audio/fart-4.wav",
+          "default_volume": 0.8
+        },
+        {
+          "name": "ball_strike",
+          "path": "./audio/ball_strike.mp3",
+          "default_volume": 1.0
+        },
+        {
+          "name": "ball_pot",
+          "path": "./audio/ball_pot.mp3",
+          "default_volume": 1.0
+        },
+        {
+          "name": "ball_pot_mech",
+          "path": "./audio/ball_pot_mech.mp3",
+          "default_volume": 1.0
         }
       ]
     }

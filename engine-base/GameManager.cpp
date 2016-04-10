@@ -57,19 +57,18 @@ void GameManager::run(){
 
 		msec *= 2.0f;
 
-		// TEMP CODE
-		// ENGINE SYSTEMS
-
 		for (vector<SystemManager*>::iterator system = system_managers.begin(); system != system_managers.end(); ++system)
 			(*system)->update(msec);
 
-		for (vector<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+		for (vector<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity) {
 			(*entity)->update(msec);
+		}
 
 		renderer.ClearBuffers();
 
-		for (vector<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+		for (vector<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity) {
 			(*entity)->render(&renderer);
+		}
 
 		renderer.SwapBuffers();
 	}

@@ -80,12 +80,14 @@
   <ItemGroup>
     <ClInclude Include="CollisionResponse.h" />
     <ClInclude Include="GameAudio.h" />
+    <ClInclude Include="GameEvents.h" />
     <ClInclude Include="GameInput.h" />
     <ClInclude Include="SnookerBall.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionResponse.cpp" />
     <ClCompile Include="GameAudio.cpp" />
+    <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="GameInput.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SnookerBall.cpp" />
