@@ -80,3 +80,4 @@ void Entity::addChild(Entity *child) {
 vector<Entity*> Entity::getChildren(){
 	return this->children;
 }
+

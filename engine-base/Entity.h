@@ -22,6 +22,8 @@ public:
 	void setVel(Vector3);
 	void setMass(float);
 
+	
+
 	RenderObject* getRenderObject() const;
 	PhysicsObject* getPhysicsObject() const;
 
@@ -36,12 +38,14 @@ public:
 	void addChild(Entity *child);
 	vector<Entity*> getChildren();
 	bool renderable;
+	string name;
+
 private:
 	PhysicsObject* physicsObject;
 	RenderObject* renderObject;
 	Entity*	parent;
 	vector<Entity*> children;
-	string name;
+	
 	float dt;
 };
 

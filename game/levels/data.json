@@ -11,26 +11,35 @@
         {
           "function": "GenerateQuad",
           "name": "mesh_cushionLeft",
-          "x": 10.0,
+          "x": 1.0,
           "y": 115.0
         },
         {
           "name": "mesh_cushionRight",
           "function": "GenerateQuad",
-          "x": 10.0,
+          "x": 1.0,
           "y": 115.0
         },
         {
           "name": "mesh_cushionBottom",
           "function": "GenerateQuad",
           "x": 293.0,
-          "y": 10.0
+          "y": 1.0
         },
         {
           "name": "mesh_cushionTop",
           "function": "GenerateQuad",
           "x": 293.0,
-          "y": 10.0
+          "y": 1.0
+        },
+        {
+          "name": "mesh_pocket",
+          "function": "GenerateTriFan",
+          "radius": 3.6,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 0.7
         },
         {
           "name": "mesh_ballRed",
@@ -41,6 +50,7 @@
           "z": 0.0,
           "w": 0.7
         },
+
         {
           "name": "mesh_ballGreen",
           "function": "GenerateTriFan",
@@ -139,9 +149,66 @@
           "collision_object": ""
         },
         {
+          "name": "pocketBR",
+          "parent": "table",
+          "position": [ 178.435, -88.9, 1.0 ],
+          "acceleration": [ 0.0, 0.0, 0.0 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mesh": "mesh_pocket",
+          "shader": "basic",
+          "texture": "",
+          "mass": 0.0,
+          "collidable": false,
+          "collision_object": ""
+        },
+         {
+          "name": "pocketBL",
+          "parent": "table",
+          "position": [ -178.435, -88.9, 1.0 ],
+          "acceleration": [ 0.0, 0.0, 0.0 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mesh": "mesh_pocket",
+          "shader": "basic",
+          "texture": "",
+          "mass": 0.0,
+          "collidable": false,
+          "collision_object": ""
+        },
+       
+         {
+          "name": "pocketTL",
+          "parent": "table",
+          "position": [ -178.435, 88.9, 1.0 ],
+          "acceleration": [ 0.0, 0.0, 0.0 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mesh": "mesh_pocket",
+          "shader": "basic",
+          "texture": "",
+          "mass": 0.0,
+          "collidable": false,
+          "collision_object": ""
+        },
+       
+        {
+          "name": "pocketTR",
+          "parent": "table",
+         "position": [ 178.435, 88.9, 1.0 ],
+          "acceleration": [ 0.0, 0.0, 0.0 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mesh": "mesh_pocket",
+          "shader": "basic",
+          "texture": "",
+          "mass": 0.0,
+          "collidable": false,
+          "collision_object": ""
+        },
+
+
+
+        {
           "name": "white",
           "parent": "table",
-          "position": [ 90.0, 10.0, 5.0 ],
+           "position": [ 90.0, 10.0, 5.0 ],
           "acceleration": [ 0.0, 0.0, 0.0 ],
           "velocity": [ 0.0, 0.0, 0.0 ],
           "mesh": "mesh_ballWhite",
@@ -504,8 +571,68 @@
           "collidable": true,
           "collision_object": "PLANE",
           "hidden": true,
-           "normal": [ 0.0, -1.0, 0.0]
-        }
+          "normal": [ 0.0, -1.0, 0.0 ]
+        },
+        {
+          "name": "pocketTLPlane",
+          "parent": "table",
+          "position": [ -177, 87.5, 5.0 ],
+          "acceleration": [ 0.0, 0.0, 0.0 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mesh": "mesh_cushionTop",
+          "shader": "basic",
+          "texture": "",
+          "mass": 0.0,
+          "collidable": true,
+          "collision_object": "PLANE",
+          "hidden": true,
+          "normal": [ 1.0, -1.0, 0.0 ]
+        },
+        {
+          "name": "pocketBLPlane",
+          "parent": "table",
+          "position": [ -177, -87.5, 5.0 ],
+          "acceleration": [ 0.0, 0.0, 0.0 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mesh": "mesh_cushionTop",
+          "shader": "basic",
+          "texture": "",
+          "mass": 0.0,
+          "collidable": true,
+          "collision_object": "PLANE",
+          "hidden": true,
+          "normal": [ 1.0, 1.0, 0.0 ]
+        },
+        {
+          "name": "pocketTRPlane",
+          "parent": "table",
+          "position": [ 177, 87.5, 5.0 ],
+          "acceleration": [ 0.0, 0.0, 0.0 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mesh": "mesh_cushionTop",
+          "shader": "basic",
+          "texture": "",
+          "mass": 0.0,
+          "collidable": true,
+          "collision_object": "PLANE",
+          "hidden": true,
+          "normal": [ -1.0, -1.0, 0.0 ]
+        },
+        {
+          "name": "pocketBRPlane",
+          "parent": "table",
+          "position": [ 177, -87.5, 5.0 ],
+          "acceleration": [ 0.0, 0.0, 0.0 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mesh": "mesh_cushionTop",
+          "shader": "basic",
+          "texture": "",
+          "mass": 0.0,
+          "collidable": true,
+          "collision_object": "PLANE",
+          "hidden": true,
+           "normal": [ -1.0, 1.0, 0.0]
+        },
       ]
     }
   ]

@@ -37,6 +37,7 @@ void main(void) {
 	CollisionManager* cm = new CollisionManager();
 	AudioManager* am = new AudioManager();
 	GameInput* gi = new GameInput(gm, camera);
+	GameAudio* ga = new GameAudio(gm);
 
 	
 	// JSON STUFF
@@ -103,7 +104,6 @@ void main(void) {
 			e->renderable = false;
 		}
 			
-		cout << "whagtever";
 		if (level["entities"][i]["collidable"].asBool()) {
 
 			if (level["entities"][i]["collision_object"].asString() == "CIRCLE")
@@ -131,6 +131,7 @@ void main(void) {
 	gm->addSubSystem(cm);
 	gm->addSubSystem(am);
 	gm->addSubSystem(gi);
+	gm->addSubSystem(ga);
 
 	//start
 	gm->run();

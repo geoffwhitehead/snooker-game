@@ -1,4 +1,1 @@
-﻿  GameInput.cpp
-c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(67): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(76): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  game.vcxproj -> C:\Users\Geoff\Source\Repos\game-engine\\_exe\Debug\game.exe
+﻿  game.vcxproj -> C:\Users\Geoff\Source\Repos\game-engine\\_exe\Debug\game.exe

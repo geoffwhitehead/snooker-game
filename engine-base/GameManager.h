@@ -3,7 +3,7 @@
 #include "RenderObject.h"
 #include "Entity.h"
 #include "Renderer.h"
-#include "SubSystem.h"
+#include "SystemManager.h"
 
 // init gm with reference to input handler, ui, camera, audio, memory manager 
 
@@ -15,9 +15,10 @@ public:
 
 	void run();
 	void addEntity(Entity*);
-	void addSubSystem(SubSystem*);
+	void addSystemManager(SystemManager*);
 	Window* getWindow();
 	vector<Entity*>* getEntities();
+	Entity* getEntityByName(string child_name, string parent_name = "no parent");
 
 	GLuint LoadTexture(const char* filename, bool textureRepeating = true);
 
@@ -26,7 +27,7 @@ private:
 	Renderer renderer;
 	vector<Entity*> entities;
 	vector<GLuint> textures;
-	vector<SubSystem*> subSystems;
+	vector<SystemManager*> system_managers;
 
 	
 };

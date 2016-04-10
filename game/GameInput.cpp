@@ -19,9 +19,10 @@ void GameInput::update(float msec) {
 	if (Mouse::ButtonDown(MouseButtons(MOUSE_LEFT))) {
 
 		vector<Entity*>* e = gm->getEntities();
-		Entity* white = (*e)[0]->getChildren()[0];
-
-		cout << (*e)[0]->getChildren()[0]->getPhysicsObject()->getPos();
+		Entity* white = gm->getEntityByName("white", "table");
+			
+		assert(white != nullptr);
+		cout << white->getPhysicsObject()->getPos();
 
 		Vector2 pos = gm->getWindow()->GetOSMousePosition();
 		Vector2 mPos = gm->getWindow()->convertToScreenCoords(pos);
@@ -30,7 +31,7 @@ void GameInput::update(float msec) {
 
 		// apply vector to cue ball
 		Vector3 dir = mPos3D - cueBall;
-		white->setVel(dir/100);
+		white->setVel(dir/FORCE_SCALE);
 
 	}
 	

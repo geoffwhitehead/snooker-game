@@ -15,9 +15,9 @@ void CollisionManager::init(){
 }
 void CollisionManager::update(float msec){
 
-	// LOOPS THROUGH SPHERES
+	// circle - circle collisions
 	for (int i = 0; i < collidableSpheres.size() - 1; i++){
-		//SPHERES
+		//circles
 		for (int j = 1; j < collidableSpheres.size(); j++){
 			if (collidableSpheres[i] != collidableSpheres[j]) {
 				
@@ -45,7 +45,9 @@ void CollisionManager::update(float msec){
 						collision_map[collidableSpheres[i]][collidableSpheres[j]] = true;
 						collision_map[collidableSpheres[j]][collidableSpheres[i]] = true;
 					}
-					// else do nothing - this collision has already been resolved
+					else {
+						// else do nothing - this collision has already been resolved
+					}
 				}
 				else {
 					// else no collision - set both maps to false to mark the objects as not colliding
@@ -55,7 +57,7 @@ void CollisionManager::update(float msec){
 			}
 		}
 	}
-	//LOOP THROUGH PLANES
+	//circle - plane collisions
 	for (int i = 0; i < collidableSpheres.size(); i++){
 		for (int j = 0; j < collidablePlanes.size(); j++){
 
@@ -83,8 +85,9 @@ void CollisionManager::update(float msec){
 					);
 					collision_map[collidableSpheres[i]][collidablePlanes[j]] = true;
 					collision_map[collidablePlanes[j]][collidableSpheres[i]] = true;
+				} else {
+					// else do nothing - this collision has already been resolved
 				}
-				// else do nothing as collision has already been resolved
 			}
 			else {
 				collision_map[collidableSpheres[i]][collidablePlanes[j]] = false;
@@ -92,6 +95,7 @@ void CollisionManager::update(float msec){
 			}
 		}
 	}
+
 }
 void CollisionManager::destroy(){
 

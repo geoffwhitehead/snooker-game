@@ -13,8 +13,8 @@ GameManager::~GameManager(){}
 void GameManager::addEntity(Entity* e){
 	entities.push_back(e);
 }
-void GameManager::addSubSystem(SubSystem* ss) {
-	subSystems.push_back(ss);
+void GameManager::addSystemManager(SystemManager* sm) {
+	system_managers.push_back(sm);
 }
 
 Window* GameManager::getWindow() {
@@ -25,9 +25,31 @@ vector<Entity*>* GameManager::getEntities() {
 	return &entities;
 }
 
+Entity* GameManager::getEntityByName(string name_to_find, string parent_name) {
+	if (parent_name == "no parent") {
+		for (int i = 0; i < entities.size(); i++) {
+			if (entities[i]->name == name_to_find) {
+				return entities[i];
+			}
+		}
+	}
+	else {
+		for (int i = 0; i < entities.size(); i++) {
+			if (entities[i]->name == parent_name) {
+				for (int j = 0; j < entities[i]->getChildren().size(); j++) {
+					if (entities[i]->getChildren()[j]->name == name_to_find) {
+						return entities[i]->getChildren()[j];
+					}
+				}
+			}
+		}
+	}
+	return nullptr;
+}
+
 void GameManager::run(){
 	
-	for (vector<SubSystem*>::iterator system = subSystems.begin(); system != subSystems.end(); ++system)
+	for (vector<SystemManager*>::iterator system = system_managers.begin(); system != system_managers.end(); ++system)
 		(*system)->init();
 
 	while (window.UpdateWindow()){
@@ -38,7 +60,7 @@ void GameManager::run(){
 		// TEMP CODE
 		// ENGINE SYSTEMS
 
-		for (vector<SubSystem*>::iterator system = subSystems.begin(); system != subSystems.end(); ++system)
+		for (vector<SystemManager*>::iterator system = system_managers.begin(); system != system_managers.end(); ++system)
 			(*system)->update(msec);
 
 		for (vector<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
@@ -51,7 +73,7 @@ void GameManager::run(){
 
 		renderer.SwapBuffers();
 	}
-	for (vector<SubSystem*>::iterator system = subSystems.begin(); system != subSystems.end(); ++system)
+	for (vector<SystemManager*>::iterator system = system_managers.begin(); system != system_managers.end(); ++system)
 		(*system)->destroy();
 }
 

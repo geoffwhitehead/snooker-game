@@ -28,38 +28,59 @@ public:
 		return false;
 	};
 
-	// work out the new velocity with a given velocity and elapsed time. 
-	inline static void calcVelocity(Vector3& vel, Vector3 acc, float dt){
-		
-			// damping factor will gradually reduce the velocity bringing entiies to rest
-			vel = (vel + (acc * dt)) * DAMPING_FACTOR;
-		
-		// stops the object moving above a maximum velocity
-		if (vel.Length() > CLAMP){
+	// if the velocity goes above the CLAMP threshold its lowered to meet the CLAMP value.
+	inline static void clamp( Vector3 &vel ) {
+		if (vel.Length() > CLAMP) {
 			Vector3 unit = vel.getNormal();
 			vel = unit * CLAMP;
 		}
-			
+	}
+
+	// work out the new velocity with a given velocity and elapsed time. 
+	inline static Vector3 calcVelocity(Vector3 vel, Vector3 acc, float dt){
+		
+		// damping factor will gradually reduce the velocity bringing entiies to rest
+		return (vel + (acc * dt)) * DAMPING_FACTOR;
+		
 	}
 
 	// calculate the objects new position based on their velocity and time elapsed
-	inline static void calcDisplacement(Vector3& pos, Vector3 vel, Vector3 acc, float dt, Vector3& disp){
+	inline static Vector3 calcDisplacement(Vector3 pos, Vector3 vel, Vector3 acc, float dt){
 		
-		disp = ((vel*dt) + (acc * 0.5f * dt*dt));
-		pos += disp;
+		return ((vel*dt) + (acc * 0.5f * dt*dt));
 	}
 
-	// 
+	inline void explicitEuler(Vector3& pos, Vector3 &vel, Vector3 acc, float dt) {
+
+		if (moving(vel)) {
+
+			vel = (vel + (acc * dt)) * DAMPING_FACTOR;
+			clamp(vel);
+
+			pos += calcDisplacement(pos, vel, acc, dt);
+
+		}
+	}
+
+	inline void implicitEuler(Vector3& pos, Vector3 &vel, Vector3 acc, float dt) {
+		if (moving(vel)) {
+			vel = calcVelocity(vel, acc, dt);
+			clamp(vel);
+
+			pos += calcDisplacement(pos, vel, acc, dt);
+
+		}
+	}
+
 	inline static void semiImplicitEuler(Vector3& pos, Vector3 &vel, Vector3 acc, Vector3& disp, float dt){
-		//if (moving(vel)) {
-			calcVelocity(vel, acc, dt);
-			calcDisplacement(pos, vel, acc, dt, disp);
-		//}
-			
-		
-		//Vector3 new_disp = (disp + (vel * dt)) * DAMPING_FACTOR;
-		//pos += new_disp;
-		//disp = new_disp;
+		if (moving(vel)) {
+			vel = calcVelocity(vel, acc, dt);
+			clamp(vel);
+
+			disp = calcDisplacement(pos, vel, acc, dt);
+			pos += disp;
+
+		}
 	}
 
 	// returns true if the distance between two circles is less than the combines radius

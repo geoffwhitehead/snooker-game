@@ -9,3 +9,13 @@ InputManager::InputManager()
 InputManager::~InputManager()
 {
 }
+
+void InputManager::update(float msec) {
+	for (int i = 0; i < sub_systems.size(); i++) {
+		sub_systems[i]->update(msec);
+	}
+}
+
+void InputManager::destroy() {
+
+}
