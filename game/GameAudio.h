@@ -12,6 +12,7 @@ public:
 	void init();
 	void update(float msec);
 	void destroy();
+
 	int roll(int min, int max);
 private:
 	AudioManager* am;

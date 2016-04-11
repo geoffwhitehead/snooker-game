@@ -1,4 +1,10 @@
-﻿  CollisionManager.cpp
+﻿  Rectangle.cpp
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Plane.cpp
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  CollisionManager.cpp
 c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\users\geoff\source\repos\game-engine\engine-physics\collisionmanager.cpp(14): warning C4018: '<': signed/unsigned mismatch
@@ -7,9 +13,8 @@ c:\users\geoff\source\repos\game-engine\engine-physics\collisionmanager.cpp(39):
 c:\users\geoff\source\repos\game-engine\engine-physics\collisionmanager.cpp(42): warning C4018: '<': signed/unsigned mismatch
 c:\users\geoff\source\repos\game-engine\engine-physics\collisionmanager.cpp(89): warning C4018: '<': signed/unsigned mismatch
 c:\users\geoff\source\repos\game-engine\engine-physics\collisionmanager.cpp(91): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  Rectangle.cpp
-  Plane.cpp
   Circle.cpp
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   engine-physics.vcxproj -> C:\Users\Geoff\Source\Repos\game-engine\_libs\Debug\engine-physics.lib

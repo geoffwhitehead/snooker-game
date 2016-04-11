@@ -12,6 +12,7 @@ public:
 	GameEvents(GameManager* gm);
 	~GameEvents();
 	enum EventType { COLLISIONS, SOUND, INPUT, LOGIC };
+	enum LogicEvents { RED_POT, WHITE_POT, BLUE_POT, PINK_POT, GREEN_POT, BLACK_POT };
 
 	void init();
 	void update(float msec);
@@ -28,9 +29,13 @@ public:
 	vector<pair<Entity*, Entity*> > cols_cue_pocket;
 
 	// sound events
-	vector<pair<Entity*, Entity*> > sound_events;
+	vector<std::string> sound_events;
 
 	// input events
-	vector<pair<Entity*, Entity*> > input_events;
+	vector<std::string> input_events;
+
+	// game events
+	vector<LogicEvents> logic_events;
+
 };
 

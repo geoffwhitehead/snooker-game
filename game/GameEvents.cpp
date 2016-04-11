@@ -16,9 +16,15 @@ void GameEvents::init() {
 }
 
 void GameEvents::update(float msec) {
-	for (int i = 0; i < cols_cue_pocket.size(); i++) {
-		cols_circle_pocket[i].first->is_enabled = false;
+	for (int i = 0; i < cols_circle_pocket.size(); i++) {
+		if (cols_circle_pocket[i].first->sub_group == "red"){
+			logic_events.push_back(RED_POT);
+		}
+		if (cols_circle_pocket[i].first->name == "pink") {
+			logic_events.push_back(PINK_POT);
+		}
 	}
+
 }
 
 void GameEvents::destroy() {

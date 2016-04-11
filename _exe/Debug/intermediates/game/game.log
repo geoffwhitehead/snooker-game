@@ -1,7 +1,31 @@
-﻿  GameEvents.cpp
+﻿  main.cpp
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\geoff\source\repos\game-engine\game\main.cpp(69): warning C4018: '<': signed/unsigned mismatch
+c:\users\geoff\source\repos\game-engine\game\main.cpp(77): warning C4018: '<': signed/unsigned mismatch
+c:\users\geoff\source\repos\game-engine\game\main.cpp(86): warning C4018: '<': signed/unsigned mismatch
+c:\users\geoff\source\repos\game-engine\game\main.cpp(93): warning C4018: '<': signed/unsigned mismatch
+c:\users\geoff\source\repos\game-engine\game\main.cpp(107): warning C4018: '<': signed/unsigned mismatch
+  GameLogic.cpp
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\geoff\source\repos\game-engine\game\gamelogic.cpp(19): warning C4018: '<': signed/unsigned mismatch
+  GameEvents.cpp
 c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\users\geoff\source\repos\game-engine\game\gameevents.cpp(19): warning C4018: '<': signed/unsigned mismatch
+  GameAudio.cpp
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\geoff\source\repos\game-engine\game\gameaudio.cpp(34): warning C4018: '<': signed/unsigned mismatch
+c:\users\geoff\source\repos\game-engine\game\gameaudio.cpp(38): warning C4018: '<': signed/unsigned mismatch
+c:\users\geoff\source\repos\game-engine\game\gameaudio.cpp(42): warning C4018: '<': signed/unsigned mismatch
+c:\users\geoff\source\repos\game-engine\game\gameaudio.cpp(46): warning C4018: '<': signed/unsigned mismatch
+  CollisionResponse.cpp
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\geoff\source\repos\game-engine\game\collisionresponse.cpp(29): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
 engine-base.lib(Shader.obj) : warning LNK4049: locally defined symbol ___glewAttachShader imported
 engine-base.lib(Shader.obj) : warning LNK4049: locally defined symbol ___glewBindAttribLocation imported
 engine-base.lib(Shader.obj) : warning LNK4049: locally defined symbol ___glewCompileShader imported

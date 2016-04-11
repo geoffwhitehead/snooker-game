@@ -82,6 +82,7 @@
     <ClInclude Include="GameAudio.h" />
     <ClInclude Include="GameEvents.h" />
     <ClInclude Include="GameInput.h" />
+    <ClInclude Include="GameLogic.h" />
     <ClInclude Include="SnookerBall.h" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +90,7 @@
     <ClCompile Include="GameAudio.cpp" />
     <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="GameInput.cpp" />
+    <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SnookerBall.cpp" />
   </ItemGroup>

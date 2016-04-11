@@ -6,11 +6,13 @@
 #include "../engine-audio/AudioManager.h"
 #include "../engine-input/InputManager.h"
 #include "../engine-base/EventManager.h"
+#include "../engine-base/GameLogicManager.h"
 
 #include "GameInput.h"
 #include "GameAudio.h"
 #include "CollisionResponse.h"
 #include "GameEvents.h"
+#include "GameLogic.h"
 
 #include <iostream>
 #include <map>
@@ -43,6 +45,7 @@ void main(void) {
 	AudioManager* am = new AudioManager();
 	InputManager* im = new InputManager();
 	EventManager* em = new EventManager();
+	GameLogicManager* glm = new GameLogicManager();
 
 	//CREATE SUB SYSTEMS
 	GameEvents* ge = new GameEvents(gm);
@@ -56,7 +59,7 @@ void main(void) {
 	GameInput* gi = new GameInput(gm, camera);
 	GameAudio* ga = new GameAudio(am, ge);
 	CollisionResponse* cr = new CollisionResponse(cm, ge);
-
+	GameLogic* gl = new GameLogic(glm, ge);
 	
 	// JSON STUFF
 	Json::Value level = root["level"][0];
@@ -106,6 +109,7 @@ void main(void) {
 		Entity *e = new Entity(
 			level["entities"][i]["name"].asString(),
 			level["entities"][i]["group"].asString(),
+			level["entities"][i]["subgroup"].asString(),
 			Vector3(
 				level["entities"][i]["position"][0].asFloat(),
 				level["entities"][i]["position"][1].asFloat(),
