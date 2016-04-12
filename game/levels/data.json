@@ -762,6 +762,16 @@
           "name": "ball_pot_mech",
           "path": "./audio/ball_pot_mech.mp3",
           "default_volume": 1.0
+        },
+        {
+          "name": "cue_strike_1",
+          "path": "./audio/cue_strike_1.mp3",
+          "default_volume": 1.0
+        },
+         {
+          "name": "cue_strike_2",
+          "path": "./audio/cue_strike_2.mp3",
+          "default_volume": 1.0
         }
       ]
     }

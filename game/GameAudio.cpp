@@ -11,6 +11,9 @@
 #define SOUND_BALL_POT "ball_pot"
 #define SOUND_BALL_POT_M "ball_pot_mech"
 #define SOUND_BELL "bell"
+#define SOUND_CUE_1 "cue_strike_1"
+#define SOUND_CUE_2 "cue_strike_2"
+
 
 GameAudio::GameAudio(AudioManager* am, GameEvents* ge)
 {
@@ -31,41 +34,62 @@ void GameAudio::init() {
 
 void GameAudio::update(float msec) {
 
-	for (int i = 0; i < ge->cols_circle_circle.size(); i++) {
-		am->play2D(SOUND_BALL_STRIKE);
-	}
-
-	for (int i = 0; i < ge->cols_cue_pocket.size(); i++) {
-		am->play2D(SOUND_BELL);
-	}
-
-	for (int i = 0; i < ge->cols_circle_pocket.size(); i++){
-		am->play2D(SOUND_BALL_POT);
-	}
-
-	for (int i = 0; i < ge->cols_circle_cushion.size(); i++) {
-		/*
-		int r = roll(1, 4);
-
-		switch (r) {
-		case 1:
-			am->play2D(SOUND_CUSHION1);
+	for (int i = 0; i < ge->in_sound_events.size(); i++) {
+		switch (ge->in_sound_events[i]) {
+		case GameEvents::SE_POT:
+			am->play2D(SOUND_BALL_POT);
 			break;
 
-		case 2:
-			am->play2D(SOUND_CUSHION2);
+		case GameEvents::SE_STRIKE_BALL:
+			am->play2D(SOUND_BALL_STRIKE);
 			break;
 
-		case 3:
-			am->play2D(SOUND_CUSHION3);
+		case GameEvents::SE_POT_WHITE:
+			am->play2D(SOUND_BELL);
 			break;
 
-		case 4:
-			am->play2D(SOUND_CUSHION4);
+		case GameEvents::SE_STRIKE_CUE:
+			int r = roll(0, 2);
+			switch (r) {
+			case 0:
+				am->play2D(SOUND_CUE_1);
+				break;
+
+			case 1:
+				am->play2D(SOUND_CUE_2);
+				break;
+			}
 			break;
+			/*
+			case GameEvents::SE_STRIKE_CUSHION:
+			
+			int r = roll(1, 4);
+
+			switch (r) {
+			case 1:
+				am->play2D(SOUND_CUSHION1);
+				break;
+
+			case 2:
+				am->play2D(SOUND_CUSHION2);
+				break;
+
+			case 3:
+				am->play2D(SOUND_CUSHION3);
+				break;
+
+			case 4:
+				am->play2D(SOUND_CUSHION4);
+				break;
+			}
+			break;
+			*/
 		}
-		*/
+
 	}
+
+	// clear events now that they have been actioned
+	ge->in_clearEvents(GameEvents::ET_SOUND);
 	
 }
 

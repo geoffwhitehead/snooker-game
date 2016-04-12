@@ -14,6 +14,10 @@ public:
 	void update(float msec);
 	void destroy();
 
+	void handleEvents();
+	void handleStates();
+
+private:
 	GameLogicManager* glm;
 	GameEvents* ge;
 };

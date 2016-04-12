@@ -56,7 +56,7 @@ void main(void) {
 		
 		//camera->BuildViewMatrix();
 	
-	GameInput* gi = new GameInput(gm, camera);
+	GameInput* gi = new GameInput(gm, ge, camera);
 	GameAudio* ga = new GameAudio(am, ge);
 	CollisionResponse* cr = new CollisionResponse(cm, ge);
 	GameLogic* gl = new GameLogic(glm, ge);
@@ -163,14 +163,16 @@ void main(void) {
 	gm->addSystemManager(cm);
 	gm->addSystemManager(im);
 	gm->addSystemManager(em);
+	gm->addSystemManager(glm);
 
 	//register sub systems
 	im->addSubSystem(camera);
+	glm->addSubSystem(gl);
 	im->addSubSystem(gi);
 	am->addSubSystem(ga);
 	cm->addSubSystem(cr);
 	em->addSubSystem(ge);
-
+	
 
 	//am->play2D("bg_music");
 	//am->play2D("game_over");

@@ -1,7 +1,7 @@
 #pragma once
 #include "../engine-base/SubSystem.h"
 #include "../engine-audio/AudioManager.h"
-#include "../game/GameEvents.h"
+#include "GameEvents.h"
 
 class GameAudio :
 	public SubSystem
@@ -9,6 +9,7 @@ class GameAudio :
 public:
 	GameAudio(AudioManager* am, GameEvents* ge);
 	~GameAudio();
+
 	void init();
 	void update(float msec);
 	void destroy();
