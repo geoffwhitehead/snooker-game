@@ -37,11 +37,11 @@ public:
 
 	void addChild(Entity *child);
 	vector<Entity*> getChildren();
-	bool renderable;
 	string name;
 	string group;
 	string sub_group;
-	bool is_enabled = true;
+	bool is_collidable = true;
+	bool is_renderable = true;
 
 private:
 	PhysicsObject* physicsObject;

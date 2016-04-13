@@ -133,7 +133,7 @@ void main(void) {
 		e->setMass(level["entities"][i]["mass"].asFloat());
 
 		if (level["entities"][i]["hidden"].asBool() == true) {
-			e->renderable = false;
+			e->is_renderable = false;
 		}
 			
 		if (level["entities"][i]["collidable"].asBool()) {
@@ -173,10 +173,6 @@ void main(void) {
 	cm->addSubSystem(cr);
 	em->addSubSystem(ge);
 	
-
-	//am->play2D("bg_music");
-	//am->play2D("game_over");
-	//start
 	gm->run();
 
 }

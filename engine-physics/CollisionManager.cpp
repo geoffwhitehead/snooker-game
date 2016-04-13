@@ -38,9 +38,9 @@ void CollisionManager::manageCollisions(float msec) {
 	// circle - circle collisions
 	for (int i = 0; i < collidableSpheres.size() - 1; i++) {
 		//circles
-		if (collidableSpheres[i]->is_enabled) {
+		if (collidableSpheres[i]->is_collidable) {
 			for (int j = 1; j < collidableSpheres.size(); j++) {
-				if (collidableSpheres[j]->is_enabled){
+				if (collidableSpheres[j]->is_collidable){
 
 					if (collidableSpheres[i] != collidableSpheres[j]) {
 
@@ -87,9 +87,9 @@ void CollisionManager::manageCollisions(float msec) {
 	}
 	//circle - plane collisions
 	for (int i = 0; i < collidableSpheres.size(); i++) {
-		if (collidableSpheres[i]->is_enabled) {
+		if (collidableSpheres[i]->is_collidable) {
 			for (int j = 0; j < collidablePlanes.size(); j++) {
-				if (collidablePlanes[j]->is_enabled) {
+				if (collidablePlanes[j]->is_collidable) {
 					// Detect collision
 					bool collision = Physics::detectCollision(
 						collidableSpheres[i]->getPhysicsObject()->getPos(),

@@ -18,7 +18,7 @@ public:
 	void addSystemManager(SystemManager*);
 	Window* getWindow();
 	vector<Entity*>* getEntities();
-	Entity* getEntityByName(string child_name, string parent_name = "no parent");
+	Entity* getEntityByName(string child_name, string parent_name = "");
 
 	GLuint LoadTexture(const char* filename, bool textureRepeating = true);
 

@@ -15,6 +15,9 @@ public:
 	void destroy();
 
 	int roll(int min, int max);
+	void handleEvents();
+	void handleStates();
+
 private:
 	AudioManager* am;
 	GameEvents* ge;

@@ -5,7 +5,9 @@ GameManager::GameManager(float w_x, float w_y)
 
 }
 
-GameManager::~GameManager(){}
+GameManager::~GameManager(){
+
+}
 	//for (vector<GLuint>::iterator tex = textures.begin(); tex != textures.end(); ++tex)
 		//delete (*tex);
 
@@ -26,7 +28,7 @@ vector<Entity*>* GameManager::getEntities() {
 }
 
 Entity* GameManager::getEntityByName(string name_to_find, string parent_name) {
-	if (parent_name == "no parent") {
+	if (parent_name == "") {
 		for (int i = 0; i < entities.size(); i++) {
 			if (entities[i]->name == name_to_find) {
 				return entities[i];

@@ -12,6 +12,7 @@ public:
 	void init();
 	void update(float msec);
 	void destroy();
+	void handleCollisions();
 
 	CollisionManager* cm;
 	GameEvents* ge;

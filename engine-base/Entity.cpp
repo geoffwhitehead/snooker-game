@@ -5,31 +5,30 @@ Entity::Entity(){
 	this->name = "default";
 	this->renderObject = nullptr;
 	this->physicsObject = nullptr;
-	this->renderable = true;
 }
 
 Entity::Entity(string name, string group, string sub_group, Vector3 pos, Vector3 acc, Vector3 vel, Mesh* mesh, Shader* shader, GLuint texture){
 	
 	this->name = name;
 	this->group = group;
+	this->sub_group = sub_group;
 	this->renderObject = new RenderObject(pos, mesh, shader, texture);;
 	this->physicsObject = new PhysicsObject(pos, acc, vel, renderObject);
-	this->renderable = true;
 }
 
 Entity::Entity(string name, string group, string sub_group, Vector3 pos, Vector3 acc, Vector3 vel, Mesh* mesh, Shader* shader){
 	this->name = name;
 	this->group = group;
+	this->sub_group = sub_group;
 	this->renderObject = new RenderObject(pos, mesh, shader);;
 	this->physicsObject = new PhysicsObject(pos, acc, vel, renderObject);
-	this->renderable = true;
 }
 Entity::Entity(string name, string group, string sub_group, Vector3 pos, Vector3 acc, Vector3 vel){
 	this->name = name;
 	this->group = group;
+	this->sub_group = sub_group;
 	this->renderObject = nullptr;
 	this->physicsObject = new PhysicsObject(pos, acc, vel);
-	this->renderable = true;
 }
 
 void Entity::setPos(Vector3 pos){ this->physicsObject->setPos(pos); }
@@ -54,19 +53,19 @@ PhysicsObject* Entity::getPhysicsObject() const {
 }
 
 void Entity::update(float dt){
-	if (is_enabled) {
+	if (is_collidable) {
 		this->physicsObject->update(dt);
+	}
+	if (is_renderable) {
 		this->renderObject->update(dt);
 	}
 	for (vector<Entity*>::iterator i = children.begin(); i != children.end(); ++i)
-		(*i)->update(dt);
-	
-		
+		(*i)->update(dt);	
 }
 
 void Entity::render(Renderer* renderer){
 	
-	if (this->renderable && this->is_enabled){
+	if (is_renderable){
 		renderer->render(renderObject);
 	}
 

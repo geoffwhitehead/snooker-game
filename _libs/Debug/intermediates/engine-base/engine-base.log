@@ -1,36 +1,4 @@
-﻿  SystemManager.cpp
-  SubSystem.cpp
-  Renderer.cpp
+﻿  Entity.cpp
 c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\geoff\source\repos\game-engine\engine-base\renderer.cpp(10): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  RenderObject.cpp
-  PhysicsObject.cpp
-c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  GameManager.cpp
-c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\geoff\source\repos\game-engine\engine-base\gamemanager.cpp(4): warning C4244: 'argument': conversion from 'float' to 'uint', possible loss of data
-c:\users\geoff\source\repos\game-engine\engine-base\gamemanager.cpp(30): warning C4018: '<': signed/unsigned mismatch
-c:\users\geoff\source\repos\game-engine\engine-base\gamemanager.cpp(37): warning C4018: '<': signed/unsigned mismatch
-c:\users\geoff\source\repos\game-engine\engine-base\gamemanager.cpp(39): warning C4018: '<': signed/unsigned mismatch
-  GameLogicManager.cpp
-c:\users\geoff\source\repos\game-engine\engine-base\gamelogicmanager.cpp(15): warning C4018: '<': signed/unsigned mismatch
-c:\users\geoff\source\repos\game-engine\engine-base\gamelogicmanager.cpp(25): warning C4018: '<': signed/unsigned mismatch
-  EventManager.cpp
-c:\users\geoff\source\repos\game-engine\engine-base\eventmanager.cpp(15): warning C4018: '<': signed/unsigned mismatch
-c:\users\geoff\source\repos\game-engine\engine-base\eventmanager.cpp(25): warning C4018: '<': signed/unsigned mismatch
-  Entity.cpp
-c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(88): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\geoff\source\repos\game-engine\engine-physics\physics.h(97): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Camera.cpp
-c:\users\geoff\source\repos\game-engine\engine-base\camera.cpp(35): warning C4305: 'argument': truncation from 'double' to 'const float'
-c:\users\geoff\source\repos\game-engine\engine-base\camera.cpp(36): warning C4305: 'argument': truncation from 'double' to 'const float'
-c:\users\geoff\source\repos\game-engine\engine-base\camera.cpp(38): warning C4305: 'argument': truncation from 'double' to 'const float'
-c:\users\geoff\source\repos\game-engine\engine-base\camera.cpp(39): warning C4305: 'argument': truncation from 'double' to 'const float'
-c:\users\geoff\source\repos\game-engine\engine-base\camera.cpp(41): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-c:\users\geoff\source\repos\game-engine\engine-base\camera.cpp(42): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
-c:\users\geoff\source\repos\game-engine\nclgl\vector3.h(60): warning C4715: 'Vector3::getNormal': not all control paths return a value
   engine-base.vcxproj -> C:\Users\Geoff\Source\Repos\game-engine\_libs\Debug\engine-base.lib

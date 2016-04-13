@@ -14,6 +14,7 @@
 #define SOUND_CUE_1 "cue_strike_1"
 #define SOUND_CUE_2 "cue_strike_2"
 
+int r;
 
 GameAudio::GameAudio(AudioManager* am, GameEvents* ge)
 {
@@ -29,27 +30,55 @@ GameAudio::~GameAudio()
 
 void GameAudio::init() {
 	
-	//am->play2D(SOUND_BG);
 }
 
-void GameAudio::update(float msec) {
+void GameAudio::handleStates() {
+
+}
+
+void GameAudio::handleEvents() {
 
 	for (int i = 0; i < ge->in_sound_events.size(); i++) {
 		switch (ge->in_sound_events[i]) {
-		case GameEvents::SE_POT:
+		case GameEvents::eSoundEvents::SE_POT:
 			am->play2D(SOUND_BALL_POT);
 			break;
 
-		case GameEvents::SE_STRIKE_BALL:
+		case GameEvents::eSoundEvents::SE_STRIKE_BALL:
 			am->play2D(SOUND_BALL_STRIKE);
 			break;
 
-		case GameEvents::SE_POT_WHITE:
-			am->play2D(SOUND_BELL);
+		case GameEvents::eSoundEvents::SE_POT_WHITE:
+			r = roll(1, 3);
+
+			switch (r) {
+			case 1:
+				am->play2D(SOUND_CUSHION2);
+				break;
+
+			case 2:
+				am->play2D(SOUND_CUSHION3);
+				break;
+
+			case 3:
+				am->play2D(SOUND_CUSHION4);
+				break;
+			
+				
+			}
 			break;
 
-		case GameEvents::SE_STRIKE_CUE:
-			int r = roll(0, 2);
+		case GameEvents::eSoundEvents::SE_GAMEOVER:
+			am->play2D(SOUND_GAMEOVER);
+			break;
+
+		case GameEvents::eSoundEvents::SE_STRIKE_CUSHION:
+
+			// find a ball hitting cushion sound
+			break;
+
+		case GameEvents::eSoundEvents::SE_STRIKE_CUE:
+			r = roll(0, 2);
 			switch (r) {
 			case 0:
 				am->play2D(SOUND_CUE_1);
@@ -58,37 +87,20 @@ void GameAudio::update(float msec) {
 			case 1:
 				am->play2D(SOUND_CUE_2);
 				break;
+
 			}
+
 			break;
-			/*
-			case GameEvents::SE_STRIKE_CUSHION:
-			
-			int r = roll(1, 4);
 
-			switch (r) {
-			case 1:
-				am->play2D(SOUND_CUSHION1);
-				break;
-
-			case 2:
-				am->play2D(SOUND_CUSHION2);
-				break;
-
-			case 3:
-				am->play2D(SOUND_CUSHION3);
-				break;
-
-			case 4:
-				am->play2D(SOUND_CUSHION4);
-				break;
-			}
-			break;
-			*/
 		}
-
 	}
+}
 
-	// clear events now that they have been actioned
+void GameAudio::update(float msec) {
+
+	handleEvents();
+
+	// clear events after processing them 
 	ge->in_clearEvents(GameEvents::ET_SOUND);
 	
 }
@@ -97,6 +109,7 @@ void GameAudio::destroy() {
 
 }
 
+// get a random number - used when determing which random sound to play
 int GameAudio::roll(int min, int max)
 {
 	double x = rand() / static_cast<double>(RAND_MAX + 1);

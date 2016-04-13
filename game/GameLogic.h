@@ -17,6 +17,11 @@ public:
 	void handleEvents();
 	void handleStates();
 
+	bool isLegalPosition();
+	void resolvePot(string name);
+	void editEntity(string name, string parent, bool is_collidable, bool is_renderable);
+	void resetBall(string name, Vector3 pos);
+
 private:
 	GameLogicManager* glm;
 	GameEvents* ge;

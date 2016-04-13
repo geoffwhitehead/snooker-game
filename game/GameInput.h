@@ -21,6 +21,7 @@ public:
 	void shootCueBall();
 	void handleMouse();
 	void handleEvents();
+	bool isLegalPosition();
 
 	GameManager* gm;
 	GameEvents* ge;
